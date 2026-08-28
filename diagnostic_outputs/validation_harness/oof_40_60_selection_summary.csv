@@ -1,0 +1,4 @@
+policy,n_splits,winner_exact_match_rate,rank_correlation_mean,rank_correlation_std,private_f1_regret_mean,private_f1_regret_max,most_frequent_public_winner,most_frequent_public_winner_count,most_frequent_private_winner,most_frequent_private_winner_count
+fixed_rank_rate_0.845,50,0.26,0.5605496390375234,0.28823717676365374,0.00030845771144278445,0.0010779436152570376,tree80_nn20,21,tree80_nn20,25
+public_selected_probability_threshold,50,0.06,0.29614182189180593,0.30322097916094365,0.00047791893081940986,0.0025774965806926176,tree90_nn10,16,tree70_nn30_previous_candidate,19
+public_selected_rank_rate_0.80_to_0.92,50,0.12,0.2634934951883975,0.3378939617952666,0.0004941583413149875,0.0014417989417989663,tree90_nn10,13,tree80_nn20,16

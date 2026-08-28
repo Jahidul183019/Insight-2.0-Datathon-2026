@@ -1,0 +1,5 @@
+candidate,file,rows,dead_count,dead_rate,reported_public_lb_f1,reported_public_lb_rank,score_source,like_for_like_oof_available,locally_scoreable,local_validation_note
+submission_6,submission6.csv,36000,30411,0.84475,0.877258,1,SUBMISSION_HISTORY.md metadata; not recomputed,False,False,No recipe-equivalent OOF vector and no hidden test labels
+submission_7,archive/submission7.csv,36000,30418,0.8449444444444445,0.87617,3,SUBMISSION_HISTORY.md metadata; not recomputed,False,False,No recipe-equivalent OOF vector and no hidden test labels
+submission_8,archive/submission8.csv,36000,30414,0.8448333333333333,0.876305,2,SUBMISSION_HISTORY.md metadata; not recomputed,False,False,No recipe-equivalent OOF vector and no hidden test labels
+submission_9,archive/submission9.csv,36000,30414,0.8448333333333333,0.875022,4,SUBMISSION_HISTORY.md metadata; not recomputed,False,False,No recipe-equivalent OOF vector and no hidden test labels
