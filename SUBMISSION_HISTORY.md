@@ -283,3 +283,10 @@ An investigation into whether raising the deterministic prediction rate from 84.
 - **Harness Stability:** Lost the 50-split simulation (19 wins, 31 losses).
 - **Subgroup Safety:** Regressed on Age 55-59 by 0.0017.
 **Decision:** NO GO. The 84.5% rate remains strictly superior in nested validation.
+
+### Harmonized Features (Failed Gate)
+A feature-level experiment replacing raw disconnected variables (`tumor_size_summary`, `cs_tumor_size20042015`, `tumor_size_overtime`) with merged "harmonized" features was tested specifically to improve the weak Localized-stage slice (2,566 rows). It failed its validation gate:
+- **Global F1 (Base OOF):** Identical to baseline pipeline (0.8780).
+- **Localized F1 (Base OOF):** Identical to baseline pipeline (0.7410).
+- **Explanation:** GBDT models (LightGBM/XGBoost) inherently solve missingness in disjoint columns by treating `NaN` as a valid split route. Pre-harmonizing the data saves tree depth but does not introduce new signal.
+**Decision:** NO GO. The feature engineering provides no lift over the baseline tree splits.
