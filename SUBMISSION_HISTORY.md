@@ -78,22 +78,24 @@ This document tracks the evolution of our submissions for the lung-cancer vital 
 - **LB Score:** `0.875022`
 - **Insight:** The Public Leaderboard score dropped. This means that either (A) tightening the threshold to 98% reduced the diversity of the pseudo-labels, causing slight overfitting to the highly confident samples, or (B) the 411 changed rows were actually correct in Submission 6 for the Public LB portion of the test set. 
 
-### Submission 10 Candidate (Prepared; LB Pending)
-- **File:** `submission.csv` (upload file); `archive/submission10_candidate.csv` (frozen snapshot)
+### Submission 10
+- **File:** `submission.csv` (upload file); `archive/submission10.csv` (byte-identical archived snapshot)
 - **Strategy:** Neural-network diversity blend using 80% of the archived Submission 6 probabilities (`archive/probs_v6_final.npy`) and 20% neural-network probabilities (`archive/probs_nn.npy`). Final labels use a deterministic top-k cutoff rather than a floating-point threshold.
 - **Dead Rate:** 84.475% (exactly 30,411 Dead), matching Submission 6's class count.
 - **Difference from Submission 6:** 292 rows change labels while the total Dead count remains fixed.
-- **Local Evidence:** Promising but inconclusive; the observed local improvement is small and requires leaderboard evidence before this candidate can be preferred over Submission 6.
-- **Status:** Prepared locally. It has not been uploaded, and no LB score is available yet.
+- **LB Score:** `0.876616`
+- **Comparison with Submission 6:** `-0.000642`; the neural-network diversity blend did not surpass Submission 6 on the Public Leaderboard.
+- **Insight:** Submission 10 outperformed the stacking Super-Blend in Submission 8 (`0.876305`) by `0.000311`, but remained below Submission 6 (`0.877258`). It is therefore useful as a verified diversity candidate, not as the primary submission.
+- **Status:** Submitted and verified from the Kaggle submissions page on 2026-08-29.
 
 ---
 
 ## Final Strategy Selection
 For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Based on our empirical testing:
 1. **Submission 6 (`0.877258`):** Keep this as the primary selection for now. It is the highest verified Public LB score and the strongest observed pseudo-labeling configuration; the hidden/private-set result remains unknown.
-2. **Submission 8 (`0.876305`):** Keep the Super-Blend as the provisional secondary selection because it adds stacking-model diversity, although its Public LB score is lower than Submission 6's.
+2. **Submission 10 (`0.876616`):** Use this as the secondary selection. It adds neural-network diversity, keeps the same class count as Submission 6, and has a higher verified Public LB score than Submission 8.
 
-Submission 10 remains a candidate only. Revisit the two-submission selection after its LB score is known; preparing it locally is not evidence that it outperforms either verified submission.
+The recommended pair is now Submission 6 plus Submission 10. Submission 6 remains the primary choice because it has the highest verified Public LB score; Submission 10 provides a different model blend for private-set diversification.
 
 ---
 
@@ -102,7 +104,7 @@ Intermediate files and scripts have been moved to the `archive/` folder to keep 
 - **Old scripts:** `archive/pipeline.py` (v4), `archive/pipeline_v5.py`,
   `archive/pipeline_v7.py`, and `archive/pipeline_v8.py`.
 - **Old submissions:** `archive/submission1.csv` through
-  `archive/submission9.csv`, plus `archive/submission10_candidate.csv` and
+  `archive/submission10.csv`, plus
   diagnostic files such as
   `archive/submission_all_dead.csv` and individual-model predictions.
 - **Probabilities:** Canonical historical `archive/probs_*.npy` arrays used for
@@ -110,6 +112,7 @@ Intermediate files and scripts have been moved to the `archive/` folder to keep 
 
 The main directory contains the active scripts (`pipeline_v6.py`,
 `pipeline_nn.py`, `pipeline_mega_ensemble.py`, `step1_cv_diagnostic.py`, and
-`validation_harness.py`), data files, the pending `submission.csv`, and this
+`validation_harness.py`), data files, the verified Submission 10 upload file
+`submission.csv`, and this
 history document. Historical pipelines v4, v5, v7, and v8 are retained under
 `archive/`.

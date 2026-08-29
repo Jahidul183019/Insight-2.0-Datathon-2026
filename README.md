@@ -9,7 +9,8 @@ scored with F1). The canonical upload file is `submission.csv`.
 - Decision rule: stable top-30,411 ranking
 - Output: `submission.csv` (36,000 rows, 30,411 `Dead`)
 - Generator: `pipeline_mega_ensemble.py`
-- Status: prepared locally; leaderboard score pending
+- Verified Public LB score: `0.876616`
+- Status: submitted as Submission 10
 
 Regenerate and validate the upload file:
 
@@ -24,7 +25,7 @@ IDs, labels, and finite probabilities before writing the output.
 ## Reproducibility
 
 - `insight_2_0_consolidated.ipynb` documents the workflow and validates the
-  frozen and pending artifacts.
+  frozen Submission 10 artifacts.
 - `pipeline_v6.py` contains the original tree/pseudo-label training workflow.
   It is expensive and now writes only under `artifacts/v6_rerun/`; it cannot
   overwrite the canonical root submission.
@@ -42,11 +43,11 @@ Submission 6 artifact.
 ## Important artifacts
 
 - `submission6.csv`: highest verified public-LB submission (`0.877258`)
-- `submission.csv`: pending upload candidate
-- `archive/submission10_candidate.csv`: frozen copy of the pending candidate
+- `submission.csv`: Submission 10 upload file (`0.876616` Public LB)
+- `archive/submission10.csv`: byte-identical archived Submission 10 snapshot
 - `archive/probs_v6_final.npy`: exact probability source for Submission 6
 - `archive/probs_v6_blend.npy`: pre-pseudo v6 teacher probabilities
-- `archive/probs_nn.npy`: NN test probabilities used by the pending blend
+- `archive/probs_nn.npy`: NN test probabilities used by Submission 10
 - `oof_step1.npy`, `archive/oof_nn.npy`, `y_step1.npy`: local validation inputs
 
 Historical pipelines and submissions are retained in `archive/` for provenance.
