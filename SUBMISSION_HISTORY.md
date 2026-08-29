@@ -265,6 +265,7 @@ gate is approved.
 
 ### Submission 13 (New Best Score!)
 - **File:** `submission.csv` (current upload file);
+  `archive/submission13.csv` (byte-identical archived snapshot);
   `artifacts/submission13_nn10/submission13_nn10.csv` (byte-identical generated
   artifact).
 - **Strategy:** Conservative neural-network interpolation using 90% archived
@@ -332,7 +333,7 @@ Intermediate files and scripts have been moved to the `archive/` folder to keep 
 - **Old scripts:** `archive/pipeline.py` (v4), `archive/pipeline_v5.py`,
   `archive/pipeline_v7.py`, and `archive/pipeline_v8.py`.
 - **Old submissions:** `archive/submission1.csv` through
-  `archive/submission11.csv`, plus
+  `archive/submission13.csv`, plus
   diagnostic files such as
   `archive/submission_all_dead.csv` and individual-model predictions.
 - **Probabilities:** Canonical historical `archive/probs_*.npy` arrays used for

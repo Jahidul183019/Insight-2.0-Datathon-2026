@@ -23,7 +23,7 @@ point forward; legacy binary results are retained only for provenance.
   for the Submission 6 nested-equivalent reference (`+0.000255`)
 - Difference from Submission 6 / 10 / 11: 156 / 136 / 300 labels
 - SHA-256: `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`
-- Status: prepared locally; Public LB score pending
+- Status: Submitted and verified on Public LB (`0.877460` - New Personal Best)
 
 Regenerate and validate the upload file:
 
@@ -34,8 +34,8 @@ python3 pipeline_submission13_nn10.py
 The generator requires `test.csv`, `archive/probs_v6_final.npy`,
 `archive/probs_nn.npy`, and archived Submissions 6, 10, and 11. It writes
 isolated artifacts under `artifacts/submission13_nn10/` and promotes the
-validated candidate to `submission.csv` for upload. Submission 11 remains
-preserved in `archive/submission11.csv`.
+validated candidate to `submission.csv` for upload and `archive/submission13.csv`
+for archival preservation. Submission 11 remains preserved in `archive/submission11.csv`.
 
 ## Reproducibility
 
@@ -123,12 +123,13 @@ new test-probability or submission file was generated.
 
 ## Important artifacts
 
-- `submission6.csv`: highest verified public-LB submission (`0.877258`)
-- `submission.csv`: prepared Submission 13 upload file (Public LB pending)
+- `submission.csv`: current verified highest Public LB upload file (`0.877460`)
+- `archive/submission13.csv`: byte-identical archived snapshot of Submission 13
 - `artifacts/submission13_nn10/submission13_nn10.csv`: byte-identical generated
   Submission 13 candidate
 - `artifacts/submission13_nn10/validation_summary.json`: Submission 13 format,
   provenance, hash, and disagreement audit
+- `submission6.csv`: verified baseline public-LB submission (`0.877258`)
 - `archive/submission10.csv`: byte-identical archived Submission 10 snapshot
 - `artifacts/pseudo90/submission11_pseudo90.csv`: byte-identical generated
   Submission 11 candidate

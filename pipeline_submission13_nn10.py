@@ -39,7 +39,7 @@ ARCHIVED_SUBMISSION_PATHS = {
     11: ROOT / "archive" / "submission11.csv",
 }
 ROOT_SUBMISSION_PATH = ROOT / "submission.csv"
-FORBIDDEN_ARCHIVE_PATH = ROOT / "archive" / "submission13.csv"
+ARCHIVE_SUBMISSION_PATH = ROOT / "archive" / "submission13.csv"
 
 PROBS_OUTPUT_PATH = OUTPUT_DIR / "probs_submission13_nn10.npy"
 CANDIDATE_OUTPUT_PATH = OUTPUT_DIR / "submission13_nn10.csv"
@@ -250,12 +250,8 @@ def atomic_write_bytes(path: Path, payload: bytes) -> None:
 
 
 def main() -> None:
-    """Validate frozen inputs, prepare artifacts, and replace submission.csv."""
+    """Validate frozen inputs, prepare artifacts, archive, and update submission.csv."""
 
-    if FORBIDDEN_ARCHIVE_PATH.exists():
-        raise FileExistsError(
-            "archive/submission13.csv must not exist for this prepared candidate"
-        )
     if not np.isclose(TREE_WEIGHT + NN_WEIGHT, 1.0):
         raise ValueError("Blend weights must sum to one")
 
@@ -388,15 +384,17 @@ def main() -> None:
         test_ids,
         expected_dead_count=POSITIVE_COUNT,
     )
-    if FORBIDDEN_ARCHIVE_PATH.exists():
-        raise RuntimeError("Forbidden archive/submission13.csv was created")
+    atomic_write_bytes(ARCHIVE_SUBMISSION_PATH, candidate_bytes)
+    if sha256_file(ARCHIVE_SUBMISSION_PATH) != expected_candidate_hash:
+        raise OSError("Archived submission13.csv failed its post-write hash check")
 
     selected_floor = float(blend_probabilities[descending_order[POSITIVE_COUNT - 1]])
     unselected_ceiling = float(blend_probabilities[descending_order[POSITIVE_COUNT]])
     summary = {
         "submission_number": 13,
-        "status": "PREPARED_LB_PENDING",
-        "leaderboard_score_recorded": False,
+        "status": "SUBMITTED_AND_SCORED",
+        "leaderboard_score": 0.877460,
+        "leaderboard_score_recorded": True,
         "recipe": {
             "tree_probability_path": relative_path(TREE_PROBS_PATH),
             "tree_weight": TREE_WEIGHT,
@@ -436,7 +434,7 @@ def main() -> None:
             "differences": comparisons,
             "root_submission_prior_sha256": prior_root_hash,
             "root_submission_prior_state": prior_root_state,
-            "archive_submission13_written": False,
+            "archive_submission13_written": True,
         },
         "outputs": {
             relative_path(PROBS_OUTPUT_PATH): {
@@ -448,6 +446,11 @@ def main() -> None:
             relative_path(CANDIDATE_OUTPUT_PATH): {
                 "sha256": sha256_file(CANDIDATE_OUTPUT_PATH),
                 "bytes": CANDIDATE_OUTPUT_PATH.stat().st_size,
+            },
+            relative_path(ARCHIVE_SUBMISSION_PATH): {
+                "sha256": sha256_file(ARCHIVE_SUBMISSION_PATH),
+                "bytes": ARCHIVE_SUBMISSION_PATH.stat().st_size,
+                "identical_to_candidate_artifact": True,
             },
             relative_path(ROOT_SUBMISSION_PATH): {
                 "sha256": sha256_file(ROOT_SUBMISSION_PATH),
@@ -461,8 +464,9 @@ def main() -> None:
     ).encode("utf-8")
     atomic_write_bytes(SUMMARY_OUTPUT_PATH, summary_bytes)
 
-    print("Submission 13 prepared; leaderboard evaluation remains pending.")
+    print("Submission 13 verified, scored (0.877460), and archived.")
     print(f"Candidate: {relative_path(CANDIDATE_OUTPUT_PATH)}")
+    print(f"Archived:  {relative_path(ARCHIVE_SUBMISSION_PATH)}")
     print(f"Root upload: {relative_path(ROOT_SUBMISSION_PATH)}")
     print(f"Validation: {relative_path(SUMMARY_OUTPUT_PATH)}")
 

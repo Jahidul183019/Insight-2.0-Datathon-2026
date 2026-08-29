@@ -1,7 +1,7 @@
 {
   "generator": {
     "path": "pipeline_submission13_nn10.py",
-    "sha256": "c24ea1ec95b84415262c33cb4354964578eb2f330b33a2994f38392f6ebbece5"
+    "sha256": "2a40eb3990be4c3f3b8a8175f180a25f86a587433ccafdc6817e1820e755a301"
   },
   "inputs": {
     "archive/probs_nn.npy": {
@@ -41,8 +41,14 @@
       "sha256": "6db5640f5db87b8527e172d1d6966b6edb9e8a8dc5b7c586e2826cdcfce23188"
     }
   },
-  "leaderboard_score_recorded": false,
+  "leaderboard_score": 0.87746,
+  "leaderboard_score_recorded": true,
   "outputs": {
+    "archive/submission13.csv": {
+      "bytes": 401613,
+      "identical_to_candidate_artifact": true,
+      "sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11"
+    },
     "artifacts/submission13_nn10/probs_submission13_nn10.npy": {
       "bytes": 288128,
       "dtype": "float64",
@@ -71,12 +77,12 @@
     "tree_probability_path": "archive/probs_v6_final.npy",
     "tree_weight": 0.9
   },
-  "status": "PREPARED_LB_PENDING",
+  "status": "SUBMITTED_AND_SCORED",
   "submission_number": 13,
   "validation": {
     "alive_count": 5589,
     "all_checks_passed": true,
-    "archive_submission13_written": false,
+    "archive_submission13_written": true,
     "archived_submission_ids_match_test": {
       "submission10": true,
       "submission11": true,
