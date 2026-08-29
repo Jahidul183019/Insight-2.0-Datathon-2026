@@ -290,4 +290,4 @@ A feature-level experiment replacing raw disconnected variables (`tumor_size_sum
 - **Localized F1 (Base OOF):** Identical to baseline pipeline (0.7410).
 - **Public LB Score:** `0.875597` (verified via Kaggle submissions page screenshot on 2026-08-29). This represents a regression from the best unharmonized tree ensembles (which score ~0.877+).
 - **Explanation:** GBDT models (LightGBM/XGBoost) inherently solve missingness in disjoint columns by treating `NaN` as a valid split route. Pre-harmonizing the data saves tree depth but does not introduce new signal, and in this case, actually destroyed some signal by forcing disjoint variables into the same numeric space.
-**Decision:** NO GO. The feature engineering provides no lift over the baseline tree splits.
+**Decision:** NO GO. The feature engineering provides no lift over the baseline tree splits. (Archived as `archive/submission13_harmonized.csv` and `archive/pipeline_v9_harmonized.py`).
