@@ -9,8 +9,8 @@
 
 - **Best Kaggle-Verified LB Score:** `0.877460` (Submission 12) - Confirmed via user screenshot on 2026-08-29.
 - **Private LB Selections:** 
-  1. **Primary:** Submission 12 (`0.877460`)
-  2. **Secondary:** Submission 6 (`0.877258`)
+  1. **Primary:** Submission 10 (`0.876616`) - Selected based on superior local harness robustness.
+  2. **Secondary:** Submission 6 (`0.877258`) - Pure tree fallback.
 - **Pending/Unverified Candidates:** None. All local candidates (like Submission 12) have either been skipped or explicitly resolved.
 
 ## Metric Correction
@@ -205,15 +205,20 @@ gate is approved.
 
 ## Final Strategy Selection
 
-For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Based on our empirical testing:
-1. **Submission 12 (`0.877460`):** Keep this as the primary selection. It is the highest verified Public LB score, successfully injecting neural-network diversity into the robust tree ensemble without degrading performance.
-2. **Submission 6 (`0.877258`):** Use this as the secondary selection. It is our strongest pure-tree/pseudo-labeling configuration. If the neural-network blend in Submission 12 overfits the public split, Submission 6 acts as a highly generalized pure-tree fallback.
+For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Following the principle of prioritizing robust local validation over single-split Public Leaderboard feedback, the final pair is determined by a 50-repeat stratified 40/60 split validation harness evaluating the three canonical candidates (Submission 6, Submission 10, and Submission 12).
 
-The recommended pair is now **Submission 12 plus Submission 6**.
+As documented in `diagnostic_outputs/validation_harness/three_way_summary.md` and `oof_40_60_three_way_results.csv`, at the locked production positive rate of 84.5% (the exact policy used to generate the submissions), the harness results on the simulated private holdouts are:
+- **Submission 10 (80% Tree / 20% NN):** Won 40 out of 50 holds (Mean F1 gap to 2nd place: `+0.000506` ± `0.000397`).
+- **Submission 12 (90% Tree / 10% NN):** Won 3 out of 50 holds.
+- **Submission 6 (100% Tree):** Won 2 out of 50 holds.
+- **Ties:** 5 out of 50 holds.
 
-*(Note: Submission 10 (`0.876616`) and Submission 11 (`0.876616`) were previously considered but have been formally superseded by Submission 12.)*
+Based on this harness-backed evidence, the recommended pair is **Submission 10 plus Submission 6**:
 
-The failed Submission 12 experiment does not change the pair: its local weighted-F1 improvement did not pass the uncertainty, fold-consistency, simulated-private, or subgroup-safety gates. At the time it was evaluated, the exact Submission 6 nested-equivalent reference was also unavailable. That infrastructure gap is now closed, but closing it does not retroactively turn the failed candidate into a submission recommendation.
+1. **Submission 10 (Primary):** Despite having a lower Public LB score (`0.876616`) than Submission 12 (`0.877460`), the local harness proves the 80/20 neural-network blend is significantly more robust. It dominated the simulated private splits (winning 40/50 holds, beating Sub 12 head-to-head 43 times), making it the strongest generalizer.
+2. **Submission 6 (Secondary):** The canonical pure-tree ensemble (`0.877258`). It provides maximum structural diversity as a fallback against any neural-network overfitting, ensuring a safe, purely tree-based anchor.
+
+*(Note: While Submission 12 achieved the highest Public LB score, it is explicitly not selected because its local holdout win-rate and mean F1 were strictly inferior to Submission 10. We choose local simulation stability over noisy public-split feedback.)*
 
 ---
 
@@ -250,12 +255,31 @@ Intermediate files and scripts have been moved to the `archive/` folder to keep 
 
 The main directory contains the active scripts (`pipeline_v6.py`,
 `pipeline_nn.py`, `pipeline_mega_ensemble.py`, `pipeline_pseudo90.py`,
-`pipeline_submission12_nn10.py`,
-`pseudo_label_nested_validation.py`, `submission6_nested_reconstruction.py`,
-`submission6_practical_reference_gate.py`,
-`age55_subgroup_investigation.py`, `step1_cv_diagnostic.py`, and
-`validation_harness.py`), data files, the prepared Submission 12 upload file
-`submission.csv`, and this history document. The corresponding nested,
+`pipeline_submission12_nn10.py`, `pseudo_label_nested_validation.py`, 
+`submission6_nested_reconstruction.py`, `submission6_practical_reference_gate.py`,
+`age55_subgroup_investigation.py`, `step1_cv_diagnostic.py`, `validation_harness.py`,
+`run_three_way_harness.py`, `run_four_way_harness.py`, `validate_teacher_nn5.py`, and
+`validate_threshold_85.py`), data files, the historical `submission.csv` (which contains the superseded Submission 12 candidate), and this history document. The corresponding nested,
 practical-gate, and age-subgroup evidence is retained under
 `diagnostic_outputs/`. Historical pipelines v4, v5, v7, and v8 are retained
 under `archive/`.
+
+---
+
+## Unsubmitted / Failed Experiments
+
+### Teacher + 5% NN Blend (Failed Gate)
+A candidate blending 95% of the pre-pseudo "teacher" probabilities with 5% of the neural-network probabilities achieved a very high un-cross-validated OOF F1 (`0.877429`). However, it comprehensively failed strict local validation gating against Submission 10:
+- **5-Fold Consistency:** Won 2 out of 5 folds vs Submission 10.
+- **Paired Bootstrap:** 95% CI [-0.001542, 0.000747] (not significant, includes zero).
+- **Harness Stability:** Won 14 out of 50 simulated private holdouts vs Submission 10 (14 wins, 31 losses, 5 ties).
+- **Subgroup Safety:** Passed on Age 55-59 (+0.0028) but regressed on Localized stage (-0.0028).
+**Decision:** NO GO. Submission skipped.
+
+### 85% Dead-Rate Threshold (Failed Gate)
+An investigation into whether raising the deterministic prediction rate from 84.5% to 85.0% would improve Submission 10 failed its validation gate:
+- **5-Fold Consistency:** Won only 2 out of 5 folds vs 84.5%.
+- **Paired Bootstrap:** 95% CI [-0.001132, 0.000718] (Not significant, negative mean).
+- **Harness Stability:** Lost the 50-split simulation (19 wins, 31 losses).
+- **Subgroup Safety:** Regressed on Age 55-59 by 0.0017.
+**Decision:** NO GO. The 84.5% rate remains strictly superior in nested validation.

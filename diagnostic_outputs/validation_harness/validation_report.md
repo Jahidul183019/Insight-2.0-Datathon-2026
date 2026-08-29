@@ -10,9 +10,9 @@ The primary metric is the competition's support-weighted F1 across Alive and Dea
 
 ## Direct findings
 
-- At a fixed 84.5% positive rate on full OOF data, the best tested OOF candidate was `tree80_nn20` (support-weighted F1 0.878447).
-- Across repeated 40/60 splits under that fixed-rate policy, `tree80_nn20` had the highest mean holdout support-weighted F1 (0.878170).
-- The current 80% tree / 20% NN candidate changed mean holdout support-weighted F1 by +0.000846 relative to the saved tree OOF proxy. This comparison does not include pseudo-label retraining.
+- At a fixed 84.5% positive rate on full OOF data, the best tested OOF candidate was `Submission 10` (support-weighted F1 0.877853).
+- Across repeated 40/60 splits under that fixed-rate policy, `Submission 10` had the highest mean holdout support-weighted F1 (0.877587).
+- The current 80% tree / 20% NN candidate changed mean holdout support-weighted F1 by +0.000345 relative to the saved tree OOF proxy. This comparison does not include pseudo-label retraining.
 - The reported leaderboard order is `submission_6 > submission_8 > submission_7 > submission_9`, but this harness cannot honestly reproduce or refute that order from the available files.
 - The closest hard-submission pair is `submission_7` vs `submission_8` with 260 changed rows (0.72%). Disagreement is a diversity/risk proxy, not evidence that either side is correct.
 
@@ -47,9 +47,9 @@ The detailed selection-policy summary follows:
 
 ```csv
 policy,metric_schema_version,ranking_metric,n_splits,winner_exact_match_rate,rank_correlation_mean,rank_correlation_std,private_weighted_f1_regret_mean,private_weighted_f1_regret_max,private_f1_regret_mean,private_f1_regret_max,most_frequent_public_winner,most_frequent_public_winner_count,most_frequent_private_winner,most_frequent_private_winner_count
-fixed_rank_rate_0.845,2_weighted_f1_primary,official_support_weighted_f1,50,0.220000,0.615411,0.251466,0.000600,0.002688,0.000600,0.002688,tree70_nn30_previous_candidate,20,tree80_nn20,24
-legacy_dead_class_public_selected_probability_threshold,2_weighted_f1_primary,official_support_weighted_f1,50,0.620000,0.886963,0.135102,0.000276,0.002545,0.000276,0.002545,submission6_nested_recipe_reference,17,submission6_nested_recipe_reference,16
-legacy_dead_class_public_selected_rank_rate_0.80_to_0.92,2_weighted_f1_primary,official_support_weighted_f1,50,0.700000,0.899438,0.131866,0.000188,0.003475,0.000188,0.003475,submission6_nested_recipe_reference,17,submission6_nested_recipe_reference,18
-official_weighted_public_selected_probability_threshold,2_weighted_f1_primary,official_support_weighted_f1,50,0.180000,0.589286,0.300306,0.000696,0.003885,0.000696,0.003885,tree_oof,16,tree_oof,26
-official_weighted_public_selected_rank_rate_0.80_to_0.92,2_weighted_f1_primary,official_support_weighted_f1,50,0.180000,0.509604,0.263168,0.000725,0.002552,0.000725,0.002552,tree95_nn05,14,tree95_nn05,18
+fixed_rank_rate_0.845,2_weighted_f1_primary,official_support_weighted_f1,50,0.680000,0.405885,0.626993,0.000198,0.001698,0.000198,0.001698,Submission 10,39,Submission 10,43
+legacy_dead_class_public_selected_probability_threshold,2_weighted_f1_primary,official_support_weighted_f1,50,0.800000,0.740000,0.431419,0.000097,0.001127,0.000097,0.001127,Submission 6,25,Submission 6,30
+legacy_dead_class_public_selected_rank_rate_0.80_to_0.92,2_weighted_f1_primary,official_support_weighted_f1,50,0.840000,0.779282,0.449171,0.000070,0.000980,0.000070,0.000980,Submission 6,20,Submission 6,22
+official_weighted_public_selected_probability_threshold,2_weighted_f1_primary,official_support_weighted_f1,50,0.300000,0.157321,0.728607,0.000662,0.002725,0.000662,0.002725,Submission 6,24,Submission 12,26
+official_weighted_public_selected_rank_rate_0.80_to_0.92,2_weighted_f1_primary,official_support_weighted_f1,50,0.260000,-0.035359,0.737999,0.000606,0.002085,0.000606,0.002085,Submission 6,26,Submission 6,24
 ```
