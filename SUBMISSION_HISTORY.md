@@ -288,5 +288,6 @@ An investigation into whether raising the deterministic prediction rate from 84.
 A feature-level experiment replacing raw disconnected variables (`tumor_size_summary`, `cs_tumor_size20042015`, `tumor_size_overtime`) with merged "harmonized" features was tested specifically to improve the weak Localized-stage slice (2,566 rows). It failed its validation gate:
 - **Global F1 (Base OOF):** Identical to baseline pipeline (0.8780).
 - **Localized F1 (Base OOF):** Identical to baseline pipeline (0.7410).
-- **Explanation:** GBDT models (LightGBM/XGBoost) inherently solve missingness in disjoint columns by treating `NaN` as a valid split route. Pre-harmonizing the data saves tree depth but does not introduce new signal.
+- **Public LB Score:** `0.875597` (verified via Kaggle submissions page screenshot on 2026-08-29). This represents a regression from the best unharmonized tree ensembles (which score ~0.877+).
+- **Explanation:** GBDT models (LightGBM/XGBoost) inherently solve missingness in disjoint columns by treating `NaN` as a valid split route. Pre-harmonizing the data saves tree depth but does not introduce new signal, and in this case, actually destroyed some signal by forcing disjoint variables into the same numeric space.
 **Decision:** NO GO. The feature engineering provides no lift over the baseline tree splits.
