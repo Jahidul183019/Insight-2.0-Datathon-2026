@@ -1,4 +1,4 @@
-"""Prepare Submission 13 from the frozen Submission 6 and NN probabilities.
+"""Prepare Submission 12 from the frozen Submission 6 and NN probabilities.
 
 The candidate is a deterministic 90%/10% probability blend followed by a
 stable descending top-30,411 decision rule.  It is a prepared upload artifact,
@@ -10,7 +10,7 @@ Safety and provenance rules:
 * Every frozen input is pinned to its audited SHA-256 hash.
 * Archived Submissions 6, 10, and 11 must retain the exact test ID order.
 * The existing root ``submission.csv`` must be archived Submission 11 (or an
-  identical already-prepared Submission 13 from an idempotent rerun).
+  identical already-prepared Submission 12 from an idempotent rerun).
 * Outputs are written atomically.  No file is written to ``archive/``.
 """
 
@@ -28,7 +28,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parent
-OUTPUT_DIR = ROOT / "artifacts" / "submission13_nn10"
+OUTPUT_DIR = ROOT / "artifacts" / "submission12_nn10"
 
 TEST_PATH = ROOT / "test.csv"
 TREE_PROBS_PATH = ROOT / "archive" / "probs_v6_final.npy"
@@ -39,10 +39,10 @@ ARCHIVED_SUBMISSION_PATHS = {
     11: ROOT / "archive" / "submission11.csv",
 }
 ROOT_SUBMISSION_PATH = ROOT / "submission.csv"
-ARCHIVE_SUBMISSION_PATH = ROOT / "archive" / "submission13.csv"
+ARCHIVE_SUBMISSION_PATH = ROOT / "archive" / "submission12.csv"
 
-PROBS_OUTPUT_PATH = OUTPUT_DIR / "probs_submission13_nn10.npy"
-CANDIDATE_OUTPUT_PATH = OUTPUT_DIR / "submission13_nn10.csv"
+PROBS_OUTPUT_PATH = OUTPUT_DIR / "probs_submission12_nn10.npy"
+CANDIDATE_OUTPUT_PATH = OUTPUT_DIR / "submission12_nn10.csv"
 SUMMARY_OUTPUT_PATH = OUTPUT_DIR / "validation_summary.json"
 
 TREE_WEIGHT = 0.90
@@ -305,7 +305,7 @@ def main() -> None:
         )
 
     blend_probabilities = validate_probability_vector(
-        "Submission 13 90%/10% blend",
+        "Submission 12 90%/10% blend",
         TREE_WEIGHT * tree_probabilities + NN_WEIGHT * nn_probabilities,
         EXPECTED_ROWS,
     )
@@ -321,7 +321,7 @@ def main() -> None:
         }
     )
     validate_submission_frame(
-        "Submission 13 candidate",
+        "Submission 12 candidate",
         candidate,
         test_ids,
         expected_dead_count=POSITIVE_COUNT,
@@ -352,7 +352,7 @@ def main() -> None:
     if prior_root_hash not in allowed_root_hashes:
         raise ValueError(
             "Refusing to replace submission.csv: it is neither the audited "
-            "Submission 11 nor this exact Submission 13 candidate"
+            "Submission 11 nor this exact Submission 12 candidate"
         )
     prior_root_state = (
         "ARCHIVED_SUBMISSION_11"
@@ -386,7 +386,7 @@ def main() -> None:
     )
     atomic_write_bytes(ARCHIVE_SUBMISSION_PATH, candidate_bytes)
     if sha256_file(ARCHIVE_SUBMISSION_PATH) != expected_candidate_hash:
-        raise OSError("Archived submission13.csv failed its post-write hash check")
+        raise OSError("Archived submission12.csv failed its post-write hash check")
 
     selected_floor = float(blend_probabilities[descending_order[POSITIVE_COUNT - 1]])
     unselected_ceiling = float(blend_probabilities[descending_order[POSITIVE_COUNT]])
@@ -434,7 +434,7 @@ def main() -> None:
             "differences": comparisons,
             "root_submission_prior_sha256": prior_root_hash,
             "root_submission_prior_state": prior_root_state,
-            "archive_submission13_written": True,
+            "archive_submission12_written": True,
         },
         "outputs": {
             relative_path(PROBS_OUTPUT_PATH): {
@@ -464,7 +464,7 @@ def main() -> None:
     ).encode("utf-8")
     atomic_write_bytes(SUMMARY_OUTPUT_PATH, summary_bytes)
 
-    print("Submission 13 verified, scored (0.877460), and archived.")
+    print("Submission 12 verified, scored (0.877460), and archived.")
     print(f"Candidate: {relative_path(CANDIDATE_OUTPUT_PATH)}")
     print(f"Archived:  {relative_path(ARCHIVE_SUBMISSION_PATH)}")
     print(f"Root upload: {relative_path(ROOT_SUBMISSION_PATH)}")

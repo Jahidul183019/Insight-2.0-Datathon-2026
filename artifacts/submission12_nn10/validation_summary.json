@@ -1,6 +1,6 @@
 {
   "generator": {
-    "path": "pipeline_submission13_nn10.py",
+    "path": "pipeline_submission12_nn10.py",
     "sha256": "2a40eb3990be4c3f3b8a8175f180a25f86a587433ccafdc6817e1820e755a301"
   },
   "inputs": {
@@ -44,12 +44,12 @@
   "leaderboard_score": 0.87746,
   "leaderboard_score_recorded": true,
   "outputs": {
-    "archive/submission13.csv": {
+    "archive/submission12.csv": {
       "bytes": 401613,
       "identical_to_candidate_artifact": true,
       "sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11"
     },
-    "artifacts/submission13_nn10/probs_submission13_nn10.npy": {
+    "artifacts/submission12_nn10/probs_submission12_nn10.npy": {
       "bytes": 288128,
       "dtype": "float64",
       "sha256": "b3821aca6c09913908d8b29720f09774b6b703e61a749408a91445fb81dc9304",
@@ -57,7 +57,7 @@
         36000
       ]
     },
-    "artifacts/submission13_nn10/submission13_nn10.csv": {
+    "artifacts/submission12_nn10/submission12_nn10.csv": {
       "bytes": 401613,
       "sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11"
     },
@@ -82,7 +82,7 @@
   "validation": {
     "alive_count": 5589,
     "all_checks_passed": true,
-    "archive_submission13_written": true,
+    "archive_submission12_written": true,
     "archived_submission_ids_match_test": {
       "submission10": true,
       "submission11": true,

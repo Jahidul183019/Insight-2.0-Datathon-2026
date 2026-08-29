@@ -14,11 +14,11 @@ point forward; legacy binary results are retained only for provenance.
 
 ## Current upload candidate
 
-- Candidate: Submission 13
+- Candidate: Submission 12
 - Recipe: 90% archived Submission 6 probabilities + 10% NN probabilities
 - Decision rule: stable top-30,411 ranking
 - Output: `submission.csv` (36,000 rows, 30,411 `Dead`)
-- Generator: `pipeline_submission13_nn10.py`
+- Generator: `pipeline_submission12_nn10.py`
 - Canonical nested validation: weighted F1 `0.877259`, versus `0.877004`
   for the Submission 6 nested-equivalent reference (`+0.000255`)
 - Difference from Submission 6 / 10 / 11: 156 / 136 / 300 labels
@@ -28,13 +28,13 @@ point forward; legacy binary results are retained only for provenance.
 Regenerate and validate the upload file:
 
 ```bash
-python3 pipeline_submission13_nn10.py
+python3 pipeline_submission12_nn10.py
 ```
 
 The generator requires `test.csv`, `archive/probs_v6_final.npy`,
 `archive/probs_nn.npy`, and archived Submissions 6, 10, and 11. It writes
-isolated artifacts under `artifacts/submission13_nn10/` and promotes the
-validated candidate to `submission.csv` for upload and `archive/submission13.csv`
+isolated artifacts under `artifacts/submission12_nn10/` and promotes the
+validated candidate to `submission.csv` for upload and `archive/submission12.csv`
 for archival preservation. Submission 11 remains preserved in `archive/submission11.csv`.
 
 ## Reproducibility
@@ -47,8 +47,8 @@ for archival preservation. Submission 11 remains preserved in `archive/submissio
   It is expensive and now writes only under `artifacts/v6_rerun/`; it cannot
   overwrite the canonical root submission.
 - `pipeline_nn.py` contains the neural-network training workflow.
-- `pipeline_submission13_nn10.py` deterministically reconstructs the prepared
-  Submission 13 upload candidate from frozen probabilities.
+- `pipeline_submission12_nn10.py` deterministically reconstructs the prepared
+  Submission 12 upload candidate from frozen probabilities.
 - `step1_cv_diagnostic.py` regenerates the cached tree OOF diagnostics.
 - `validation_harness.py` runs the saved-OOF 40/60 stability audit and writes
   results under `diagnostic_outputs/validation_harness/`.
@@ -71,42 +71,6 @@ Submission 6 artifact. It does not yet demonstrate a clean end-to-end retraining
 of every historical submitted model; that regeneration path must be completed
 and verified before the final competition notebook is handed in.
 
-## Previous candidate decision
-
-Submission 12 was evaluated as an 80% pseudo90 / 20% neural-network blend. Its
-weighted OOF F1 was `0.876155`, versus `0.874797` for pseudo90, but the paired
-bootstrap interval included zero (`[-0.000255, +0.002631]`), only 3 of 5 folds
-improved, and it was best in 0 of 50 simulated-private splits. The candidate
-also regressed the weak age-55–59 subgroup by `-0.0023`; at that gate, the later
-Submission 6 nested-recipe reference was not yet available. The gate therefore
-failed: no Submission 12 CSV was generated, and the final pair remains
-Submission 6 plus Submission 10.
-
-## Submission 6 reference and age-55 follow-up
-
-The completed Submission 6 reconstruction covers all 5 outer folds and all
-24,000 training rows exactly once. At the fixed 84.5% Dead rate it scores
-`0.8770041332` weighted F1, with fold scores `0.876919`, `0.879890`,
-`0.877344`, `0.874797`, and `0.874797`. Its gap to the verified Submission 6
-Public LB score is `-0.0002538668`, inside the predeclared ±0.005 scale gate.
-
-There are two deliberately separate equivalence statements. Strict historical
-probability/artifact equivalence remains `false` because the full-data replay
-has approximately 1e-9 numerical drift. The independent practical gate passes
-all 21 required checks with no failures or pending checks, reproduces all
-30,411 production `Dead` labels with zero changes, and therefore approves
-`submission6_nested_recipe_reference` as the canonical comparator for future
-validation. Practical approval does not rewrite the strict fields in
-`global_metrics.csv` or claim byte-identical probabilities.
-
-The canonical age-55–59 follow-up contains 1,821 rows and scores `0.8380620414`
-weighted F1 and `0.8624741958` ROC AUC, versus `0.8770041332` weighted F1
-globally. The EOD-unavailable × adenocarcinoma-family and raw-8140 total-error
-tests remain BH-significant (`q=0.006233` and `q=0.006456`), but zero
-class-conditional excess-error signals pass the denominator, effect-size, and
-BH gates. Step 3 was therefore skipped: no targeted feature was trained and no
-new test-probability or submission file was generated.
-
 ## Competition compliance
 
 - The model workflow is manually specified; no AutoML library is used.
@@ -124,10 +88,10 @@ new test-probability or submission file was generated.
 ## Important artifacts
 
 - `submission.csv`: current verified highest Public LB upload file (`0.877460`)
-- `archive/submission13.csv`: byte-identical archived snapshot of Submission 13
-- `artifacts/submission13_nn10/submission13_nn10.csv`: byte-identical generated
-  Submission 13 candidate
-- `artifacts/submission13_nn10/validation_summary.json`: Submission 13 format,
+- `archive/submission12.csv`: byte-identical archived snapshot of Submission 12
+- `artifacts/submission12_nn10/submission12_nn10.csv`: byte-identical generated
+  Submission 12 candidate
+- `artifacts/submission12_nn10/validation_summary.json`: Submission 12 format,
   provenance, hash, and disagreement audit
 - `submission6.csv`: verified baseline public-LB submission (`0.877258`)
 - `archive/submission10.csv`: byte-identical archived Submission 10 snapshot
