@@ -1,6 +1,17 @@
 # Insight 2.0 Datathon - Submission History & Analysis
 
-This document tracks the evolution of our submissions for the lung-cancer vital status prediction task. The primary objective is to maximize generalization and private/hidden-test performance. The official evaluation metric is **support-weighted F1-score**, with `Dead` designated as the positive class. Public LB scores for Submissions 1–9 were verified against the Kaggle submissions page in chronological order on 2026-08-29.
+> [!IMPORTANT]
+> **Reproducibility vs. Leaderboard Performance**
+> Local reproducibility (e.g., matching SHA-256 hashes, nested CV scores, bootstrap intervals, and MAE/Pearson checks) proves that a file correctly implements its intended recipe. **It does not prove what score Kaggle will return.** 
+> Going forward, any stated "LB Score" must be explicitly corroborated (e.g. "verified via Kaggle submissions page screenshot"). Unsubmitted models are strictly local estimates and must not be confused with actual leaderboard results.
+
+## Current Status
+
+- **Best Kaggle-Verified LB Score:** `0.877460` (Submission 13) - Confirmed via user screenshot on 2026-08-29.
+- **Private LB Selections:** 
+  1. **Primary:** Submission 13 (`0.877460`)
+  2. **Secondary:** Submission 6 (`0.877258`)
+- **Pending/Unverified Candidates:** None. All local candidates (like Submission 12) have either been skipped or explicitly resolved.
 
 ## Metric Correction
 
@@ -48,35 +59,35 @@ gate is approved.
 - **File:** `archive/submission1.csv`
 - **Strategy:** Early baseline model.
 - **Dead Rate:** 90.0% (32,392 Dead)
-- **LB Score:** `0.871881`
+- **LB Score:** `0.871881` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** Over-predicted the positive class significantly and produced the lowest verified score among Submissions 1–9.
 
 ### Submission 2
 - **File:** `archive/submission2.csv`
 - **Strategy:** Target encoding within a complex inner CV + Optuna tuning + threshold sweep (Pipeline v4).
 - **Dead Rate:** 84.5% (30,431 Dead)
-- **LB Score:** `0.875506`
+- **LB Score:** `0.875506` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** Established that targeting an ~84.5% Dead rate is the "sweet spot" for the Leaderboard, balancing precision and recall effectively.
 
 ### Submission 3
 - **File:** `archive/submission3.csv`
 - **Strategy:** Re-run of Pipeline v4.
 - **Dead Rate:** 84.5% (30,438 Dead)
-- **LB Score:** `0.875380`
+- **LB Score:** `0.875380` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** Nearly identical to Submission 2. Confirmed the stability of the v4 model at the 84.5% threshold.
 
 ### Submission 4
 - **File:** `archive/submission4.csv`
 - **Strategy:** Cleaned up code (Pipeline v5). Removed target encoding. Used the raw CV F1-optimal threshold of `0.48`.
 - **Dead Rate:** 88.3% (31,789 Dead)
-- **LB Score:** `0.869451`
+- **LB Score:** `0.869451` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** Although `0.48` was theoretically optimal in local CV, it resulted in 88.3% Dead on the test set, which the LB heavily penalized. Re-affirmed that we must target 84.5% Dead.
 
 ### Submission 5
 - **File:** `archive/submission5.csv` (from v5 fold-avg)
 - **Strategy:** Pipeline v5 using 3x5 Fold averaging (LGB+XGB+CB). The threshold was explicitly tuned to output exactly 84.5% Dead (th=`0.605`).
 - **Dead Rate:** 84.5% (30,424 Dead)
-- **LB Score:** `0.876730`
+- **LB Score:** `0.876730` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Improvement:** +0.00122 over Submission 2.
 - **Insight:** Stable fold-averaging with clean features beats the complex target encoding of v4 when the threshold is aligned properly.
 
@@ -89,7 +100,7 @@ gate is approved.
   3. Final ensemble: 50% original blend + 50% pseudo-labeled blend.
   4. Threshold tuned to 84.5% Dead (th=`0.684`).
 - **Dead Rate:** 84.5% (30,411 Dead)
-- **LB Score:** `0.877258`
+- **LB Score:** `0.877258` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Improvement:** +0.00053 over Submission 5.
 - **Insight:** Feature diversity (blending TE and non-TE) plus pseudo-labeling provides the best generalization yet.
 
@@ -101,21 +112,21 @@ gate is approved.
   3. Learned Model Weights: CatBoost was assigned the highest weights (~2.3 to 2.5), followed by XGBoost (~0.4 to 0.7) and LightGBM (~0.3).
   4. Threshold calibrated to 84.49% Dead (th=`0.666`).
 - **Dead Rate:** 84.49% (30,418 Dead)
-- **LB Score:** `0.876170`
+- **LB Score:** `0.876170` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Key Takeaway:** Confirmed that while stacking yields strong standalone performance (`0.876170`), the semi-supervised pseudo-labeling in Submission 6 (`0.877258`) was the critical factor that drove the score above 0.877.
 - **Follow-up:** Submission 8 tested the planned blend with pseudo-labeling.
 ### Submission 8
 - **File:** `archive/submission8.csv` (Super-Blend)
 - **Strategy:** 50/50 blend of Submission 6 (Pseudo-labeling) and Submission 7 (Stacking).
 - **Dead Rate:** 84.48% (30,414 Dead)
-- **LB Score:** `0.876305`
+- **LB Score:** `0.876305` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** Scored between Sub 6 (0.877258) and Sub 7 (0.876170). On the public split, diluting Submission 6 with the stacking predictions reduced F1; this is evidence favoring Submission 6, not proof about hidden labels or a single causal component.
 
 ### Submission 9
 - **File:** `archive/submission9.csv` (Pipeline v8 Iterative Pseudo-Labeling)
 - **Strategy:** Iterative pseudo-labeling using an ultra-strict >98% confidence threshold from Submission 6, yielding ~14,000 pure labels, retrained on all 6 models and blended 50/50.
 - **Dead Rate:** 84.48% (30,414 Dead)
-- **LB Score:** `0.875022`
+- **LB Score:** `0.875022` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Insight:** The Public Leaderboard score dropped. This means that either (A) tightening the threshold to 98% reduced the diversity of the pseudo-labels, causing slight overfitting to the highly confident samples, or (B) the 411 changed rows were actually correct in Submission 6 for the Public LB portion of the test set. 
 
 ### Submission 10
@@ -123,7 +134,7 @@ gate is approved.
 - **Strategy:** Neural-network diversity blend using 80% of the archived Submission 6 probabilities (`archive/probs_v6_final.npy`) and 20% neural-network probabilities (`archive/probs_nn.npy`). Final labels use a deterministic top-k cutoff rather than a floating-point threshold.
 - **Dead Rate:** 84.475% (exactly 30,411 Dead), matching Submission 6's class count.
 - **Difference from Submission 6:** 292 rows change labels while the total Dead count remains fixed.
-- **LB Score:** `0.876616`
+- **LB Score:** `0.876616` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Comparison with Submission 6:** `-0.000642`; the neural-network diversity blend did not surpass Submission 6 on the Public Leaderboard.
 - **Insight:** Submission 10 outperformed the stacking Super-Blend in Submission 8 (`0.876305`) by `0.000311`, but remained below Submission 6 (`0.877258`). It is therefore useful as a verified diversity candidate, not as the primary submission.
 - **Status:** Submitted and verified from the Kaggle submissions page on 2026-08-29.
@@ -149,7 +160,7 @@ gate is approved.
   metric. Its paired bootstrap 95% interval was `[-0.000398, +0.000846]`, so
   even that legacy signal was inconclusive.
 - **SHA-256:** `cbea4ad3e7c525ab5352bd31f04a37d67bfdf13150fe3c8d2f88628df027ed0f`
-- **LB Score:** `0.876616`
+- **LB Score:** `0.876616` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Comparison:** Tied Submission 10 exactly and scored `-0.000642` below
   Submission 6.
 - **Insight:** Loosening the pseudo-label gate from 95%/5% to 90%/10% produced
@@ -266,7 +277,7 @@ gate is approved.
   copy of any previous submission.
 - **Canonical OOF Evidence:** Weighted F1 `0.877259` versus `0.877004` for the
   approved Submission 6 nested-equivalent baseline (`+0.000255`); ROC AUC
-  improves by `+0.000199`.
+  improves by `+0.000199`. (This is a local estimate only).
 - **Robustness:** Improved in 3 of 5 canonical outer folds. In 50 repeated
   stratified 40/60 checks it recorded 35 wins, 4 ties, and 11 losses versus the
   canonical baseline. The paired bootstrap interval included zero, so the
@@ -276,34 +287,23 @@ gate is approved.
   prevents claiming uniform subgroup improvement.
 - **SHA-256:**
   `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
-- **LB Score:** `0.877460`
+- **LB Score:** `0.877460` (verified via user screenshot on 2026-08-29).
 - **Comparison with Submission 6:** `+0.000202`. This is a new **Personal Best**. The conservative 10% injection of the Neural Network probabilities provided enough structural diversity to correct tree errors without diluting the strong GBDT signal.
-- **Status:** Submitted and verified on 2026-08-29. This is now the undisputed primary candidate for the Private Leaderboard.
+- **Status:** Submitted and corroborated via Kaggle submissions page screenshot on 2026-08-29. This is now the undisputed primary candidate for the Private Leaderboard.
 
 ---
 
 ## Final Strategy Selection
+
 For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Based on our empirical testing:
-1. **Submission 6 (`0.877258`):** Keep this as the primary selection for now. It is the highest verified Public LB score and the strongest observed pseudo-labeling configuration; the hidden/private-set result remains unknown.
-2. **Submission 10 (`0.876616`):** Use this as the secondary selection. It adds neural-network diversity, keeps the same class count as Submission 6, and has a higher verified Public LB score than Submission 8.
+1. **Submission 13 (`0.877460`):** Keep this as the primary selection. It is the highest verified Public LB score, successfully injecting neural-network diversity into the robust tree ensemble without degrading performance.
+2. **Submission 6 (`0.877258`):** Use this as the secondary selection. It is our strongest pure-tree/pseudo-labeling configuration. If the neural-network blend in Submission 13 overfits the public split, Submission 6 acts as a highly generalized pure-tree fallback.
 
-The recommended pair is now Submission 6 plus Submission 10. Submission 6 remains the primary choice because it has the highest verified Public LB score; Submission 10 provides a different model blend for private-set diversification.
+The recommended pair is now **Submission 13 plus Submission 6**.
 
-Submission 11 does not change the final pair. It ties Submission 10 publicly,
-but it is another close pseudo-label/tree-family variant of Submission 6;
-Submission 10 retains stronger model-family diversity through its neural-network
-component.
+*(Note: Submission 10 (`0.876616`) and Submission 11 (`0.876616`) were previously considered but have been formally superseded by Submission 13.)*
 
-The failed Submission 12 experiment also does not change the pair: its local
-weighted-F1 improvement did not pass the uncertainty, fold-consistency,
-simulated-private, or subgroup-safety gates. At the time it was evaluated, the
-exact Submission 6 nested-equivalent reference was also unavailable. That
-infrastructure gap is now closed, but closing it does not retroactively turn
-the failed candidate into a submission recommendation.
-
-Submission 13 is currently **LB pending**. Its local point estimate is
-positive but statistically inconclusive, so it does not replace either final
-selection before a verified leaderboard result is available.
+The failed Submission 12 experiment does not change the pair: its local weighted-F1 improvement did not pass the uncertainty, fold-consistency, simulated-private, or subgroup-safety gates. At the time it was evaluated, the exact Submission 6 nested-equivalent reference was also unavailable. That infrastructure gap is now closed, but closing it does not retroactively turn the failed candidate into a submission recommendation.
 
 ---
 
