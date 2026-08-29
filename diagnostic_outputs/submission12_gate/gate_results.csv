@@ -1,0 +1,9 @@
+gate,metric,metric_role,observed,required,passed,note
+1_bootstrap_ci_lower_strictly_above_zero,weighted_f1,official_primary,-0.0002546498277840037,> 0,False,Sub12 minus nested pseudo90 paired stratified bootstrap.
+2_outer_fold_improvement_count,weighted_f1,official_primary,3,>= 4 of 5,False,Each fold independently uses an exact 84.5% top-rate policy.
+3_simulated_private_clear_majority,weighted_f1,official_primary,0,> 25 of 50,False,Winner comparison includes all five requested OOF candidates.
+1_bootstrap_ci_lower_strictly_above_zero,dead_class_binary_f1,legacy_comparison,-0.00014925373134322406,> 0,False,Sub12 minus nested pseudo90 paired stratified bootstrap.
+2_outer_fold_improvement_count,dead_class_binary_f1,legacy_comparison,3,>= 4 of 5,False,Each fold independently uses an exact 84.5% top-rate policy.
+3_simulated_private_clear_majority,dead_class_binary_f1,legacy_comparison,0,> 25 of 50,False,Winner comparison includes all five requested OOF candidates.
+4_no_meaningful_subgroup_regression,external,separate_audit,,separate subgroup audit must pass,,"Handled by the separate exact subgroup audit, not this script."
+5_directionally_better_than_actual_submission6_nested,weighted_f1,official_primary,,exact recipe-equivalent nested Submission 6 OOF,False,Unavailable: nested pseudo95 is not an exact replay. Sub12 is +0.001952315 versus the pseudo95 proxy but -0.002291848 versus existing tree80_nn20.

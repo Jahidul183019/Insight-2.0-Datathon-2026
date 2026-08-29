@@ -1,0 +1,18 @@
+{
+  "status": "plan_only_ok",
+  "run_signature": "019972621bd5a68444c1a2f15e7de5336853ca37a012faa3ed129407d724b162",
+  "first_fold_preprocessing": {
+    "base_feature_count": 82,
+    "categorical_feature_count": 30,
+    "unknown_validation_category_cells": 22,
+    "unknown_test_category_cells": 19
+  },
+  "requested_outer_folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "estimated_model_fits_full_run": 600
+}

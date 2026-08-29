@@ -1,0 +1,6 @@
+item,status,exact_match,disagreement_count,detail
+actual_submission6_hard_reconstruction,exact,True,0,"Top-30,411 of archive/probs_v6_final.npy reproduces archive/submission6.csv in memory."
+actual_submission10_hard_reconstruction,exact,True,0,"Top-30,411 of 0.80*v6 + 0.20*NN reproduces archive/submission10.csv in memory."
+nested_pseudo95_vs_actual_submission6,not_recipe_equivalent,False,,"The nested control uses one full 1500-round fit per model family without inner early stopping or fold averaging. Actual Submission 6 uses a 3x5 early-stopped teacher and a five-fold early-stopped pseudo student. It is a like-for-like pseudo90 control, not an exact nested replay of Submission 6."
+oof_step1_vs_actual_submission6,not_recipe_equivalent,False,,oof_step1/frozen_tree_oof is the pre-pseudo teacher proxy and does not contain Submission 6's final pseudo-student component.
+nn_oof_outer_fold_comparability,screening_proxy_only,False,,"pipeline_nn.py uses the same five-fold StratifiedKFold seed 42, but preprocessing is fit globally and each validation fold selects the best NN epoch. The blend is aligned OOF screening, not the same untouched-outer-fold standard as the nested pseudo audit."

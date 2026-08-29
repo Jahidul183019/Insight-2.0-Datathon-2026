@@ -10,6 +10,10 @@ The 40/60 exercise is a proxy for checking whether a decision made on a
 smaller labelled partition remains sensible on a larger labelled partition.
 It is *not* a reconstruction of Kaggle's public/private split.
 
+The official support-weighted F1 metric is primary.  Binary Dead-class F1 is
+retained under explicit legacy names (and a few documented compatibility
+aliases) so version-1 outputs cannot be mistaken for official evaluation.
+
 Default outputs are written only under:
     diagnostic_outputs/validation_harness/
 """
@@ -17,8 +21,11 @@ Default outputs are written only under:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import itertools
+import json
 from pathlib import Path
+from typing import Callable
 
 import numpy as np
 import pandas as pd
@@ -28,6 +35,18 @@ from sklearn.model_selection import train_test_split
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT_DIR = ROOT / "diagnostic_outputs" / "validation_harness"
+OFFICIAL_F1_AVERAGE = "weighted"
+METRIC_SCHEMA_VERSION = "2_weighted_f1_primary"
+SUBMISSION6_REFERENCE_GATE_PATH = (
+    ROOT
+    / "diagnostic_outputs"
+    / "submission6_reference_gate"
+    / "submission6_practical_reference_acceptance.json"
+)
+SUBMISSION6_NESTED_OOF_PATH = (
+    ROOT / "diagnostic_outputs" / "submission6_nested" / "nested_oof_predictions.npz"
+)
+SUBMISSION6_NESTED_CANDIDATE = "submission6_nested_recipe_reference"
 
 # These scores are metadata reported in SUBMISSION_HISTORY.md.  They are never
 # treated as row-level labels or recomputed by this script.
@@ -95,6 +114,14 @@ def require_file(path: Path) -> Path:
     return path
 
 
+def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        while chunk := handle.read(chunk_size):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def validate_probability_vector(name: str, values: np.ndarray, n_rows: int) -> np.ndarray:
     values = np.asarray(values, dtype=float)
     if values.ndim != 1 or len(values) != n_rows:
@@ -104,6 +131,57 @@ def validate_probability_vector(name: str, values: np.ndarray, n_rows: int) -> n
     if values.min() < 0.0 or values.max() > 1.0:
         raise ValueError(f"{name} contains values outside [0, 1]")
     return values
+
+
+def load_approved_submission6_nested_reference(
+    y: np.ndarray,
+) -> np.ndarray | None:
+    """Load the nested vector only after its independent gate approves it.
+
+    A missing or pending gate is the ordinary state while reconstruction is in
+    progress and leaves the historical harness candidate set unchanged.  Once
+    approval is asserted, any stale hash, signature, label order, or vector
+    shape is treated as an error rather than silently accepting a different
+    reference.
+    """
+
+    if not SUBMISSION6_REFERENCE_GATE_PATH.is_file():
+        return None
+    gate = json.loads(SUBMISSION6_REFERENCE_GATE_PATH.read_text(encoding="utf-8"))
+    if not bool(gate.get("canonical_nested_recipe_reference_approved", False)):
+        return None
+    if not (
+        gate.get("status") == "approved"
+        and bool(gate.get("practical_recipe_replay_accepted", False))
+        and bool(gate.get("nested_reference_integrity_accepted", False))
+    ):
+        raise ValueError(
+            "Submission 6 reference gate asserts canonical approval without all "
+            "required practical/nested approval fields"
+        )
+    expected_relative_path = str(SUBMISSION6_NESTED_OOF_PATH.relative_to(ROOT))
+    if gate.get("nested_oof_path") != expected_relative_path:
+        raise ValueError("Submission 6 reference gate points to an unexpected OOF path")
+    if gate.get("nested_oof_key") != "submission6_nested_oof":
+        raise ValueError("Submission 6 reference gate names an unexpected OOF key")
+    expected_sha = gate.get("nested_oof_sha256")
+    if not isinstance(expected_sha, str) or sha256_file(SUBMISSION6_NESTED_OOF_PATH) != expected_sha:
+        raise ValueError("Approved Submission 6 nested OOF hash is stale or invalid")
+
+    with np.load(SUBMISSION6_NESTED_OOF_PATH, allow_pickle=False) as artifact:
+        run_signature = str(artifact["run_signature"].item())
+        saved_y = artifact["y"].astype(np.int8)
+        completed = artifact["completed_outer_folds"].astype(np.int8)
+        scores = artifact["submission6_nested_oof"].astype(np.float64)
+    if run_signature != gate.get("run_signature"):
+        raise ValueError("Approved Submission 6 nested OOF run signature is stale")
+    if not np.array_equal(saved_y, y):
+        raise ValueError("Approved Submission 6 nested OOF labels/order do not match")
+    if not np.array_equal(completed, np.arange(1, 6, dtype=np.int8)):
+        raise ValueError("Approved Submission 6 nested OOF does not contain 5/5 folds")
+    return validate_probability_vector(
+        SUBMISSION6_NESTED_CANDIDATE, scores, len(y)
+    )
 
 
 def top_rate_predictions(scores: np.ndarray, positive_rate: float) -> np.ndarray:
@@ -116,8 +194,80 @@ def top_rate_predictions(scores: np.ndarray, positive_rate: float) -> np.ndarray
     return predictions
 
 
+def official_weighted_f1(y_true: np.ndarray, predictions: np.ndarray) -> float:
+    """Competition metric: support-weighted F1 across Alive and Dead."""
+
+    return float(
+        f1_score(
+            y_true,
+            predictions,
+            average=OFFICIAL_F1_AVERAGE,
+            zero_division=0,
+        )
+    )
+
+
+def legacy_dead_class_f1(y_true: np.ndarray, predictions: np.ndarray) -> float:
+    """Historical local metric: binary F1 with Dead encoded as class 1."""
+
+    return float(f1_score(y_true, predictions, average="binary", zero_division=0))
+
+
+def _threshold_for_top_k(sorted_scores: np.ndarray, best_k: int) -> float:
+    """Translate a desired top-k cutoff to a deterministic score threshold."""
+
+    if best_k == 0:
+        return float(np.nextafter(sorted_scores[0], np.inf))
+    if best_k == len(sorted_scores):
+        return float(np.nextafter(sorted_scores[-1], -np.inf))
+    upper = float(sorted_scores[best_k - 1])
+    lower = float(sorted_scores[best_k])
+    if upper == lower:
+        # Exact top-k selection is impossible across a tied boundary.  The
+        # recorded positive rate exposes the resulting difference.
+        return upper
+    return (upper + lower) / 2.0
+
+
 def best_probability_threshold(y_true: np.ndarray, scores: np.ndarray) -> float:
-    """Choose an exact F1-optimal threshold on one labelled partition."""
+    """Choose a support-weighted-F1-optimal probability threshold."""
+
+    order = np.argsort(-scores, kind="mergesort")
+    sorted_y = y_true[order]
+    predicted_positive = np.arange(len(scores) + 1, dtype=np.int64)
+    true_positive = np.concatenate(
+        [np.array([0], dtype=np.int64), np.cumsum(sorted_y, dtype=np.int64)]
+    )
+    positive = int(y_true.sum())
+    negative = len(y_true) - positive
+    false_positive = predicted_positive - true_positive
+    false_negative = positive - true_positive
+    true_negative = negative - false_positive
+
+    positive_denominator = 2 * true_positive + false_positive + false_negative
+    negative_denominator = 2 * true_negative + false_positive + false_negative
+    positive_f1 = np.divide(
+        2.0 * true_positive,
+        positive_denominator,
+        out=np.zeros(len(scores) + 1, dtype=float),
+        where=positive_denominator > 0,
+    )
+    negative_f1 = np.divide(
+        2.0 * true_negative,
+        negative_denominator,
+        out=np.zeros(len(scores) + 1, dtype=float),
+        where=negative_denominator > 0,
+    )
+    weighted_f1 = (positive * positive_f1 + negative * negative_f1) / len(y_true)
+    best_k = int(np.flatnonzero(weighted_f1 == weighted_f1.max())[0])
+    return _threshold_for_top_k(scores[order], best_k)
+
+
+def best_dead_class_probability_threshold_legacy(
+    y_true: np.ndarray, scores: np.ndarray
+) -> float:
+    """Choose the historical binary-Dead-F1-optimal threshold."""
+
     order = np.argsort(-scores, kind="mergesort")
     sorted_y = y_true[order]
     cumulative_tp = np.cumsum(sorted_y)
@@ -131,17 +281,7 @@ def best_probability_threshold(y_true: np.ndarray, scores: np.ndarray) -> float:
     )
     best_k = int(np.flatnonzero(f1_values == f1_values.max())[0]) + 1
 
-    sorted_scores = scores[order]
-    if best_k == len(scores):
-        return float(np.nextafter(sorted_scores[-1], -np.inf))
-    upper = float(sorted_scores[best_k - 1])
-    lower = float(sorted_scores[best_k])
-    if upper == lower:
-        # Exact top-k selection is impossible across a tied boundary.  The
-        # threshold remains deterministic; the recorded positive rate exposes
-        # any difference from best_k / n.
-        return upper
-    return (upper + lower) / 2.0
+    return _threshold_for_top_k(scores[order], best_k)
 
 
 def best_rank_rate(
@@ -149,17 +289,22 @@ def best_rank_rate(
     scores: np.ndarray,
     rate_grid: np.ndarray,
     tie_reference: float,
+    metric: Callable[[np.ndarray, np.ndarray], float],
 ) -> float:
     scored_rates = []
     for rate in rate_grid:
         predictions = top_rate_predictions(scores, float(rate))
-        score = f1_score(y_true, predictions, zero_division=0)
+        score = metric(y_true, predictions)
         scored_rates.append((float(score), -abs(float(rate) - tie_reference), float(rate)))
     # Prefer the rate nearest the fixed-rate reference when F1 ties exactly.
     return max(scored_rates)[2]
 
 
-def make_oof_candidates(tree_oof: np.ndarray, nn_oof: np.ndarray) -> dict[str, dict[str, object]]:
+def make_oof_candidates(
+    tree_oof: np.ndarray,
+    nn_oof: np.ndarray,
+    submission6_nested_reference: np.ndarray | None = None,
+) -> dict[str, dict[str, object]]:
     weights = [
         ("tree_oof", 1.00, 0.00),
         ("tree95_nn05", 0.95, 0.05),
@@ -168,7 +313,7 @@ def make_oof_candidates(tree_oof: np.ndarray, nn_oof: np.ndarray) -> dict[str, d
         ("tree70_nn30_previous_candidate", 0.70, 0.30),
         ("nn_oof", 0.00, 1.00),
     ]
-    return {
+    candidates = {
         name: {
             "scores": tree_weight * tree_oof + nn_weight * nn_oof,
             "tree_weight": tree_weight,
@@ -176,6 +321,14 @@ def make_oof_candidates(tree_oof: np.ndarray, nn_oof: np.ndarray) -> dict[str, d
         }
         for name, tree_weight, nn_weight in weights
     }
+    if submission6_nested_reference is not None:
+        candidates[SUBMISSION6_NESTED_CANDIDATE] = {
+            "scores": submission6_nested_reference,
+            # This is a complete recipe reference, not a tree/NN ratio.
+            "tree_weight": np.nan,
+            "nn_weight": np.nan,
+        }
+    return candidates
 
 
 def global_oof_metrics(
@@ -192,35 +345,87 @@ def global_oof_metrics(
         scores = np.asarray(candidate["scores"])
         threshold = best_probability_threshold(y, scores)
         threshold_predictions = (scores >= threshold).astype(np.int8)
+        legacy_threshold = best_dead_class_probability_threshold_legacy(y, scores)
+        legacy_threshold_predictions = (scores >= legacy_threshold).astype(np.int8)
         fixed_predictions = top_rate_predictions(scores, fixed_rate)
-        rank_rate = best_rank_rate(y, scores, rate_grid, fixed_rate)
+        rank_rate = best_rank_rate(
+            y, scores, rate_grid, fixed_rate, official_weighted_f1
+        )
         rank_predictions = top_rate_predictions(scores, rank_rate)
+        legacy_rank_rate = best_rank_rate(
+            y, scores, rate_grid, fixed_rate, legacy_dead_class_f1
+        )
+        legacy_rank_predictions = top_rate_predictions(scores, legacy_rank_rate)
         rows.append(
             {
                 "candidate": name,
+                "metric_schema_version": METRIC_SCHEMA_VERSION,
                 "tree_weight": candidate["tree_weight"],
                 "nn_weight": candidate["nn_weight"],
                 "roc_auc": roc_auc_score(y, scores),
                 "pearson_correlation_with_tree": np.corrcoef(tree_scores, scores)[0, 1],
+                "official_weighted_f1_at_probability_0_5": official_weighted_f1(
+                    y, scores >= 0.5
+                ),
+                "legacy_dead_class_f1_at_probability_0_5": legacy_dead_class_f1(
+                    y, scores >= 0.5
+                ),
+                # Backward-compatible alias with the historical binary-Dead
+                # semantics.  New analysis must use the explicit field above.
                 "f1_at_probability_0_5": f1_score(
-                    y, scores >= 0.5, zero_division=0
+                    y, scores >= 0.5, average="binary", zero_division=0
                 ),
                 "positive_rate_at_probability_0_5": float((scores >= 0.5).mean()),
-                "descriptive_oracle_threshold": threshold,
-                "descriptive_oracle_threshold_f1": f1_score(
-                    y, threshold_predictions, zero_division=0
+                "official_descriptive_oracle_threshold": threshold,
+                "official_descriptive_oracle_threshold_weighted_f1": official_weighted_f1(
+                    y, threshold_predictions
                 ),
-                "descriptive_oracle_threshold_positive_rate": float(
+                "official_descriptive_oracle_threshold_positive_rate": float(
                     threshold_predictions.mean()
                 ),
+                "legacy_descriptive_oracle_threshold": legacy_threshold,
+                "legacy_descriptive_oracle_threshold_dead_class_f1": legacy_dead_class_f1(
+                    y, legacy_threshold_predictions
+                ),
+                "legacy_descriptive_oracle_threshold_positive_rate": float(
+                    legacy_threshold_predictions.mean()
+                ),
+                # The three unqualified oracle fields are deprecated aliases
+                # for the earlier binary-Dead optimization and metric.
+                "descriptive_oracle_threshold": legacy_threshold,
+                "descriptive_oracle_threshold_f1": f1_score(
+                    y,
+                    legacy_threshold_predictions,
+                    average="binary",
+                    zero_division=0,
+                ),
+                "descriptive_oracle_threshold_positive_rate": float(
+                    legacy_threshold_predictions.mean()
+                ),
                 "fixed_rate": fixed_rate,
-                "fixed_rate_f1": f1_score(y, fixed_predictions, zero_division=0),
+                "official_weighted_f1_at_fixed_rate": official_weighted_f1(
+                    y, fixed_predictions
+                ),
+                "legacy_dead_class_f1_at_fixed_rate": legacy_dead_class_f1(
+                    y, fixed_predictions
+                ),
+                # Deprecated backward-compatible binary-Dead alias.
+                "fixed_rate_f1": legacy_dead_class_f1(y, fixed_predictions),
                 "fixed_rate_disagreement_with_tree": float(
                     (fixed_predictions != tree_fixed).mean()
                 ),
-                "descriptive_oracle_rank_rate": rank_rate,
-                "descriptive_oracle_rank_rate_f1": f1_score(
-                    y, rank_predictions, zero_division=0
+                "official_descriptive_oracle_rank_rate": rank_rate,
+                "official_descriptive_oracle_rank_rate_weighted_f1": official_weighted_f1(
+                    y, rank_predictions
+                ),
+                "legacy_descriptive_oracle_rank_rate": legacy_rank_rate,
+                "legacy_descriptive_oracle_rank_rate_dead_class_f1": legacy_dead_class_f1(
+                    y, legacy_rank_predictions
+                ),
+                # Deprecated backward-compatible binary-Dead aliases.
+                "descriptive_oracle_rank_rate": legacy_rank_rate,
+                "descriptive_oracle_rank_rate_f1": legacy_dead_class_f1(
+                    y, legacy_rank_predictions
                 ),
             }
         )
@@ -258,25 +463,65 @@ def repeated_split_audit(
             threshold = best_probability_threshold(public_y, public_scores)
             public_threshold_predictions = (public_scores >= threshold).astype(np.int8)
             private_threshold_predictions = (private_scores >= threshold).astype(np.int8)
+            legacy_threshold = best_dead_class_probability_threshold_legacy(
+                public_y, public_scores
+            )
+            public_legacy_threshold_predictions = (
+                public_scores >= legacy_threshold
+            ).astype(np.int8)
+            private_legacy_threshold_predictions = (
+                private_scores >= legacy_threshold
+            ).astype(np.int8)
 
             selected_rate = best_rank_rate(
-                public_y, public_scores, rate_grid, fixed_rate
+                public_y,
+                public_scores,
+                rate_grid,
+                fixed_rate,
+                official_weighted_f1,
             )
             public_rank_predictions = top_rate_predictions(public_scores, selected_rate)
             private_rank_predictions = top_rate_predictions(private_scores, selected_rate)
+            legacy_selected_rate = best_rank_rate(
+                public_y,
+                public_scores,
+                rate_grid,
+                fixed_rate,
+                legacy_dead_class_f1,
+            )
+            public_legacy_rank_predictions = top_rate_predictions(
+                public_scores, legacy_selected_rate
+            )
+            private_legacy_rank_predictions = top_rate_predictions(
+                private_scores, legacy_selected_rate
+            )
 
             policies = [
                 (
-                    "public_selected_probability_threshold",
+                    "official_weighted_public_selected_probability_threshold",
                     threshold,
                     public_threshold_predictions,
                     private_threshold_predictions,
                 ),
                 (
-                    "public_selected_rank_rate_0.80_to_0.92",
+                    "official_weighted_public_selected_rank_rate_0.80_to_0.92",
                     selected_rate,
                     public_rank_predictions,
                     private_rank_predictions,
+                ),
+                # Preserve the earlier decision policies under names that make
+                # their binary-Dead objective explicit.
+                (
+                    "legacy_dead_class_public_selected_probability_threshold",
+                    legacy_threshold,
+                    public_legacy_threshold_predictions,
+                    private_legacy_threshold_predictions,
+                ),
+                (
+                    "legacy_dead_class_public_selected_rank_rate_0.80_to_0.92",
+                    legacy_selected_rate,
+                    public_legacy_rank_predictions,
+                    private_legacy_rank_predictions,
                 ),
                 (
                     f"fixed_rank_rate_{fixed_rate:.3f}",
@@ -291,6 +536,7 @@ def repeated_split_audit(
                     {
                         "split_id": split_id,
                         "split_seed": split_seed,
+                        "metric_schema_version": METRIC_SCHEMA_VERSION,
                         "policy": policy,
                         "candidate": name,
                         "tree_weight": candidate["tree_weight"],
@@ -302,11 +548,25 @@ def repeated_split_audit(
                         "private_prevalence": float(private_y.mean()),
                         "public_positive_rate": float(public_predictions.mean()),
                         "private_positive_rate": float(private_predictions.mean()),
-                        "public_f1": f1_score(
-                            public_y, public_predictions, zero_division=0
+                        "public_weighted_f1": official_weighted_f1(
+                            public_y, public_predictions
                         ),
-                        "private_f1": f1_score(
-                            private_y, private_predictions, zero_division=0
+                        "private_weighted_f1": official_weighted_f1(
+                            private_y, private_predictions
+                        ),
+                        "public_dead_class_f1_legacy": legacy_dead_class_f1(
+                            public_y, public_predictions
+                        ),
+                        "private_dead_class_f1_legacy": legacy_dead_class_f1(
+                            private_y, private_predictions
+                        ),
+                        # Backward-compatible aliases with the historical
+                        # binary-Dead semantics.
+                        "public_f1": legacy_dead_class_f1(
+                            public_y, public_predictions
+                        ),
+                        "private_f1": legacy_dead_class_f1(
+                            private_y, private_predictions
                         ),
                     }
                 )
@@ -318,6 +578,27 @@ def summarize_split_candidates(split_results: pd.DataFrame) -> pd.DataFrame:
     summary = (
         split_results.groupby(["policy", "candidate"], as_index=False)
         .agg(
+            public_weighted_f1_mean=("public_weighted_f1", "mean"),
+            public_weighted_f1_std=("public_weighted_f1", "std"),
+            private_weighted_f1_mean=("private_weighted_f1", "mean"),
+            private_weighted_f1_std=("private_weighted_f1", "std"),
+            public_dead_class_f1_legacy_mean=(
+                "public_dead_class_f1_legacy",
+                "mean",
+            ),
+            public_dead_class_f1_legacy_std=(
+                "public_dead_class_f1_legacy",
+                "std",
+            ),
+            private_dead_class_f1_legacy_mean=(
+                "private_dead_class_f1_legacy",
+                "mean",
+            ),
+            private_dead_class_f1_legacy_std=(
+                "private_dead_class_f1_legacy",
+                "std",
+            ),
+            # Deprecated binary-Dead aliases retained for old consumers.
             public_f1_mean=("public_f1", "mean"),
             public_f1_std=("public_f1", "std"),
             private_f1_mean=("private_f1", "mean"),
@@ -327,9 +608,12 @@ def summarize_split_candidates(split_results: pd.DataFrame) -> pd.DataFrame:
             selection_value_mean=("selection_value", "mean"),
             selection_value_std=("selection_value", "std"),
         )
-        .sort_values(["policy", "private_f1_mean"], ascending=[True, False])
+        .sort_values(
+            ["policy", "private_weighted_f1_mean"], ascending=[True, False]
+        )
         .reset_index(drop=True)
     )
+    summary.insert(0, "metric_schema_version", METRIC_SCHEMA_VERSION)
     return summary
 
 
@@ -337,10 +621,10 @@ def split_selection_stability(split_results: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for (split_id, policy), group in split_results.groupby(["split_id", "policy"]):
         group = group.sort_values("candidate").copy()
-        group["public_rank"] = group["public_f1"].rank(
+        group["public_rank"] = group["public_weighted_f1"].rank(
             method="average", ascending=False
         )
-        group["private_rank"] = group["private_f1"].rank(
+        group["private_rank"] = group["private_weighted_f1"].rank(
             method="average", ascending=False
         )
         if group["public_rank"].nunique() == 1 or group["private_rank"].nunique() == 1:
@@ -351,30 +635,48 @@ def split_selection_stability(split_results: pd.DataFrame) -> pd.DataFrame:
             )
 
         public_winner_row = group.sort_values(
-            ["public_f1", "candidate"], ascending=[False, True]
+            ["public_weighted_f1", "candidate"], ascending=[False, True]
         ).iloc[0]
         private_winner_row = group.sort_values(
-            ["private_f1", "candidate"], ascending=[False, True]
+            ["private_weighted_f1", "candidate"], ascending=[False, True]
         ).iloc[0]
-        selected_private_f1 = float(
+        selected_private_weighted_f1 = float(
             group.loc[
-                group["candidate"] == public_winner_row["candidate"], "private_f1"
+                group["candidate"] == public_winner_row["candidate"],
+                "private_weighted_f1",
             ].iloc[0]
         )
         rows.append(
             {
                 "split_id": split_id,
                 "policy": policy,
+                "metric_schema_version": METRIC_SCHEMA_VERSION,
+                "ranking_metric": "official_support_weighted_f1",
                 "public_selected_candidate": public_winner_row["candidate"],
                 "private_best_candidate": private_winner_row["candidate"],
                 "winner_exact_match": bool(
                     public_winner_row["candidate"] == private_winner_row["candidate"]
                 ),
                 "rank_correlation": rank_correlation,
-                "selected_candidate_private_f1": selected_private_f1,
-                "best_private_f1": float(private_winner_row["private_f1"]),
-                "private_f1_regret": float(private_winner_row["private_f1"])
-                - selected_private_f1,
+                "selected_candidate_private_weighted_f1": selected_private_weighted_f1,
+                "best_private_weighted_f1": float(
+                    private_winner_row["private_weighted_f1"]
+                ),
+                "private_weighted_f1_regret": float(
+                    private_winner_row["private_weighted_f1"]
+                )
+                - selected_private_weighted_f1,
+                # Deprecated aliases now follow the explicitly declared
+                # ranking_metric; metric_schema_version prevents silent reuse
+                # as version-1 binary-Dead outputs.
+                "selected_candidate_private_f1": selected_private_weighted_f1,
+                "best_private_f1": float(
+                    private_winner_row["private_weighted_f1"]
+                ),
+                "private_f1_regret": float(
+                    private_winner_row["private_weighted_f1"]
+                )
+                - selected_private_weighted_f1,
             }
         )
     return pd.DataFrame(rows)
@@ -388,10 +690,19 @@ def summarize_selection_stability(stability: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "policy": policy,
+                "metric_schema_version": METRIC_SCHEMA_VERSION,
+                "ranking_metric": "official_support_weighted_f1",
                 "n_splits": len(group),
                 "winner_exact_match_rate": float(group["winner_exact_match"].mean()),
                 "rank_correlation_mean": float(group["rank_correlation"].mean()),
                 "rank_correlation_std": float(group["rank_correlation"].std()),
+                "private_weighted_f1_regret_mean": float(
+                    group["private_weighted_f1_regret"].mean()
+                ),
+                "private_weighted_f1_regret_max": float(
+                    group["private_weighted_f1_regret"].max()
+                ),
+                # Deprecated aliases follow ranking_metric in schema v2.
                 "private_f1_regret_mean": float(group["private_f1_regret"].mean()),
                 "private_f1_regret_max": float(group["private_f1_regret"].max()),
                 "most_frequent_public_winner": public_win_counts.index[0],
@@ -440,10 +751,16 @@ def load_submission_audit(test_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str
         rows.append(
             {
                 "candidate": name,
+                "metric_schema_version": METRIC_SCHEMA_VERSION,
                 "file": str(path.relative_to(ROOT)),
                 "rows": len(submission),
                 "dead_count": int(dead.sum()),
                 "dead_rate": float(dead.mean()),
+                "reported_public_lb_official_weighted_f1": REPORTED_LB_SCORES[
+                    name
+                ],
+                # Backward-compatible alias; leaderboard metadata is known to
+                # use the official support-weighted metric.
                 "reported_public_lb_f1": REPORTED_LB_SCORES[name],
                 "reported_public_lb_rank": reported_order[name],
                 "score_source": "SUBMISSION_HISTORY.md metadata; not recomputed",
@@ -471,6 +788,7 @@ def pairwise_submission_disagreement(
             {
                 "left_candidate": left,
                 "right_candidate": right,
+                "metric_schema_version": METRIC_SCHEMA_VERSION,
                 "rows": len(left_dead),
                 "disagreement_count": int(disagreement.sum()),
                 "disagreement_rate": float(disagreement.mean()),
@@ -506,20 +824,55 @@ def write_report(
 ) -> None:
     fixed_policy = f"fixed_rank_rate_{fixed_rate:.3f}"
     fixed_summary = candidate_summary[candidate_summary["policy"] == fixed_policy]
-    fixed_best = fixed_summary.sort_values("private_f1_mean", ascending=False).iloc[0]
+    fixed_best = fixed_summary.sort_values(
+        "private_weighted_f1_mean", ascending=False
+    ).iloc[0]
     current_candidate = fixed_summary[
         fixed_summary["candidate"] == "tree80_nn20"
     ].iloc[0]
     tree = fixed_summary[fixed_summary["candidate"] == "tree_oof"].iloc[0]
     candidate_delta = float(
-        current_candidate["private_f1_mean"] - tree["private_f1_mean"]
+        current_candidate["private_weighted_f1_mean"]
+        - tree["private_weighted_f1_mean"]
     )
 
-    global_best_fixed = global_metrics.sort_values("fixed_rate_f1", ascending=False).iloc[0]
+    global_best_fixed = global_metrics.sort_values(
+        "official_weighted_f1_at_fixed_rate", ascending=False
+    ).iloc[0]
     closest_pair = pairwise.sort_values("disagreement_count").iloc[0]
     reported_order = " > ".join(
         submission_audit.sort_values("reported_public_lb_rank")["candidate"]
     )
+    nested_reference_loaded = bool(
+        SUBMISSION6_NESTED_CANDIDATE in set(global_metrics["candidate"])
+    )
+    if nested_reference_loaded:
+        local_ranking_heading = (
+            "## Why Submissions 7--9 cannot yet be locally ranked with Submission 6"
+        )
+        local_ranking_boundary = (
+            "The independently approved nested-equivalent reference makes "
+            "Submission 6 locally scoreable under its locked 84.5% OOF policy. "
+            "Recipe-equivalent OOF vectors remain unavailable for Submissions "
+            "7--9, and hidden test labels remain unavailable for every submission."
+        )
+        replay_requirement = (
+            "A valid cross-submission ranking still requires regenerating the "
+            "remaining candidate recipes inside the same outer folds, including "
+            "pseudo-label creation using only information allowed within each fold."
+        )
+    else:
+        local_ranking_heading = "## Why Submissions 6--9 cannot be locally ranked"
+        local_ranking_boundary = (
+            "There is not yet an independently approved recipe-equivalent OOF "
+            "vector for Submission 6, and none is available for Submissions 7--9. "
+            "Test labels are hidden."
+        )
+        replay_requirement = (
+            "A valid replay requires regenerating all four candidates inside the "
+            "same outer folds, including pseudo-label creation using only information "
+            "allowed within each fold."
+        )
 
     lines = [
         "# Validation-harness report",
@@ -536,20 +889,29 @@ def write_report(
         "The words `public` and `private` in CSV column names mean only the synthetic "
         "40/60 selection and holdout partitions. They are not Kaggle partitions.",
         "",
+        "The primary metric is the competition's support-weighted F1 across Alive "
+        "and Dead. Explicit `*_dead_class_f1_legacy` columns retain the earlier "
+        "binary Dead-class calculation for historical comparison. Unqualified "
+        "`*_f1` columns are deprecated compatibility aliases; see "
+        f"`metric_schema_version={METRIC_SCHEMA_VERSION}`.",
+        "",
         "## Direct findings",
         "",
         (
             f"- At a fixed {fixed_rate:.1%} positive rate on full OOF data, the best "
-            f"tested tree/NN candidate was `{global_best_fixed['candidate']}` "
-            f"(F1 {global_best_fixed['fixed_rate_f1']:.6f})."
+            f"tested OOF candidate was `{global_best_fixed['candidate']}` "
+            "(support-weighted F1 "
+            f"{global_best_fixed['official_weighted_f1_at_fixed_rate']:.6f})."
         ),
         (
             f"- Across repeated 40/60 splits under that fixed-rate policy, "
-            f"`{fixed_best['candidate']}` had the highest mean holdout F1 "
-            f"({fixed_best['private_f1_mean']:.6f})."
+            f"`{fixed_best['candidate']}` had the highest mean holdout "
+            "support-weighted F1 "
+            f"({fixed_best['private_weighted_f1_mean']:.6f})."
         ),
         (
-            f"- The current 80% tree / 20% NN candidate changed mean holdout F1 by "
+            "- The current 80% tree / 20% NN candidate changed mean holdout "
+            "support-weighted F1 by "
             f"{candidate_delta:+.6f} relative to the saved tree OOF proxy. This comparison "
             "does not include pseudo-label retraining."
         ),
@@ -565,18 +927,15 @@ def write_report(
             "proxy, not evidence that either side is correct."
         ),
         "",
-        "## Why Submissions 6--9 cannot be locally ranked",
+        local_ranking_heading,
         "",
-        "Only their test probabilities or hard labels are available. There are no "
-        "recipe-equivalent OOF vectors for the 95%-pseudo-label model (Sub 6), stack "
-        "(Sub 7), super-blend (Sub 8), and 98%-pseudo-label model (Sub 9). Test labels "
-        "are hidden. Reported leaderboard scores are included only as historical metadata; "
+        local_ranking_boundary,
+        "Reported leaderboard scores are included only as historical metadata; "
         "they are not validation targets.",
         "",
-        "A valid replay requires regenerating all four candidates inside the same outer "
-        "folds, including pseudo-label creation using only information allowed within each "
-        "fold. Comparing their current hard test files against training labels would be "
-        "invalid because the rows do not correspond.",
+        replay_requirement,
+        "Comparing current hard test files against training labels would be invalid "
+        "because the rows do not correspond.",
         "",
         "## Important limitations",
         "",
@@ -590,6 +949,9 @@ def write_report(
         "dispersion and are not independent-sample confidence intervals.",
         "- A fixed positive-rate policy depends only on ranking; it does not evaluate "
         "probability calibration.",
+        "- The 84.5% rate is a historically selected policy, not an independently "
+        "derived value in this harness. It must not be used as evidence from an "
+        "independent validation set or refined through leaderboard probing.",
         "",
         "## Output guide",
         "",
@@ -639,7 +1001,12 @@ def main() -> None:
         np.load(require_file(ROOT / "archive" / "oof_nn.npy"), allow_pickle=False),
         len(y),
     )
-    candidates = make_oof_candidates(tree_oof, nn_oof)
+    submission6_nested_reference = load_approved_submission6_nested_reference(y)
+    candidates = make_oof_candidates(
+        tree_oof,
+        nn_oof,
+        submission6_nested_reference=submission6_nested_reference,
+    )
 
     # The bounded grid includes the locally interesting region while preventing
     # arbitrary extreme positive-rate searches on the synthetic public split.

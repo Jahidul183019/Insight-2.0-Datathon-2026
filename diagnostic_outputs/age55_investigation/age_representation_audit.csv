@@ -1,0 +1,6 @@
+representation,present_in_pipeline_v6,source_file
+age_recode categorical,True,pipeline_v6.py
+age_midpoint numeric,True,pipeline_v6.py
+age × diagnosis-year interaction,True,pipeline_v6.py
+age × stage interaction,True,pipeline_v6.py
+age × metastasis interaction,True,pipeline_v6.py

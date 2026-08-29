@@ -1,0 +1,41 @@
+{
+  "validation_design": "5-fold outer holdout; test pseudo-labels and models rebuilt without outer-fold labels",
+  "metric_schema_version": "2_weighted_f1_primary",
+  "official_metric": "support-weighted F1 across Alive and Dead",
+  "legacy_metric": "binary Dead-class F1; retained for historical comparison only",
+  "preprocessing_limitation": "ordinal categorical encoder was fitted target-free on all training feature rows before outer splitting",
+  "recipe_equivalent_to_submission11": false,
+  "recipe_equivalence_limitation": "nested students fit one full model per family; Submission 11 used five-fold early-stopped student averaging",
+  "positive_rate_provenance_limitation": "the fixed 84.5% rate is a historically chosen policy and must not be treated as independent validation evidence",
+  "rules_review_note": "pseudo-labels are automated model predictions from provided test features, not hidden/manual labels; confirm transductive pseudo-labeling is permitted by the organizer",
+  "fixed_positive_rate": 0.845,
+  "pseudo90_official_weighted_f1_at_fixed_rate": 0.8747971680061233,
+  "pseudo95_official_weighted_f1_at_fixed_rate": 0.8742029850746268,
+  "pseudo90_minus_pseudo95_official_weighted_f1": 0.0005941829314964897,
+  "official_weighted_f1_paired_stratified_bootstrap_mean_delta": 0.00042339778032912645,
+  "official_weighted_f1_paired_stratified_bootstrap_95pct_interval": [
+    -0.0006790662074243087,
+    0.001443015690776983
+  ],
+  "pseudo90_legacy_dead_class_f1_at_fixed_rate": 0.9266169154228856,
+  "pseudo95_legacy_dead_class_f1_at_fixed_rate": 0.9262686567164179,
+  "pseudo90_minus_pseudo95_legacy_dead_class_f1": 0.00034825870646770785,
+  "legacy_dead_class_f1_paired_stratified_bootstrap_mean_delta": 0.0002481592039800996,
+  "legacy_dead_class_f1_paired_stratified_bootstrap_95pct_interval": [
+    -0.0003980099502487455,
+    0.0008457711442786398
+  ],
+  "pseudo90_fixed_rate_f1": 0.9266169154228856,
+  "pseudo95_fixed_rate_f1": 0.9262686567164179,
+  "pseudo90_minus_pseudo95_f1": 0.00034825870646770785,
+  "paired_stratified_bootstrap_mean_delta": 0.0002481592039800996,
+  "paired_stratified_bootstrap_95pct_interval": [
+    -0.0003980099502487455,
+    0.0008457711442786398
+  ],
+  "legacy_alias_note": "unqualified *_f1 fields are deprecated aliases for binary Dead-class F1",
+  "gate_tolerance": -0.001,
+  "gate_metric": "official_weighted_f1",
+  "submission_a_gate_pass": true,
+  "frozen_tree_is_recipe_equivalent": false
+}

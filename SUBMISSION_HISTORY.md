@@ -1,6 +1,46 @@
 # Insight 2.0 Datathon - Submission History & Analysis
 
-This document tracks the evolution of our submissions for the lung-cancer vital status prediction task. The primary objective is to maximize generalization and private/hidden-test performance. The evaluation metric is **F1-Score** (Dead = 1). Public LB scores for Submissions 1–9 were verified against the Kaggle submissions page in chronological order on 2026-08-29.
+This document tracks the evolution of our submissions for the lung-cancer vital status prediction task. The primary objective is to maximize generalization and private/hidden-test performance. The official evaluation metric is **support-weighted F1-score**, with `Dead` designated as the positive class. Public LB scores for Submissions 1–9 were verified against the Kaggle submissions page in chronological order on 2026-08-29.
+
+## Metric Correction
+
+Earlier local validation code used scikit-learn's default binary F1, which
+scores only the `Dead` class. Those values near `0.928` are not directly
+comparable with the official weighted-F1 leaderboard scores near `0.877`.
+Recomputing the frozen tree OOF predictions gives weighted F1 `0.877513`
+instead of legacy binary F1 `0.928209`, resolving most of the apparent scale
+gap. Historical Public LB scores below are unchanged; corrected weighted F1 is
+the primary metric for all new local decisions.
+
+At the production decision rate of 30,411 / 36,000 = `0.84475`, the earlier
+like-for-like nested proxies compared with the Public LB as follows:
+
+| Submission reference | Nested proxy recipe | Weighted F1 | Public LB | Local − LB |
+| --- | --- | ---: | ---: | ---: |
+| Submission 6 | pseudo95 proxy | `0.874244` | `0.877258` | `-0.003014` |
+| Submission 10 | 80% pseudo95 + 20% NN proxy | `0.875686` | `0.876616` | `-0.000930` |
+| Submission 11 | pseudo90 proxy | `0.874753` | `0.876616` | `-0.001863` |
+
+These corrected local values are on the same scale and move in the same
+direction as the leaderboard scores. They remain historical proxy recipes and
+not the exact Kaggle split. The earlier roughly `0.05` gap was a metric
+mismatch; the residual differences do not prove a causal generalization
+effect.
+
+The later leakage-safe reconstruction now supersedes the pseudo95 proxy as the
+canonical local comparator for the Submission 6 recipe:
+
+| Canonical reference | Weighted F1 | Public LB | Local − LB | Scale gate |
+| --- | ---: | ---: | ---: | --- |
+| Submission 6 nested-equivalent | `0.877004` | `0.877258` | `-0.000254` | Pass (`|gap| ≤ 0.005`) |
+
+This is a canonical **nested recipe-equivalent comparator**, not a claim that
+threaded model probabilities are byte-identical to the historical files. The
+production replay reproduced the pseudo-label membership, the historical
+`0.684` threshold, all 30,411 hard labels, and their ranking exactly; archived
+probabilities differed only at approximately `1e-9`. The strict probability
+flag therefore remains false, while the separately audited practical recipe
+gate is approved.
 
 ## Submission Log
 
@@ -79,7 +119,7 @@ This document tracks the evolution of our submissions for the lung-cancer vital 
 - **Insight:** The Public Leaderboard score dropped. This means that either (A) tightening the threshold to 98% reduced the diversity of the pseudo-labels, causing slight overfitting to the highly confident samples, or (B) the 411 changed rows were actually correct in Submission 6 for the Public LB portion of the test set. 
 
 ### Submission 10
-- **File:** `submission.csv` (upload file); `archive/submission10.csv` (byte-identical archived snapshot)
+- **File:** `archive/submission10.csv` (byte-identical archived upload)
 - **Strategy:** Neural-network diversity blend using 80% of the archived Submission 6 probabilities (`archive/probs_v6_final.npy`) and 20% neural-network probabilities (`archive/probs_nn.npy`). Final labels use a deterministic top-k cutoff rather than a floating-point threshold.
 - **Dead Rate:** 84.475% (exactly 30,411 Dead), matching Submission 6's class count.
 - **Difference from Submission 6:** 292 rows change labels while the total Dead count remains fixed.
@@ -87,6 +127,158 @@ This document tracks the evolution of our submissions for the lung-cancer vital 
 - **Comparison with Submission 6:** `-0.000642`; the neural-network diversity blend did not surpass Submission 6 on the Public Leaderboard.
 - **Insight:** Submission 10 outperformed the stacking Super-Blend in Submission 8 (`0.876305`) by `0.000311`, but remained below Submission 6 (`0.877258`). It is therefore useful as a verified diversity candidate, not as the primary submission.
 - **Status:** Submitted and verified from the Kaggle submissions page on 2026-08-29.
+
+### Submission 11
+- **File:** `archive/submission11.csv` (byte-identical archived upload);
+  `artifacts/pseudo90/submission11_pseudo90.csv` (generated artifact)
+- **Strategy:** Controlled one-pass pseudo-label confidence experiment based on
+  the Submission 6 recipe. The frozen pre-pseudo teacher
+  (`archive/probs_v6_blend.npy`) selects test rows at ≥90% Dead or ≤10% Dead,
+  yielding 22,922 pseudo-labels (22,203 Dead and 719 Alive). The same six-model
+  student family is retrained, blended 50/50 with the teacher, and converted to
+  labels using a deterministic top-30,411 cutoff.
+- **Dead Rate:** 84.475% (exactly 30,411 Dead), matching Submission 6.
+- **Difference from Submission 6:** 288 rows change labels while the total Dead
+  count remains fixed (144 in each direction).
+- **Validation:** In a five-fold outer holdout where teacher creation,
+  pseudo-label selection, target encoding, and student fitting excluded each
+  validation fold, corrected weighted F1 was `0.874797` at the locked 84.5%
+  rate versus `0.874203` for the like-for-like rebuilt 95% control
+  (`+0.000594`). The originally reported `0.926617` versus `0.926269`
+  (`+0.000348`) values used legacy binary Dead-class F1, not the competition
+  metric. Its paired bootstrap 95% interval was `[-0.000398, +0.000846]`, so
+  even that legacy signal was inconclusive.
+- **SHA-256:** `cbea4ad3e7c525ab5352bd31f04a37d67bfdf13150fe3c8d2f88628df027ed0f`
+- **LB Score:** `0.876616`
+- **Comparison:** Tied Submission 10 exactly and scored `-0.000642` below
+  Submission 6.
+- **Insight:** Loosening the pseudo-label gate from 95%/5% to 90%/10% produced
+  a small positive nested-OOF signal but no Public LB improvement. Because
+  Submission 11 changes 288 labels relative to Submission 6 and 384 relative
+  to Submission 10, the identical score does not mean the files are identical;
+  it means only that Kaggle reported the same six-decimal Public F1. The public
+  labels are unavailable, so the row-level effect cannot be determined.
+- **Status:** Submitted and verified from the Kaggle submissions page on
+  2026-08-29.
+
+### Submission 12 Experiment (Gate Failed; Not Submitted)
+- **Candidate:** 80% pseudo90 probabilities plus 20% neural-network
+  probabilities, followed by the same fixed 84.5%-rate decision policy.
+- **Weighted OOF F1:** `0.876155`, versus `0.874797` for pseudo90 alone
+  (`+0.001358`).
+- **Uncertainty:** The paired bootstrap 95% interval for the improvement was
+  `[-0.000255, +0.002631]`, which includes zero.
+- **Fold Gate:** Improved in only 3 of 5 outer folds, below the required 4 of
+  5.
+- **Simulated-Private Gate:** Best in 0 of 50 simulated 40/60 splits across the
+  full candidate set; `tree80_nn20` was best in all 50. This is a saved-OOF
+  stability screen, not a reconstruction of Kaggle's hidden public/private
+  split.
+- **Subgroup Gate:** Weighted F1 for the already weak age-55–59 slice regressed
+  by `-0.0023` versus pseudo90.
+- **Submission 6 Gate (at evaluation time):** A leakage-safe nested-equivalent
+  reconstruction of the actual Submission 6 training recipe was then
+  unavailable, so the required direct comparison could not be passed. That
+  infrastructure was completed later and is documented below.
+- **Decision:** **No submission.** No `submission12.csv` or archived Submission
+  12 CSV was generated. At that time, `submission.csv` remained Submission 11;
+  it was later replaced by the prepared Submission 13 candidate documented
+  below. The final-pair recommendation remained Submission 6 plus Submission
+  10.
+
+### Submission 6 Nested Reference Reconstruction (Completed; No Submission)
+- **Purpose:** Build the missing leakage-safe reference for the actual
+  Submission 6 recipe so future candidates can be compared with the verified
+  best workflow rather than only with pseudo95, pseudo90, or frozen-tree
+  proxies.
+- **Recipe:** Five outer folds. Within every outer-training partition, the
+  teacher reproduces the 55% v5 / 45% v4 blend; the v4 target encodings exclude
+  the outer-validation rows; test pseudo-labels are selected at ≥95% or ≤5%;
+  the six-model student is refit with those pseudo-labels; and the final OOF
+  probability is 50% teacher plus 50% student.
+- **Completed Work:** All five folds, exactly 90 teacher and 30 student model
+  fits per fold (`600` nested fits total), with every one of the 24,000 labelled
+  rows predicted exactly once.
+- **Official Weighted F1 at Fixed 84.5% Rate:** `0.877004`.
+- **Fold Weighted F1:** `0.876919`, `0.879890`, `0.877344`, `0.874797`,
+  `0.874797`.
+- **ROC AUC:** `0.900666`.
+- **Scale Check:** `-0.000254` versus Submission 6's Public LB `0.877258`,
+  passing the predeclared absolute-gap limit of `0.005`.
+- **Production Replay:** Recovered exactly 17,535 pseudo-label rows (17,234
+  Dead and 301 Alive), threshold `0.684`, exactly 30,411 Dead predictions, and
+  zero hard-label changes versus archived Submission 6. Probability drift was
+  approximately `1e-9`, so strict probability/artifact equivalence remains
+  false rather than being relabelled.
+- **Canonical Status:** The independent practical gate passed `21/21` checks
+  with no failures or pending checks and approved
+  `submission6_nested_recipe_reference` as the canonical nested-equivalent
+  comparison vector. The original `global_metrics.csv` strict-artifact field
+  remains false by design; the authority for practical canonical approval is
+  `diagnostic_outputs/submission6_reference_gate/submission6_practical_reference_acceptance.json`.
+- **Harness Status:** `validation_harness.py` now loads this vector only after
+  verifying its approval, SHA-256, run signature, labels, fold coverage, and
+  finiteness. It is therefore available as the Submission 6 baseline for
+  future candidate gates.
+- **Decision:** Infrastructure accepted. This reconstruction generated no test
+  candidate and no submission CSV.
+
+### Age 55–59 Canonical Follow-up (No Targeted Fix; No Submission)
+- **Reference:** The approved Submission 6 nested-equivalent OOF vector, not the
+  earlier frozen-tree proxy.
+- **Subgroup Result:** 1,821 rows; weighted F1 `0.838062` versus `0.877004`
+  globally and `0.880201` outside the band. ROC AUC is `0.862474`; the band is
+  below both adjacent age bands in only 3 of 5 canonical outer folds for both
+  weighted F1 and AUC.
+- **Class Balance:** Dead prevalence is `79.24%`, versus `83.31%` elsewhere;
+  the global fixed-rate policy predicts `82.04%` Dead in the band, producing
+  169 false positives and 118 false negatives.
+- **Targeted Replication:** The EOD-all-blank × adenocarcinoma-family and raw
+  histology-8140 cells retain BH-significant **total-error** associations
+  (`q=0.006233` and `q=0.006456`), but total error is confounded by their
+  different Dead prevalence.
+- **Actionable Error Test:** No cluster passes the class-conditional
+  denominator, effect-size, and BH gates. For the family cell, the excess FPR
+  and FNR are only `+0.0117` and `+0.0331`; for raw 8140 they are `+0.0079` and
+  `+0.0265`, all below the predeclared five-percentage-point effect gate.
+- **Other Causes Checked:** The age band generally has less—not more—semantic
+  unavailability; no material categorical association was found; and v6
+  already contains categorical age, numeric age midpoint, and age interactions.
+- **Step 2 Verdict:** The weak subgroup replicates, but the proposed actionable
+  EOD-unavailable × adenocarcinoma error mechanism does not. It is therefore
+  treated as a prevalence/case-mix association rather than evidence for a new
+  interaction feature.
+- **Step 3 Decision:** Not entered. No targeted feature was trained because its
+  prerequisite failed; consequently no candidate or submission CSV was
+  generated.
+
+### Submission 13 (New Best Score!)
+- **File:** `submission.csv` (current upload file);
+  `artifacts/submission13_nn10/submission13_nn10.csv` (byte-identical generated
+  artifact).
+- **Strategy:** Conservative neural-network interpolation using 90% archived
+  Submission 6 probabilities (`archive/probs_v6_final.npy`) and 10% neural-
+  network probabilities (`archive/probs_nn.npy`). Labels use a deterministic
+  stable top-30,411 cutoff.
+- **Rows / Class Count:** 36,000 rows; exactly 30,411 `Dead` and 5,589 `Alive`.
+- **Difference from Previous Submissions:** 156 labels versus Submission 6,
+  136 versus Submission 10, and 300 versus Submission 11. The file is not a
+  copy of any previous submission.
+- **Canonical OOF Evidence:** Weighted F1 `0.877259` versus `0.877004` for the
+  approved Submission 6 nested-equivalent baseline (`+0.000255`); ROC AUC
+  improves by `+0.000199`.
+- **Robustness:** Improved in 3 of 5 canonical outer folds. In 50 repeated
+  stratified 40/60 checks it recorded 35 wins, 4 ties, and 11 losses versus the
+  canonical baseline. The paired bootstrap interval included zero, so the
+  apparent improvement is encouraging but not a confirmed generalization win.
+- **Age 55–59 Safety Check:** Weighted F1 changed by `-0.000471`, a small
+  regression that remains within the exploratory non-inferiority tolerance but
+  prevents claiming uniform subgroup improvement.
+- **SHA-256:**
+  `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
+- **LB Score:** `0.877460`
+- **Comparison with Submission 6:** `+0.000202`. This is a new **Personal Best**. The conservative 10% injection of the Neural Network probabilities provided enough structural diversity to correct tree errors without diluting the strong GBDT signal.
+- **Status:** Submitted and verified on 2026-08-29. This is now the undisputed primary candidate for the Private Leaderboard.
 
 ---
 
@@ -97,6 +289,42 @@ For the final Kaggle Private Leaderboard evaluation, you are allowed to select t
 
 The recommended pair is now Submission 6 plus Submission 10. Submission 6 remains the primary choice because it has the highest verified Public LB score; Submission 10 provides a different model blend for private-set diversification.
 
+Submission 11 does not change the final pair. It ties Submission 10 publicly,
+but it is another close pseudo-label/tree-family variant of Submission 6;
+Submission 10 retains stronger model-family diversity through its neural-network
+component.
+
+The failed Submission 12 experiment also does not change the pair: its local
+weighted-F1 improvement did not pass the uncertainty, fold-consistency,
+simulated-private, or subgroup-safety gates. At the time it was evaluated, the
+exact Submission 6 nested-equivalent reference was also unavailable. That
+infrastructure gap is now closed, but closing it does not retroactively turn
+the failed candidate into a submission recommendation.
+
+Submission 13 is currently **LB pending**. Its local point estimate is
+positive but statistically inconclusive, so it does not replace either final
+selection before a verified leaderboard result is available.
+
+---
+
+## Competition Rules and Reproducibility
+
+- The workflow uses manually specified preprocessing, features, models, and
+  blends; no AutoML library is used.
+- The rules separately prohibit "automated pipeline-generation systems."
+  AI-assisted modelling code may be covered by that wording, so the team must
+  obtain written organizer confirmation before relying on it in the submitted
+  notebook rather than assuming that the absence of an AutoML library is
+  sufficient.
+- Hidden test labels must not be inferred, probed, or manually assigned using
+  leaderboard feedback.
+- Restricted competition data, artifacts, and solution code must remain within
+  the official team during the competition.
+- The final notebook must regenerate the submitted workflow and outputs. The
+  current consolidated notebook validates frozen artifacts, but that alone
+  must not be represented as a complete fresh retraining of every historical
+  model.
+
 ---
 
 ## Workspace Organization
@@ -104,15 +332,20 @@ Intermediate files and scripts have been moved to the `archive/` folder to keep 
 - **Old scripts:** `archive/pipeline.py` (v4), `archive/pipeline_v5.py`,
   `archive/pipeline_v7.py`, and `archive/pipeline_v8.py`.
 - **Old submissions:** `archive/submission1.csv` through
-  `archive/submission10.csv`, plus
+  `archive/submission11.csv`, plus
   diagnostic files such as
   `archive/submission_all_dead.csv` and individual-model predictions.
 - **Probabilities:** Canonical historical `archive/probs_*.npy` arrays used for
   reconstruction and blending.
 
 The main directory contains the active scripts (`pipeline_v6.py`,
-`pipeline_nn.py`, `pipeline_mega_ensemble.py`, `step1_cv_diagnostic.py`, and
-`validation_harness.py`), data files, the verified Submission 10 upload file
-`submission.csv`, and this
-history document. Historical pipelines v4, v5, v7, and v8 are retained under
-`archive/`.
+`pipeline_nn.py`, `pipeline_mega_ensemble.py`, `pipeline_pseudo90.py`,
+`pipeline_submission13_nn10.py`,
+`pseudo_label_nested_validation.py`, `submission6_nested_reconstruction.py`,
+`submission6_practical_reference_gate.py`,
+`age55_subgroup_investigation.py`, `step1_cv_diagnostic.py`, and
+`validation_harness.py`), data files, the prepared Submission 13 upload file
+`submission.csv`, and this history document. The corresponding nested,
+practical-gate, and age-subgroup evidence is retained under
+`diagnostic_outputs/`. Historical pipelines v4, v5, v7, and v8 are retained
+under `archive/`.

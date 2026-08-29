@@ -1,0 +1,130 @@
+{
+  "generator": {
+    "path": "pipeline_submission13_nn10.py",
+    "sha256": "c24ea1ec95b84415262c33cb4354964578eb2f330b33a2994f38392f6ebbece5"
+  },
+  "inputs": {
+    "archive/probs_nn.npy": {
+      "bytes": 288128,
+      "expected_sha256": "7ec4721ae7d4eccb35ebc5821014e581ad2da4e872775d8a4845f37423b1ce46",
+      "matches_expected": true,
+      "sha256": "7ec4721ae7d4eccb35ebc5821014e581ad2da4e872775d8a4845f37423b1ce46"
+    },
+    "archive/probs_v6_final.npy": {
+      "bytes": 288128,
+      "expected_sha256": "aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6",
+      "matches_expected": true,
+      "sha256": "aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6"
+    },
+    "archive/submission10.csv": {
+      "bytes": 401613,
+      "expected_sha256": "333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1",
+      "matches_expected": true,
+      "sha256": "333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1"
+    },
+    "archive/submission11.csv": {
+      "bytes": 401613,
+      "expected_sha256": "cbea4ad3e7c525ab5352bd31f04a37d67bfdf13150fe3c8d2f88628df027ed0f",
+      "matches_expected": true,
+      "sha256": "cbea4ad3e7c525ab5352bd31f04a37d67bfdf13150fe3c8d2f88628df027ed0f"
+    },
+    "archive/submission6.csv": {
+      "bytes": 401613,
+      "expected_sha256": "fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477",
+      "matches_expected": true,
+      "sha256": "fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477"
+    },
+    "test.csv": {
+      "bytes": 16764591,
+      "expected_sha256": "6db5640f5db87b8527e172d1d6966b6edb9e8a8dc5b7c586e2826cdcfce23188",
+      "matches_expected": true,
+      "sha256": "6db5640f5db87b8527e172d1d6966b6edb9e8a8dc5b7c586e2826cdcfce23188"
+    }
+  },
+  "leaderboard_score_recorded": false,
+  "outputs": {
+    "artifacts/submission13_nn10/probs_submission13_nn10.npy": {
+      "bytes": 288128,
+      "dtype": "float64",
+      "sha256": "b3821aca6c09913908d8b29720f09774b6b703e61a749408a91445fb81dc9304",
+      "shape": [
+        36000
+      ]
+    },
+    "artifacts/submission13_nn10/submission13_nn10.csv": {
+      "bytes": 401613,
+      "sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11"
+    },
+    "submission.csv": {
+      "bytes": 401613,
+      "identical_to_candidate_artifact": true,
+      "sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11"
+    }
+  },
+  "recipe": {
+    "nn_probability_path": "archive/probs_nn.npy",
+    "nn_weight": 0.1,
+    "positive_count": 30411,
+    "positive_label": "Dead",
+    "selection_method": "stable_descending_top_k",
+    "tie_break": "original_test_row_order",
+    "tree_probability_path": "archive/probs_v6_final.npy",
+    "tree_weight": 0.9
+  },
+  "status": "PREPARED_LB_PENDING",
+  "submission_number": 13,
+  "validation": {
+    "alive_count": 5589,
+    "all_checks_passed": true,
+    "archive_submission13_written": false,
+    "archived_submission_ids_match_test": {
+      "submission10": true,
+      "submission11": true,
+      "submission6": true
+    },
+    "boundary_gap": 0.00011619911851357134,
+    "columns": [
+      "patient_id",
+      "vital_status"
+    ],
+    "dead_count": 30411,
+    "dead_rate": 0.84475,
+    "differences": {
+      "submission10": {
+        "alive_to_dead": 68,
+        "dead_to_alive": 68,
+        "difference_count": 136,
+        "expected_difference_count": 136,
+        "matches_expected": true,
+        "path": "archive/submission10.csv"
+      },
+      "submission11": {
+        "alive_to_dead": 150,
+        "dead_to_alive": 150,
+        "difference_count": 300,
+        "expected_difference_count": 300,
+        "matches_expected": true,
+        "path": "archive/submission11.csv"
+      },
+      "submission6": {
+        "alive_to_dead": 78,
+        "dead_to_alive": 78,
+        "difference_count": 156,
+        "expected_difference_count": 156,
+        "matches_expected": true,
+        "path": "archive/submission6.csv"
+      }
+    },
+    "frozen_80_20_probabilities_reconstruct_submission10": true,
+    "frozen_probabilities_reconstruct_submission6": true,
+    "patient_ids_match_test": true,
+    "patient_ids_unique": true,
+    "probabilities_finite": true,
+    "probabilities_in_unit_interval": true,
+    "root_submission_prior_sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11",
+    "root_submission_prior_state": "IDENTICAL_SUBMISSION_13_RERUN",
+    "rows": 36000,
+    "selected_floor_probability": 0.6744279597816482,
+    "unselected_ceiling_probability": 0.6743117606631346
+  }
+}

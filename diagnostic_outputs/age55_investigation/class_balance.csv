@@ -1,0 +1,2 @@
+comparison,focal_rows,rest_rows,focal_dead_count,rest_dead_count,focal_rate,rest_rate,rate_difference,difference_ci95_lower,difference_ci95_upper,binary_smd,z_statistic,p_value,dead_rate_ratio,dead_odds_ratio_haldane
+55-59 years vs all other ages,1821,22179,1443,18477,0.7924217462932455,0.83308535100771,-0.04066360471446451,-0.05992740945961486,-0.02139979996931415,-0.10437831498406049,-4.440815197868695,8.961873325251764e-06,0.9511891492687066,0.7641924815911101

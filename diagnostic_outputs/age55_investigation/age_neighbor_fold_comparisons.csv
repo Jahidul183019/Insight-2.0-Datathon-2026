@@ -1,0 +1,6 @@
+fold_source,analysis_role,eligible_for_intervention_fold_gate,outer_fold,age50_54_weighted_f1,age55_59_weighted_f1,age60_64_weighted_f1,age55_f1_below_both_neighbors,age50_54_roc_auc,age55_59_roc_auc,age60_64_roc_auc,age55_auc_below_both_neighbors
+canonical Submission 6 nested artifact,approved_canonical_outer_fold_diagnostic,True,1,0.8640419947506561,0.8696165191740414,0.8287775108587514,False,0.906982421875,0.8976530612244898,0.8899420024420024,False
+canonical Submission 6 nested artifact,approved_canonical_outer_fold_diagnostic,True,2,0.8719072838498748,0.8467294900221729,0.8765994640851434,True,0.9297235023041475,0.8789437585733882,0.9119390012642226,True
+canonical Submission 6 nested artifact,approved_canonical_outer_fold_diagnostic,True,3,0.8771733248635423,0.8105140360660847,0.8594565500293024,True,0.9004360465116279,0.8130681818181817,0.8671141895621516,True
+canonical Submission 6 nested artifact,approved_canonical_outer_fold_diagnostic,True,4,0.7717996289424861,0.813250987516621,0.8732108436842868,False,0.8468196457326892,0.8381224612607191,0.8908801119577049,True
+canonical Submission 6 nested artifact,approved_canonical_outer_fold_diagnostic,True,5,0.8590325863053135,0.8526972647081131,0.8571849098999952,True,0.8728813559322034,0.8892731968271537,0.8703809463375427,False

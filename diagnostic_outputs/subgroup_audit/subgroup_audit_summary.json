@@ -1,0 +1,63 @@
+{
+  "purpose": "saved-OOF subgroup screening; not hidden-test reconstruction",
+  "official_metric": "support-weighted F1",
+  "official_metric_source": "competition Evaluation page",
+  "dead_class_f1_role": "legacy diagnostic only",
+  "fixed_positive_rate": 0.845,
+  "min_report_rows": 200,
+  "min_intervention_rows": 500,
+  "meaningful_f1_gap": -0.02,
+  "material_regression": -0.001,
+  "outer_folds": 5,
+  "outer_seed": 42,
+  "composite_stage_is_formal_ajcc": false,
+  "composite_stage_definition": {
+    "M1 distant/metastatic": "M starts with M1, regardless of T or N",
+    "M0 N1-3 node-positive": "M0 and N is N1, N2, or N3",
+    "M0 N0 T0-2 localized": "M0, N0, and T is T0, T1*, or T2*",
+    "M0 N0 T3-4 locally advanced": "M0, N0, and T is T3 or T4*",
+    "M0 indeterminate T/N": "M0 with T or N not classifiable above",
+    "EOD unavailable (all blank)": "T, N, and M are all Blank(s)",
+    "EOD not applicable (88)": "T, N, and M are all code 88",
+    "Other/discordant EOD": "any remaining T/N/M combination"
+  },
+  "input_sha256": {
+    "train.csv": "28189b2140be2fdfff65c5dae8cf5d2ffeaffd009ee962047396096cba4ab3c2",
+    "y_step1.npy": "00b24b69a78146ce19d7a057d7f7e21404c42efda06033e9d8e2e4296457d9db",
+    "oof_step1.npy": "14fbad5a4584b61ca8ca6b8beeeeb3c6f8ec7ba167f023b9676be33653f641df",
+    "archive/oof_nn.npy": "5620400c786fa180abec67f919920015ac8796d69a5ea5dbeb5c05e714232f8d",
+    "nested_oof_predictions.npz": "d77f9449997e200ae7f5069a57ad5b7dc9314c7b7f8e216f13bc1db8c5d9190f"
+  },
+  "reported_slice_count": 29,
+  "bootstrap": {
+    "method": "paired stratified bootstrap; fixed 84.5% rank policy re-applied per sample",
+    "seed": 9042,
+    "repeats": 1000,
+    "dead_class_f1_delta": {
+      "mean": 0.0007006467661691551,
+      "median": 0.0006965174129353047,
+      "lower_95pct": -0.00014925373134322406,
+      "upper_95pct": 0.0015422885572138362,
+      "fraction_le_zero": 0.053
+    },
+    "weighted_f1_delta": {
+      "mean": 0.001195411174894756,
+      "median": 0.0011883658629928129,
+      "lower_95pct": -0.0002546498277840037,
+      "upper_95pct": 0.0026313815537694074,
+      "fraction_le_zero": 0.053
+    }
+  },
+  "observed_combined_minus_pseudo90_weighted_f1": 0.0013581324148488338,
+  "required_observed_weighted_f1_delta": 0.0004,
+  "material_large_subgroup_regressions": 1,
+  "legacy_dead_class_material_large_subgroup_regressions": 3,
+  "conservative_submission_gate_pass": false,
+  "gate_verdict": "do_not_submit",
+  "caveats": [
+    "F1 is prevalence-sensitive across subgroups.",
+    "Binary Dead-class F1 is retained only to reconcile legacy local analyses.",
+    "archive/oof_nn.npy is ordinary OOF, not jointly nested with pseudo90.",
+    "A subgroup feature or weight still requires full leakage-safe nested retraining."
+  ]
+}

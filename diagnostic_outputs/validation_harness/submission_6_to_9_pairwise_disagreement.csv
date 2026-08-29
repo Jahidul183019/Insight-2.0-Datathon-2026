@@ -1,7 +1,7 @@
-left_candidate,right_candidate,rows,disagreement_count,disagreement_rate,left_dead_right_alive,left_alive_right_dead,both_dead,both_alive,dead_set_jaccard,reported_lb_score_left,reported_lb_score_right,reported_lb_score_left_minus_right,interpretation
-submission_6,submission_7,36000,671,0.01863888888888889,332,339,30079,5250,0.9781788617886179,0.877258,0.87617,0.0010879999999999779,"prediction-structure proxy, not a local F1 comparison"
-submission_6,submission_8,36000,411,0.011416666666666667,204,207,30207,5382,0.9865765236135606,0.877258,0.876305,0.0009529999999999816,"prediction-structure proxy, not a local F1 comparison"
-submission_6,submission_9,36000,411,0.011416666666666667,204,207,30207,5382,0.9865765236135606,0.877258,0.875022,0.0022360000000000158,"prediction-structure proxy, not a local F1 comparison"
-submission_7,submission_8,36000,260,0.007222222222222222,132,128,30286,5454,0.9914882472336803,0.87617,0.876305,-0.00013499999999999623,"prediction-structure proxy, not a local F1 comparison"
-submission_7,submission_9,36000,1080,0.03,542,538,29876,5044,0.9651117715467115,0.87617,0.875022,0.0011480000000000379,"prediction-structure proxy, not a local F1 comparison"
-submission_8,submission_9,36000,820,0.02277777777777778,410,410,30004,5176,0.9733973527121723,0.876305,0.875022,0.0012830000000000341,"prediction-structure proxy, not a local F1 comparison"
+left_candidate,right_candidate,metric_schema_version,rows,disagreement_count,disagreement_rate,left_dead_right_alive,left_alive_right_dead,both_dead,both_alive,dead_set_jaccard,reported_lb_score_left,reported_lb_score_right,reported_lb_score_left_minus_right,interpretation
+submission_6,submission_7,2_weighted_f1_primary,36000,671,0.01863888888888889,332,339,30079,5250,0.9781788617886179,0.877258,0.87617,0.0010879999999999779,"prediction-structure proxy, not a local F1 comparison"
+submission_6,submission_8,2_weighted_f1_primary,36000,411,0.011416666666666667,204,207,30207,5382,0.9865765236135606,0.877258,0.876305,0.0009529999999999816,"prediction-structure proxy, not a local F1 comparison"
+submission_6,submission_9,2_weighted_f1_primary,36000,411,0.011416666666666667,204,207,30207,5382,0.9865765236135606,0.877258,0.875022,0.0022360000000000158,"prediction-structure proxy, not a local F1 comparison"
+submission_7,submission_8,2_weighted_f1_primary,36000,260,0.007222222222222222,132,128,30286,5454,0.9914882472336803,0.87617,0.876305,-0.00013499999999999623,"prediction-structure proxy, not a local F1 comparison"
+submission_7,submission_9,2_weighted_f1_primary,36000,1080,0.03,542,538,29876,5044,0.9651117715467115,0.87617,0.875022,0.0011480000000000379,"prediction-structure proxy, not a local F1 comparison"
+submission_8,submission_9,2_weighted_f1_primary,36000,820,0.02277777777777778,410,410,30004,5176,0.9733973527121723,0.876305,0.875022,0.0012830000000000341,"prediction-structure proxy, not a local F1 comparison"

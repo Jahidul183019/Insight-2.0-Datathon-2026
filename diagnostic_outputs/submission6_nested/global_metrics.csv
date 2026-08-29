@@ -1,0 +1,4 @@
+scope,rows,completed_outer_folds,fixed_dead_rate_target,fixed_dead_rate_actual,official_support_weighted_f1,legacy_dead_class_f1,roc_auc,is_complete_5_fold,finite_oof_rows,submission6_public_lb_reference,nested_minus_public_lb,sanity_absolute_gap_tolerance,sanity_scale_pass,production_probability_replay_verified,canonical_reference_approved
+teacher,24000,5,0.845,0.845,0.8770890164561808,0.9279601990049752,0.9006681505433498,True,24000,,,,,,
+student,24000,5,0.845,0.845,0.8766646000765405,0.9277114427860697,0.9004331664894873,True,24000,,,,,,
+submission6_nested,24000,5,0.845,0.845,0.8770041331802525,0.927910447761194,0.9006663049255847,True,24000,0.877258,-0.0002538668197474836,0.005,True,False,False

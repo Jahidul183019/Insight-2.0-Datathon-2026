@@ -1,0 +1,38 @@
+{
+  "candidate": "sub12_candidate_p90_nn20",
+  "decision": "NO_GO_DO_NOT_GENERATE_OR_SUBMIT",
+  "overall_gate_pass": false,
+  "fixed_positive_rate": 0.845,
+  "official_primary_metric": "weighted_f1",
+  "legacy_comparison_metric": "dead_class_binary_f1",
+  "metric_resolution": "Official evaluation page specifies weighted F1; Dead-class binary F1 is retained only for comparison with earlier local analyses.",
+  "decisive_failures": [
+    {
+      "gate": "1_bootstrap_ci_lower_strictly_above_zero",
+      "metric": "weighted_f1",
+      "observed": -0.0002546498277840037,
+      "required": "> 0"
+    },
+    {
+      "gate": "2_outer_fold_improvement_count",
+      "metric": "weighted_f1",
+      "observed": 3.0,
+      "required": ">= 4 of 5"
+    },
+    {
+      "gate": "3_simulated_private_clear_majority",
+      "metric": "weighted_f1",
+      "observed": 0.0,
+      "required": "> 25 of 50"
+    },
+    {
+      "gate": "5_directionally_better_than_actual_submission6_nested",
+      "metric": "weighted_f1",
+      "observed": null,
+      "required": "exact recipe-equivalent nested Submission 6 OOF"
+    }
+  ],
+  "submission_artifact_generated": false,
+  "test_probability_artifact_generated": false,
+  "recipe_equivalent_submission6_nested_oof_available": false
+}

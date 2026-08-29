@@ -1,0 +1,80 @@
+{
+  "schema_version": "submission6_practical_reference_gate_v1",
+  "status": "approved",
+  "run_signature": "019972621bd5a68444c1a2f15e7de5336853ca37a012faa3ed129407d724b162",
+  "definition": "separate tight practical recipe-replay acceptance plus complete nested OOF integrity/scale gate; never byte-identical probability equivalence",
+  "practical_recipe_replay_accepted": true,
+  "nested_reference_integrity_accepted": true,
+  "canonical_nested_recipe_reference_approved": true,
+  "strict_probability_equivalence_verified": false,
+  "strict_recipe_artifact_equivalence_verified": false,
+  "strict_equivalence_note": "Preserved from production_replay_comparison.json; practical acceptance does not overwrite or reinterpret this field.",
+  "candidate_name_for_validation_harness": "submission6_nested_recipe_reference",
+  "nested_oof_path": "diagnostic_outputs/submission6_nested/nested_oof_predictions.npz",
+  "nested_oof_key": "submission6_nested_oof",
+  "nested_oof_sha256": "f04d5f07d3f5203ca1e4f84da1bcdc3e2e915cfcfd0932e271695a5511aa92dd",
+  "official_support_weighted_f1": 0.8770041331802525,
+  "nested_minus_public_lb": -0.0002538668197474836,
+  "submission6_public_lb_reference": 0.877258,
+  "scale_gap_absolute_tolerance": 0.005,
+  "practical_thresholds": {
+    "maximum_mean_absolute_error": 1e-08,
+    "maximum_root_mean_squared_error": 1e-08,
+    "maximum_absolute_error": 1e-07,
+    "minimum_pearson": 0.999999999,
+    "minimum_spearman": 0.999999999,
+    "historical_threshold": 0.684,
+    "historical_threshold_absolute_tolerance": 1e-12,
+    "required_dead_count": 30411,
+    "maximum_historical_label_changes": 0,
+    "maximum_top_k_label_changes": 0
+  },
+  "replay_summary": {
+    "available": true,
+    "teacher_comparison": {
+      "rows": 36000,
+      "mean_absolute_error": 8.255092245348301e-10,
+      "root_mean_squared_error": 1.081767125559795e-09,
+      "maximum_absolute_error": 4.908070172504608e-09,
+      "pearson_correlation": 1.0,
+      "spearman_rank_correlation": 0.9999999999984568
+    },
+    "final_comparison": {
+      "rows": 36000,
+      "mean_absolute_error": 1.6476536270564466e-09,
+      "root_mean_squared_error": 1.919942870273346e-09,
+      "maximum_absolute_error": 6.034970301271869e-09,
+      "pearson_correlation": 0.9999999999999976,
+      "spearman_rank_correlation": 0.9999999999981997
+    },
+    "selected_threshold": 0.6840000000000003,
+    "archived_dead_count": 30411,
+    "historical_label_changes": 0,
+    "top_k_label_changes": 0,
+    "strict_probability_equivalence_verified": false,
+    "strict_recipe_artifact_equivalence_verified": false
+  },
+  "nested_summary": {
+    "complete": true,
+    "integrity_pass": true,
+    "scale_pass": true,
+    "weighted_f1": 0.8770041331802525,
+    "nested_minus_public_lb": -0.0002538668197474836,
+    "completed_outer_folds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "finite_final_rows": 24000,
+    "nested_oof_sha256": "f04d5f07d3f5203ca1e4f84da1bcdc3e2e915cfcfd0932e271695a5511aa92dd"
+  },
+  "check_summary": {
+    "pass": 21,
+    "fail": 0,
+    "pending": 0
+  },
+  "new_probability_vector_saved": false,
+  "new_submission_saved": false
+}

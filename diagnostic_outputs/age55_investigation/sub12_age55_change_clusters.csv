@@ -1,0 +1,12 @@
+cluster,focal_age_rows,cluster_focal_rows,changed_predictions,changed_fraction_of_cluster,changed_fraction_of_focal_age,control_dead_to_stress_alive,control_alive_to_stress_dead,corrected_predictions,harmed_predictions,net_corrected
+EOD unavailable (all blank) | adenocarcinoma family,1821,473,2,0.004228329809725159,0.001098297638660077,1,1,0,2,-2
+EOD unavailable (all blank) | other histology,1821,81,1,0.012345679012345678,0.0005491488193300384,0,1,0,1,-1
+EOD unavailable (all blank) | small-cell family,1821,181,1,0.0055248618784530384,0.0005491488193300384,0,1,0,1,-1
+M0 N0 T0-2 localized | squamous family,1821,23,1,0.043478260869565216,0.0005491488193300384,1,0,0,1,-1
+M1 distant/metastatic | NOS/other epithelial family,1821,42,1,0.023809523809523808,0.0005491488193300384,1,0,0,1,-1
+M1 distant/metastatic | small-cell family,1821,85,1,0.011764705882352941,0.0005491488193300384,1,0,0,1,-1
+EOD unavailable (all blank) | squamous family,1821,145,2,0.013793103448275862,0.001098297638660077,2,0,1,1,0
+M0 N1-3 node-positive | squamous family,1821,48,2,0.041666666666666664,0.001098297638660077,1,1,1,1,0
+M1 distant/metastatic | adenocarcinoma family,1821,236,3,0.012711864406779662,0.0016474464579901153,0,3,2,1,1
+EOD not applicable (88) | other histology,1821,48,1,0.020833333333333332,0.0005491488193300384,1,0,1,0,1
+EOD unavailable (all blank) | neuroendocrine family,1821,37,1,0.02702702702702703,0.0005491488193300384,0,1,1,0,1
