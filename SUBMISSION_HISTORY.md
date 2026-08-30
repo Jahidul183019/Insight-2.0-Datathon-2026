@@ -29,6 +29,11 @@
 - The generated probability vector has SHA-256
   `aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6`.
 - Both files are byte-identical to the archived Submission 6 references.
+- Exact hashes are diagnostic references, not cross-platform execution gates.
+  Schema, ID alignment, probability validity, labels, row count, and the locked
+  class count remain strict. A byte mismatch produces a warning plus a
+  historical label-disagreement report rather than an automatic notebook
+  failure.
 - Submission 12 remains archived with SHA-256
   `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
   It remains a valid scored historical artifact, but its original NN fold

@@ -64,6 +64,13 @@ and submission match the archived Submission 6 artifacts byte-for-byte. The
 saved notebook includes execution counts, EDA tables and plots, training logs,
 and the final SHA-256 verification.
 
+Exact probability and CSV hashes are reported as diagnostics rather than hard
+cross-platform gates. Machine-independent checks for schema, patient IDs,
+probability validity, labels, row count, and class count remain strict. If a
+different supported environment introduces floating-point drift, the notebook
+warns and reports historical label disagreement instead of crashing solely on
+a byte mismatch.
+
 ## Competition compliance
 
 - The model workflow is manually specified; no AutoML library is used.

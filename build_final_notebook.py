@@ -86,6 +86,7 @@ CatBoost 1.2.10.
 from pathlib import Path
 import hashlib
 import platform
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -111,9 +112,32 @@ assert not train["patient_id"].isna().any() and not test["patient_id"].isna().an
 assert set(train["vital_status"].unique()) == {"Dead", "Alive"}
 
 y_binary = train["vital_status"].eq("Dead").astype("int8")
+AUDITED_VERSIONS = {
+    "numpy": "2.4.3",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.2.0",
+    "catboost": "1.2.10",
+}
+RUNTIME_VERSIONS = {
+    "numpy": np.__version__,
+    "pandas": pd.__version__,
+    "scikit-learn": sklearn.__version__,
+    "lightgbm": lightgbm.__version__,
+    "xgboost": xgboost.__version__,
+    "catboost": catboost.__version__,
+}
+VERSION_MATCHES = {
+    name: RUNTIME_VERSIONS[name] == expected
+    for name, expected in AUDITED_VERSIONS.items()
+}
 print("Python:", platform.python_version())
-print("numpy/pandas/sklearn:", np.__version__, pd.__version__, sklearn.__version__)
-print("lightgbm/xgboost/catboost:", lightgbm.__version__, xgboost.__version__, catboost.__version__)
+display(pd.DataFrame({
+    "audited": AUDITED_VERSIONS,
+    "runtime": RUNTIME_VERSIONS,
+    "exact_match": VERSION_MATCHES,
+}))
 print("train/test shapes:", train.shape, test.shape)
 print("Dead prevalence:", f"{y_binary.mean():.3%}")
 """
@@ -234,8 +258,9 @@ pseudo labels are part of its student training population. To avoid presenting
 an optimistic estimate, the local score below is explicitly the pre-pseudo
 teacher OOF score at the locked class-count policy. The final cell then verifies
 the fresh probability vector and submission structure. If the historical
-reference files are present, they are used only after training to prove exact
-reproduction; they never contribute to prediction generation.
+reference files are present, they are used only after training to measure exact
+byte and label-level reproduction; they never contribute to prediction
+generation.
 """
     ),
     code(
@@ -254,8 +279,20 @@ print(f"Pre-pseudo teacher OOF support-weighted F1: {teacher_weighted_f1:.6f}")
 generated_dir = ROOT / "artifacts" / "final_notebook"
 generated_submission_path = generated_dir / "submission.csv"
 generated_probability_path = generated_dir / "probs_v6_final.npy"
-generated = pd.read_csv(generated_submission_path)
 generated_probabilities = np.load(generated_probability_path, allow_pickle=False)
+
+assert generated_probabilities.shape == (len(test),)
+assert np.isfinite(generated_probabilities).all()
+assert ((generated_probabilities >= 0.0) & (generated_probabilities <= 1.0)).all()
+
+# Apply the documented decision policy deterministically even if small
+# cross-platform floating-point differences change the historical threshold.
+generated_labels = stable_top_k(generated_probabilities, target_dead_count)
+generated = pd.DataFrame({
+    "patient_id": test["patient_id"].copy(),
+    "vital_status": np.where(generated_labels == 1, "Dead", "Alive"),
+})
+generated.to_csv(generated_submission_path, index=False, lineterminator="\\n")
 
 assert generated.columns.tolist() == ["patient_id", "vital_status"]
 assert len(generated) == len(test) == 36_000
@@ -263,8 +300,6 @@ assert generated["patient_id"].equals(test["patient_id"])
 assert generated["patient_id"].is_unique
 assert generated["vital_status"].isin(["Dead", "Alive"]).all()
 assert not generated.isna().any().any()
-assert generated_probabilities.shape == (len(test),)
-assert np.isfinite(generated_probabilities).all()
 assert int(generated["vital_status"].eq("Dead").sum()) == target_dead_count
 
 def sha256(path):
@@ -272,34 +307,203 @@ def sha256(path):
 
 EXPECTED_SUBMISSION6_SHA256 = "fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477"
 EXPECTED_PROBABILITY_SHA256 = "aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6"
-assert sha256(generated_submission_path) == EXPECTED_SUBMISSION6_SHA256
-assert sha256(generated_probability_path) == EXPECTED_PROBABILITY_SHA256
+actual_submission_sha256 = sha256(generated_submission_path)
+actual_probability_sha256 = sha256(generated_probability_path)
+exact_submission_bytes = actual_submission_sha256 == EXPECTED_SUBMISSION6_SHA256
+exact_probability_bytes = actual_probability_sha256 == EXPECTED_PROBABILITY_SHA256
+
+if not exact_probability_bytes:
+    warnings.warn(
+        "Fresh probabilities are not byte-identical to the audited reference. "
+        "This can occur across OS, hardware, thread counts, or library builds. "
+        "Structural validity and prediction-level agreement are reported below."
+    )
+if not exact_submission_bytes:
+    warnings.warn(
+        "Fresh CSV bytes differ from the audited reference; the notebook will "
+        "continue because schema, IDs, labels, and class count are valid."
+    )
+if not all(VERSION_MATCHES.values()):
+    warnings.warn(
+        "Runtime package versions differ from the audited environment; exact "
+        "floating-point reproduction is therefore not expected."
+    )
 
 historical_path = ROOT / "archive" / "submission6.csv"
+historical_label_disagreements = None
+historical_bytes_equal = None
 if historical_path.is_file():
-    assert generated_submission_path.read_bytes() == historical_path.read_bytes()
+    historical = pd.read_csv(historical_path)
+    if (
+        historical.columns.tolist() == ["patient_id", "vital_status"]
+        and len(historical) == len(test)
+        and historical["patient_id"].equals(test["patient_id"])
+        and historical["vital_status"].isin(["Dead", "Alive"]).all()
+    ):
+        historical_label_disagreements = int(
+            (generated["vital_status"] != historical["vital_status"]).sum()
+        )
+        historical_bytes_equal = (
+            generated_submission_path.read_bytes() == historical_path.read_bytes()
+        )
+        if historical_label_disagreements:
+            warnings.warn(
+                f"Fresh predictions differ from the audited Submission 6 on "
+                f"{historical_label_disagreements:,} rows."
+            )
+    else:
+        warnings.warn(
+            "The optional historical reference is malformed or misaligned; "
+            "it was ignored and did not affect prediction generation."
+        )
 
-# Promote only after every format, count, probability, and hash check passes.
+# Promote only after all machine-independent structural checks pass. Exact
+# reference hashes remain diagnostics, not cross-platform execution gates.
 # Submission 12 remains safely preserved at archive/submission12.csv.
 canonical_submission_path = ROOT / "submission.csv"
 canonical_submission_path.write_bytes(generated_submission_path.read_bytes())
-assert sha256(canonical_submission_path) == EXPECTED_SUBMISSION6_SHA256
+assert sha256(canonical_submission_path) == actual_submission_sha256
 
-print("Reproducibility check passed.")
+print("Structural validation: PASS")
+print("Audited environment exact match:", all(VERSION_MATCHES.values()))
+print("Exact probability-byte match:", exact_probability_bytes)
+print("Exact CSV-byte match:", exact_submission_bytes)
+print("Historical label disagreements:", historical_label_disagreements)
+print("Historical CSV bytes equal:", historical_bytes_equal)
 print("Final submission:", canonical_submission_path)
 print("Rows / Dead / Alive:", len(generated), int(generated.vital_status.eq("Dead").sum()), int(generated.vital_status.eq("Alive").sum()))
-print("SHA-256:", sha256(generated_submission_path))
+print("Actual SHA-256:", actual_submission_sha256)
+print("Audited reference SHA-256:", EXPECTED_SUBMISSION6_SHA256)
 """
     ),
     markdown(
         """
-## 7. Result and reproducibility statement
+## 7. Compact interpretation appendix
 
-The notebook regenerates the final root `submission.csv` from the organizer-provided
-data with exactly 36,000 patients, 30,411 `Dead` predictions, and SHA-256
-`fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`.
-Its verified Public Leaderboard score is `0.877258`; the Private Leaderboard
-remains unknown until the competition closes.
+### Representative component importance
+
+The chart below reports feature importance from the **final-fold,
+pseudo-trained v4 CatBoost component** that remains in memory after the
+unchanged training workflow finishes. It is a useful model-inspection view,
+but it is not an aggregate importance for all 120 fitted components and must
+not be interpreted causally. The final prediction also includes LightGBM,
+XGBoost, non-target-encoded models, repeated folds, and the teacher/student
+blend.
+"""
+    ),
+    code(
+        """
+representative_feature_names = list(X_train_base.columns) + [
+    f"{column}_te" for column in te_cols
+]
+
+if hasattr(m, "get_feature_importance"):
+    representative_importance = np.asarray(m.get_feature_importance(), dtype=float)
+    if len(representative_importance) == len(representative_feature_names):
+        importance_table = (
+            pd.DataFrame({
+                "feature": representative_feature_names,
+                "importance": representative_importance,
+            })
+            .sort_values("importance", ascending=False)
+            .head(15)
+            .sort_values("importance")
+        )
+        ax = importance_table.plot.barh(
+            x="feature",
+            y="importance",
+            figsize=(9, 6),
+            legend=False,
+            color="#4C78A8",
+        )
+        ax.set_title("Representative final-fold v4 CatBoost feature importance")
+        ax.set_xlabel("CatBoost importance")
+        ax.set_ylabel("")
+        plt.tight_layout()
+        plt.show()
+        display(importance_table.sort_values("importance", ascending=False).reset_index(drop=True))
+    else:
+        warnings.warn(
+            "Representative importance length does not match the documented "
+            "feature names; the optional interpretation plot was skipped."
+        )
+else:
+    warnings.warn(
+        "The final retained component does not expose CatBoost feature "
+        "importance; the optional interpretation plot was skipped."
+    )
+"""
+    ),
+    markdown(
+        """
+### Leakage-safe age-band audit
+
+The following table is a compact extract from
+`diagnostic_outputs/age55_investigation/age_band_metrics.csv`, restricted to
+the approved `submission6_nested_equivalent` predictions. Each row has at
+least 789 patients, and the predictions come from outer folds that excluded
+the evaluated patients during fitting. The global nested weighted F1 was
+`0.8770`; among the age bands shown, age 55–59 is the clearest local trough,
+but the dedicated follow-up found no class-conditional error cluster strong
+enough to justify a targeted model change.
+
+| Age band | Patients | Weighted F1 | ROC AUC |
+| --- | ---: | ---: | ---: |
+| 50–54 | 789 | 0.8514 | 0.8904 |
+| 55–59 | 1,821 | 0.8381 | 0.8625 |
+| 60–64 | 2,925 | 0.8584 | 0.8860 |
+| 65–69 | 3,851 | 0.8484 | 0.8801 |
+| 70–74 | 4,233 | 0.8723 | 0.8988 |
+
+### Why the 84.5% policy and threshold 0.684 were retained
+
+The production decision policy was locked during development at no more than
+approximately 84.5% `Dead`. On the final probability vector, the documented
+0.001-step scan first reaches that policy at threshold `0.684`, producing
+30,411 of 36,000 `Dead` predictions (`84.475%`). A leakage-safe nested
+reconstruction evaluated the corresponding fixed-rate rule at weighted F1
+`0.877004`. A separate 85.0% stress test on the related saved-OOF screening
+candidate improved only two of five folds and had a negative mean change, so
+it did not justify changing the locked rate. That stress test is secondary
+evidence, not a direct retuning of Submission 6. The rate is a historical,
+pre-specified ranking policy—not a probability-calibration claim—and was not
+refined through row-level leaderboard probing.
+"""
+    ),
+    markdown(
+        """
+## 8. Results and limitations
+
+The notebook regenerates the final root `submission.csv` from the
+organizer-provided data with exactly 36,000 patients and 30,411 `Dead`
+predictions. In the audited environment it reproduces SHA-256
+`fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
+and the verified Public Leaderboard score is `0.877258`; the Private
+Leaderboard remains unknown until the competition closes.
+
+Exact probability and CSV hashes are diagnostic evidence rather than execution
+gates. Different supported hardware or library builds may produce tiny numeric
+differences. The notebook fails only for machine-independent validity problems
+such as malformed schemas, misaligned IDs, invalid probabilities or labels,
+missing values, or incorrect row/class counts. When the optional historical
+reference exists, label disagreement is reported explicitly.
+
+The leakage-safe nested-equivalent reconstruction of the production recipe
+achieved support-weighted F1 `0.877004`, close to the Public-LB result but not
+an estimate of the hidden Private-LB score. The age-band audit identifies
+lower performance for patients aged 55–59 (`0.8381` weighted F1), and the
+final-fold importance chart is representative of one CatBoost component
+rather than the entire ensemble. Registry variables and their importances
+describe predictive associations, not clinical or causal effects.
+
+Pseudo-label training can reinforce confident teacher errors, while the fixed
+class-count policy can transfer imperfectly if hidden prevalence differs. The
+public leaderboard covers only part of the test set, so the Private-LB result
+remains uncertain. Exact floating-point probabilities may also vary across
+hardware and library builds even when structural predictions remain valid.
+Finally, the higher-scoring historical neural-network blend is not presented
+as the final model because its original per-fold model checkpoints were not
+preserved for an exact clean-runtime retrain.
 
 The workflow uses manually specified preprocessing, features, model families,
 folds, and ensemble rules. It does not use an AutoML library, external data,
