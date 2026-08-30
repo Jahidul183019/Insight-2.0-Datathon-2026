@@ -8,10 +8,32 @@
 ## Current Status
 
 - **Best Kaggle-Verified LB Score:** `0.877460` (Submission 12) - Confirmed via user screenshot on 2026-08-29.
-- **Private LB Selections:** 
-  1. **Primary:** Submission 10 (`0.876616`) - Selected based on superior local harness robustness.
-  2. **Secondary:** Submission 6 (`0.877258`) - Pure tree fallback.
+- **Rulebook-Safe Final Model:** Submission 6 (`0.877258`). It is regenerated
+  end-to-end by the executed final notebook and matches its archived CSV and
+  probability vector byte-for-byte.
+- **Historical Private-LB Pair Analysis:** Submission 10 plus Submission 6 had
+  the strongest saved-OOF harness evidence. Submission 10 is not the declared
+  final notebook model because its original NN weights were not preserved.
 - **Pending/Unverified Candidates:** None. All local candidates (like Submission 12) have either been skipped or explicitly resolved.
+
+## Final Notebook Reproducibility Audit
+
+- `insight_2_0_consolidated.ipynb` now embeds the complete Submission 6
+  training implementation and runs it by default.
+- It requires only `train.csv`, `test.csv`, and the documented Python packages
+  to generate predictions; frozen probability or OOF arrays are not prediction
+  inputs.
+- A clean full run completed successfully and regenerated
+  `submission.csv` with SHA-256
+  `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`.
+- The generated probability vector has SHA-256
+  `aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6`.
+- Both files are byte-identical to the archived Submission 6 references.
+- Submission 12 remains archived with SHA-256
+  `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
+  It remains a valid scored historical artifact, but its original NN fold
+  weights were not saved, so it is not claimed as the exact retrainable final
+  notebook model.
 
 ## Metric Correction
 
@@ -213,12 +235,20 @@ As documented in `diagnostic_outputs/validation_harness/three_way_summary.md` an
 - **Submission 6 (100% Tree):** Won 2 out of 50 holds.
 - **Ties:** 5 out of 50 holds.
 
-Based on this harness-backed evidence, the recommended pair is **Submission 10 plus Submission 6**:
+Based on saved-OOF performance evidence, the historical ranking recommendation
+was **Submission 10 plus Submission 6**:
 
 1. **Submission 10 (Primary):** Despite having a lower Public LB score (`0.876616`) than Submission 12 (`0.877460`), the local harness proves the 80/20 neural-network blend is significantly more robust. It dominated the simulated private splits (winning 40/50 holds, beating Sub 12 head-to-head 43 times), making it the strongest generalizer.
 2. **Submission 6 (Secondary):** The canonical pure-tree ensemble (`0.877258`). It provides maximum structural diversity as a fallback against any neural-network overfitting, ensuring a safe, purely tree-based anchor.
 
 *(Note: While Submission 12 achieved the highest Public LB score, it is explicitly not selected because its local holdout win-rate and mean F1 were strictly inferior to Submission 10. We choose local simulation stability over noisy public-split feedback.)*
+
+For the notebook deliverable, reproducibility is a separate hard gate. The
+original NN fold weights used by Submissions 10 and 12 were not preserved, and
+fresh NN retraining is hardware-sensitive. Therefore, the rulebook-safe final
+notebook model is **Submission 6**. Select Submission 6 as a final Kaggle entry
+unless the organizers explicitly confirm that loading the frozen NN probability
+artifact is sufficient for their reproducibility review.
 
 ---
 
@@ -235,10 +265,9 @@ Based on this harness-backed evidence, the recommended pair is **Submission 10 p
   leaderboard feedback.
 - Restricted competition data, artifacts, and solution code must remain within
   the official team during the competition.
-- The final notebook must regenerate the submitted workflow and outputs. The
-  current consolidated notebook validates frozen artifacts, but that alone
-  must not be represented as a complete fresh retraining of every historical
-  model.
+- The final notebook regenerates Submission 6 from `train.csv` and `test.csv`,
+  writes the root `submission.csv`, and verifies both the probability and CSV
+  hashes. Frozen artifacts are optional post-training equality references only.
 
 ---
 
@@ -259,7 +288,9 @@ The main directory contains the active scripts (`pipeline_v6.py`,
 `submission6_nested_reconstruction.py`, `submission6_practical_reference_gate.py`,
 `age55_subgroup_investigation.py`, `step1_cv_diagnostic.py`, `validation_harness.py`,
 `run_three_way_harness.py`, `run_four_way_harness.py`, `validate_teacher_nn5.py`, and
-`validate_threshold_85.py`), data files, the historical `submission.csv` (which contains the superseded Submission 12 candidate), and this history document. The corresponding nested,
+`validate_threshold_85.py`), data files, the reproducible Submission 6
+`submission.csv`, and this history document. Submission 12 remains at
+`archive/submission12.csv`. The corresponding nested,
 practical-gate, and age-subgroup evidence is retained under
 `diagnostic_outputs/`. Historical pipelines v4, v5, v7, and v8 are retained
 under `archive/`.

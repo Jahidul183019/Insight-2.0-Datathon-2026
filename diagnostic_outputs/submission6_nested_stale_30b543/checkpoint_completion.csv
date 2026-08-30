@@ -1,6 +1,0 @@
-outer_fold,teacher_models_complete,teacher_models_expected,teacher_complete,student_models_complete,student_models_expected,student_complete,final_fold_artifact_complete
-1,0,90,False,0,30,False,False
-2,0,90,False,0,30,False,False
-3,0,90,False,0,30,False,False
-4,0,90,False,0,30,False,False
-5,0,90,False,0,30,False,False

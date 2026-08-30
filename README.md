@@ -12,35 +12,30 @@ apparent roughly 0.05 gap between local scores near 0.928 and Public LB scores
 near 0.877. Corrected weighted-F1 results are the primary evidence from this
 point forward; legacy binary results are retained only for provenance.
 
-## Current upload candidate
+## Final reproducible deliverable
 
-- Candidate: Submission 12
-- Recipe: 90% archived Submission 6 probabilities + 10% NN probabilities
-- Decision rule: stable top-30,411 ranking
+- Final notebook model: Submission 6
+- Recipe: manually specified v4/v5 LightGBM, XGBoost, and CatBoost blend,
+  followed by one-pass pseudo-label augmentation
 - Output: `submission.csv` (36,000 rows, 30,411 `Dead`)
-- Generator: `pipeline_submission12_nn10.py`
-- Canonical nested validation: weighted F1 `0.877259`, versus `0.877004`
-  for the Submission 6 nested-equivalent reference (`+0.000255`)
-- Difference from Submission 6 / 10 / 11: 156 / 136 / 300 labels
-- SHA-256: `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`
-- Status: Submitted and verified on Public LB (`0.877460` - New Personal Best)
+- Public LB score: `0.877258`
+- SHA-256: `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
+- Status: regenerated end-to-end and byte-identical to `archive/submission6.csv`
 
-Regenerate and validate the upload file:
+Open `insight_2_0_consolidated.ipynb` and run all cells from a clean kernel.
+The notebook reads only `train.csv` and `test.csv` to train the final model and
+promotes the fully validated result to `submission.csv`.
 
-```bash
-python3 pipeline_submission12_nn10.py
-```
-
-The generator requires `test.csv`, `archive/probs_v6_final.npy`,
-`archive/probs_nn.npy`, and archived Submissions 6, 10, and 11. It writes
-isolated artifacts under `artifacts/submission12_nn10/` and promotes the
-validated candidate to `submission.csv` for upload and `archive/submission12.csv`
-for archival preservation. Submission 11 remains preserved in `archive/submission11.csv`.
+Submission 12 remains the highest Public-LB artifact (`0.877460`) and is safely
+preserved at `archive/submission12.csv`. It is not presented as the final
+reproducible model because the original neural-network weights were not saved;
+fresh NN retraining is hardware-sensitive and does not reproduce that CSV
+exactly.
 
 ## Reproducibility
 
-- `insight_2_0_consolidated.ipynb` documents the workflow and validates the
-  frozen Submission 10 and verified Submission 11 artifacts.
+- `insight_2_0_consolidated.ipynb` embeds and executes the complete Submission 6
+  workflow without loading cached model probabilities.
 - `pseudo_label_nested_validation.py` performs the five-fold outer-holdout gate
   comparing 90% pseudo-labeling with a rebuilt 95% control.
 - `pipeline_v6.py` contains the original tree/pseudo-label training workflow.
@@ -64,12 +59,10 @@ for archival preservation. Submission 11 remains preserved in `archive/submissio
   `diagnostic_outputs/age55_investigation/`.
 - `SUBMISSION_HISTORY.md` maps scored submissions to their canonical files.
 
-The current notebook is artifact-reproducible: it verifies frozen probability
-vectors and submissions byte-for-byte. A fresh v6 training run can vary slightly
-and must not be described as an exact replay unless its output matches the frozen
-Submission 6 artifact. It does not yet demonstrate a clean end-to-end retraining
-of every historical submitted model; that regeneration path must be completed
-and verified before the final competition notebook is handed in.
+The notebook has been executed from top to bottom. Its fresh probability vector
+and submission match the archived Submission 6 artifacts byte-for-byte. The
+saved notebook includes execution counts, EDA tables and plots, training logs,
+and the final SHA-256 verification.
 
 ## Competition compliance
 
@@ -87,7 +80,8 @@ and verified before the final competition notebook is handed in.
 
 ## Important artifacts
 
-- `submission.csv`: current verified highest Public LB upload file (`0.877460`)
+- `submission.csv`: final reproducible Submission 6 output (`0.877258`)
+- `artifacts/final_notebook/submission.csv`: byte-identical notebook output
 - `archive/submission12.csv`: byte-identical archived snapshot of Submission 12
 - `artifacts/submission12_nn10/submission12_nn10.csv`: byte-identical generated
   Submission 12 candidate
@@ -102,7 +96,8 @@ and verified before the final competition notebook is handed in.
 - `archive/probs_v6_final.npy`: exact probability source for Submission 6
 - `archive/probs_v6_blend.npy`: pre-pseudo v6 teacher probabilities
 - `archive/probs_nn.npy`: NN test probabilities used by Submission 10
-- `oof_step1.npy`, `archive/oof_nn.npy`, `y_step1.npy`: local validation inputs
+- `archive/oof_nn.npy` and the versioned diagnostic outputs: historical local
+  validation inputs; they are not required by the final notebook
 - `diagnostic_outputs/submission6_nested/nested_oof_predictions.npz`: completed
   Submission 6 nested-recipe OOF vector
 - `diagnostic_outputs/submission6_reference_gate/submission6_practical_reference_acceptance.json`:

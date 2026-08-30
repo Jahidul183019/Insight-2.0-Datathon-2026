@@ -1,6 +1,0 @@
-outer_fold,fit_rows,validation_rows,fit_validation_intersection_rows,fit_validation_union_rows,fit_dead_rate,validation_dead_rate,disjoint_pass,full_union_pass
-1,19200,4800,0,24000,0.83,0.83,True,True
-2,19200,4800,0,24000,0.83,0.83,True,True
-3,19200,4800,0,24000,0.83,0.83,True,True
-4,19200,4800,0,24000,0.83,0.83,True,True
-5,19200,4800,0,24000,0.83,0.83,True,True

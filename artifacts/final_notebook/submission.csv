@@ -47,7 +47,7 @@ patient_id,vital_status
 24046,Alive
 24047,Dead
 24048,Alive
-24049,Dead
+24049,Alive
 24050,Dead
 24051,Dead
 24052,Dead
@@ -101,7 +101,7 @@ patient_id,vital_status
 24100,Dead
 24101,Dead
 24102,Dead
-24103,Alive
+24103,Dead
 24104,Alive
 24105,Dead
 24106,Dead
@@ -170,7 +170,7 @@ patient_id,vital_status
 24169,Dead
 24170,Dead
 24171,Dead
-24172,Dead
+24172,Alive
 24173,Dead
 24174,Dead
 24175,Dead
@@ -238,7 +238,7 @@ patient_id,vital_status
 24237,Dead
 24238,Dead
 24239,Dead
-24240,Alive
+24240,Dead
 24241,Alive
 24242,Dead
 24243,Dead
@@ -249,7 +249,7 @@ patient_id,vital_status
 24248,Dead
 24249,Dead
 24250,Dead
-24251,Dead
+24251,Alive
 24252,Dead
 24253,Dead
 24254,Dead
@@ -278,7 +278,7 @@ patient_id,vital_status
 24277,Dead
 24278,Dead
 24279,Dead
-24280,Dead
+24280,Alive
 24281,Dead
 24282,Dead
 24283,Dead
@@ -293,7 +293,7 @@ patient_id,vital_status
 24292,Dead
 24293,Dead
 24294,Dead
-24295,Dead
+24295,Alive
 24296,Dead
 24297,Dead
 24298,Alive
@@ -310,13 +310,13 @@ patient_id,vital_status
 24309,Alive
 24310,Alive
 24311,Dead
-24312,Alive
+24312,Dead
 24313,Dead
 24314,Alive
 24315,Dead
 24316,Alive
 24317,Alive
-24318,Alive
+24318,Dead
 24319,Dead
 24320,Dead
 24321,Dead
@@ -398,10 +398,10 @@ patient_id,vital_status
 24397,Dead
 24398,Alive
 24399,Alive
-24400,Dead
+24400,Alive
 24401,Dead
 24402,Dead
-24403,Dead
+24403,Alive
 24404,Dead
 24405,Dead
 24406,Dead
@@ -518,7 +518,7 @@ patient_id,vital_status
 24517,Alive
 24518,Dead
 24519,Dead
-24520,Alive
+24520,Dead
 24521,Dead
 24522,Dead
 24523,Dead
@@ -560,12 +560,12 @@ patient_id,vital_status
 24559,Dead
 24560,Dead
 24561,Alive
-24562,Alive
+24562,Dead
 24563,Dead
 24564,Dead
 24565,Dead
 24566,Dead
-24567,Dead
+24567,Alive
 24568,Dead
 24569,Alive
 24570,Dead
@@ -574,11 +574,11 @@ patient_id,vital_status
 24573,Dead
 24574,Dead
 24575,Dead
-24576,Dead
+24576,Alive
 24577,Dead
 24578,Dead
 24579,Dead
-24580,Dead
+24580,Alive
 24581,Dead
 24582,Dead
 24583,Alive
@@ -618,7 +618,7 @@ patient_id,vital_status
 24617,Dead
 24618,Dead
 24619,Alive
-24620,Alive
+24620,Dead
 24621,Dead
 24622,Dead
 24623,Dead
@@ -693,7 +693,7 @@ patient_id,vital_status
 24692,Dead
 24693,Dead
 24694,Dead
-24695,Dead
+24695,Alive
 24696,Alive
 24697,Dead
 24698,Dead
@@ -706,7 +706,7 @@ patient_id,vital_status
 24705,Dead
 24706,Alive
 24707,Dead
-24708,Alive
+24708,Dead
 24709,Dead
 24710,Dead
 24711,Dead
@@ -715,7 +715,7 @@ patient_id,vital_status
 24714,Alive
 24715,Alive
 24716,Dead
-24717,Dead
+24717,Alive
 24718,Dead
 24719,Dead
 24720,Dead
@@ -739,7 +739,7 @@ patient_id,vital_status
 24738,Dead
 24739,Dead
 24740,Dead
-24741,Dead
+24741,Alive
 24742,Dead
 24743,Dead
 24744,Dead
@@ -783,7 +783,7 @@ patient_id,vital_status
 24782,Alive
 24783,Dead
 24784,Dead
-24785,Alive
+24785,Dead
 24786,Dead
 24787,Dead
 24788,Dead
@@ -806,7 +806,7 @@ patient_id,vital_status
 24805,Dead
 24806,Dead
 24807,Dead
-24808,Dead
+24808,Alive
 24809,Dead
 24810,Alive
 24811,Alive
@@ -850,13 +850,13 @@ patient_id,vital_status
 24849,Dead
 24850,Dead
 24851,Dead
-24852,Alive
+24852,Dead
 24853,Dead
 24854,Alive
 24855,Dead
 24856,Dead
 24857,Dead
-24858,Dead
+24858,Alive
 24859,Dead
 24860,Dead
 24861,Dead
@@ -933,7 +933,7 @@ patient_id,vital_status
 24932,Alive
 24933,Alive
 24934,Dead
-24935,Alive
+24935,Dead
 24936,Dead
 24937,Dead
 24938,Dead
@@ -1041,7 +1041,7 @@ patient_id,vital_status
 25040,Dead
 25041,Dead
 25042,Dead
-25043,Dead
+25043,Alive
 25044,Dead
 25045,Dead
 25046,Alive
@@ -1052,7 +1052,7 @@ patient_id,vital_status
 25051,Alive
 25052,Dead
 25053,Dead
-25054,Dead
+25054,Alive
 25055,Dead
 25056,Dead
 25057,Dead
@@ -1088,7 +1088,7 @@ patient_id,vital_status
 25087,Dead
 25088,Dead
 25089,Dead
-25090,Alive
+25090,Dead
 25091,Alive
 25092,Dead
 25093,Dead
@@ -1135,11 +1135,11 @@ patient_id,vital_status
 25134,Alive
 25135,Dead
 25136,Dead
-25137,Dead
+25137,Alive
 25138,Dead
 25139,Dead
-25140,Alive
-25141,Alive
+25140,Dead
+25141,Dead
 25142,Dead
 25143,Dead
 25144,Dead
@@ -1230,7 +1230,7 @@ patient_id,vital_status
 25229,Dead
 25230,Dead
 25231,Dead
-25232,Alive
+25232,Dead
 25233,Dead
 25234,Alive
 25235,Dead
@@ -1263,7 +1263,7 @@ patient_id,vital_status
 25262,Alive
 25263,Dead
 25264,Dead
-25265,Alive
+25265,Dead
 25266,Dead
 25267,Dead
 25268,Dead
@@ -1308,7 +1308,7 @@ patient_id,vital_status
 25307,Alive
 25308,Dead
 25309,Alive
-25310,Alive
+25310,Dead
 25311,Dead
 25312,Dead
 25313,Dead
@@ -1383,7 +1383,7 @@ patient_id,vital_status
 25382,Dead
 25383,Dead
 25384,Dead
-25385,Alive
+25385,Dead
 25386,Dead
 25387,Dead
 25388,Dead
@@ -1392,13 +1392,13 @@ patient_id,vital_status
 25391,Alive
 25392,Dead
 25393,Dead
-25394,Alive
+25394,Dead
 25395,Alive
 25396,Dead
 25397,Alive
 25398,Dead
 25399,Dead
-25400,Dead
+25400,Alive
 25401,Alive
 25402,Dead
 25403,Dead
@@ -1425,7 +1425,7 @@ patient_id,vital_status
 25424,Dead
 25425,Dead
 25426,Alive
-25427,Dead
+25427,Alive
 25428,Dead
 25429,Dead
 25430,Dead
@@ -1482,7 +1482,7 @@ patient_id,vital_status
 25481,Alive
 25482,Dead
 25483,Dead
-25484,Alive
+25484,Dead
 25485,Dead
 25486,Dead
 25487,Dead
@@ -1551,7 +1551,7 @@ patient_id,vital_status
 25550,Dead
 25551,Alive
 25552,Alive
-25553,Alive
+25553,Dead
 25554,Dead
 25555,Dead
 25556,Dead
@@ -1650,7 +1650,7 @@ patient_id,vital_status
 25649,Dead
 25650,Dead
 25651,Dead
-25652,Dead
+25652,Alive
 25653,Dead
 25654,Dead
 25655,Dead
@@ -1697,7 +1697,7 @@ patient_id,vital_status
 25696,Dead
 25697,Alive
 25698,Dead
-25699,Alive
+25699,Dead
 25700,Dead
 25701,Alive
 25702,Dead
@@ -1716,7 +1716,7 @@ patient_id,vital_status
 25715,Alive
 25716,Dead
 25717,Dead
-25718,Alive
+25718,Dead
 25719,Dead
 25720,Alive
 25721,Dead
@@ -1753,7 +1753,7 @@ patient_id,vital_status
 25752,Dead
 25753,Dead
 25754,Dead
-25755,Alive
+25755,Dead
 25756,Dead
 25757,Alive
 25758,Dead
@@ -1812,7 +1812,7 @@ patient_id,vital_status
 25811,Alive
 25812,Dead
 25813,Dead
-25814,Dead
+25814,Alive
 25815,Dead
 25816,Dead
 25817,Dead
@@ -1840,7 +1840,7 @@ patient_id,vital_status
 25839,Alive
 25840,Dead
 25841,Alive
-25842,Alive
+25842,Dead
 25843,Dead
 25844,Alive
 25845,Dead
@@ -1890,7 +1890,7 @@ patient_id,vital_status
 25889,Dead
 25890,Dead
 25891,Dead
-25892,Dead
+25892,Alive
 25893,Dead
 25894,Dead
 25895,Dead
@@ -1909,7 +1909,7 @@ patient_id,vital_status
 25908,Dead
 25909,Dead
 25910,Dead
-25911,Dead
+25911,Alive
 25912,Dead
 25913,Dead
 25914,Dead
@@ -1949,7 +1949,7 @@ patient_id,vital_status
 25948,Dead
 25949,Alive
 25950,Dead
-25951,Alive
+25951,Dead
 25952,Dead
 25953,Alive
 25954,Dead
@@ -2024,7 +2024,7 @@ patient_id,vital_status
 26023,Dead
 26024,Dead
 26025,Dead
-26026,Alive
+26026,Dead
 26027,Dead
 26028,Dead
 26029,Alive
@@ -2115,7 +2115,7 @@ patient_id,vital_status
 26114,Dead
 26115,Dead
 26116,Dead
-26117,Alive
+26117,Dead
 26118,Dead
 26119,Dead
 26120,Dead
@@ -2153,7 +2153,7 @@ patient_id,vital_status
 26152,Dead
 26153,Dead
 26154,Dead
-26155,Dead
+26155,Alive
 26156,Dead
 26157,Dead
 26158,Alive
@@ -2203,7 +2203,7 @@ patient_id,vital_status
 26202,Alive
 26203,Dead
 26204,Alive
-26205,Alive
+26205,Dead
 26206,Dead
 26207,Dead
 26208,Dead
@@ -2235,7 +2235,7 @@ patient_id,vital_status
 26234,Dead
 26235,Dead
 26236,Alive
-26237,Dead
+26237,Alive
 26238,Dead
 26239,Dead
 26240,Dead
@@ -2299,7 +2299,7 @@ patient_id,vital_status
 26298,Dead
 26299,Dead
 26300,Dead
-26301,Dead
+26301,Alive
 26302,Dead
 26303,Dead
 26304,Dead
@@ -2317,7 +2317,7 @@ patient_id,vital_status
 26316,Dead
 26317,Dead
 26318,Dead
-26319,Dead
+26319,Alive
 26320,Alive
 26321,Dead
 26322,Alive
@@ -2468,7 +2468,7 @@ patient_id,vital_status
 26467,Dead
 26468,Dead
 26469,Dead
-26470,Dead
+26470,Alive
 26471,Dead
 26472,Alive
 26473,Dead
@@ -2570,7 +2570,7 @@ patient_id,vital_status
 26569,Dead
 26570,Alive
 26571,Dead
-26572,Alive
+26572,Dead
 26573,Dead
 26574,Dead
 26575,Alive
@@ -2627,7 +2627,7 @@ patient_id,vital_status
 26626,Dead
 26627,Dead
 26628,Dead
-26629,Dead
+26629,Alive
 26630,Dead
 26631,Dead
 26632,Dead
@@ -2687,7 +2687,7 @@ patient_id,vital_status
 26686,Dead
 26687,Dead
 26688,Dead
-26689,Dead
+26689,Alive
 26690,Dead
 26691,Dead
 26692,Dead
@@ -2702,7 +2702,7 @@ patient_id,vital_status
 26701,Dead
 26702,Alive
 26703,Dead
-26704,Alive
+26704,Dead
 26705,Dead
 26706,Dead
 26707,Alive
@@ -2720,7 +2720,7 @@ patient_id,vital_status
 26719,Dead
 26720,Alive
 26721,Dead
-26722,Dead
+26722,Alive
 26723,Alive
 26724,Alive
 26725,Dead
@@ -2729,7 +2729,7 @@ patient_id,vital_status
 26728,Dead
 26729,Dead
 26730,Dead
-26731,Dead
+26731,Alive
 26732,Dead
 26733,Dead
 26734,Dead
@@ -2821,7 +2821,7 @@ patient_id,vital_status
 26820,Alive
 26821,Dead
 26822,Alive
-26823,Dead
+26823,Alive
 26824,Alive
 26825,Dead
 26826,Dead
@@ -2915,7 +2915,7 @@ patient_id,vital_status
 26914,Dead
 26915,Dead
 26916,Dead
-26917,Dead
+26917,Alive
 26918,Dead
 26919,Alive
 26920,Alive
@@ -2937,7 +2937,7 @@ patient_id,vital_status
 26936,Dead
 26937,Dead
 26938,Dead
-26939,Dead
+26939,Alive
 26940,Dead
 26941,Dead
 26942,Alive
@@ -2982,7 +2982,7 @@ patient_id,vital_status
 26981,Dead
 26982,Dead
 26983,Dead
-26984,Dead
+26984,Alive
 26985,Dead
 26986,Dead
 26987,Dead
@@ -3127,7 +3127,7 @@ patient_id,vital_status
 27126,Dead
 27127,Alive
 27128,Dead
-27129,Alive
+27129,Dead
 27130,Dead
 27131,Dead
 27132,Dead
@@ -3178,7 +3178,7 @@ patient_id,vital_status
 27177,Dead
 27178,Dead
 27179,Dead
-27180,Alive
+27180,Dead
 27181,Dead
 27182,Dead
 27183,Dead
@@ -3190,7 +3190,7 @@ patient_id,vital_status
 27189,Dead
 27190,Dead
 27191,Dead
-27192,Alive
+27192,Dead
 27193,Dead
 27194,Dead
 27195,Dead
@@ -3391,7 +3391,7 @@ patient_id,vital_status
 27390,Dead
 27391,Alive
 27392,Dead
-27393,Alive
+27393,Dead
 27394,Dead
 27395,Alive
 27396,Dead
@@ -3411,7 +3411,7 @@ patient_id,vital_status
 27410,Alive
 27411,Dead
 27412,Dead
-27413,Alive
+27413,Dead
 27414,Alive
 27415,Dead
 27416,Dead
@@ -3430,11 +3430,11 @@ patient_id,vital_status
 27429,Dead
 27430,Dead
 27431,Dead
-27432,Dead
+27432,Alive
 27433,Dead
 27434,Dead
 27435,Dead
-27436,Alive
+27436,Dead
 27437,Alive
 27438,Alive
 27439,Dead
@@ -3468,7 +3468,7 @@ patient_id,vital_status
 27467,Dead
 27468,Dead
 27469,Alive
-27470,Alive
+27470,Dead
 27471,Alive
 27472,Dead
 27473,Dead
@@ -3580,7 +3580,7 @@ patient_id,vital_status
 27579,Dead
 27580,Dead
 27581,Dead
-27582,Alive
+27582,Dead
 27583,Dead
 27584,Dead
 27585,Alive
@@ -3640,7 +3640,7 @@ patient_id,vital_status
 27639,Dead
 27640,Dead
 27641,Dead
-27642,Dead
+27642,Alive
 27643,Dead
 27644,Dead
 27645,Dead
@@ -3725,7 +3725,7 @@ patient_id,vital_status
 27724,Alive
 27725,Dead
 27726,Dead
-27727,Dead
+27727,Alive
 27728,Dead
 27729,Dead
 27730,Dead
@@ -3741,7 +3741,7 @@ patient_id,vital_status
 27740,Dead
 27741,Dead
 27742,Dead
-27743,Alive
+27743,Dead
 27744,Dead
 27745,Dead
 27746,Dead
@@ -3757,10 +3757,10 @@ patient_id,vital_status
 27756,Dead
 27757,Dead
 27758,Dead
-27759,Alive
+27759,Dead
 27760,Dead
 27761,Dead
-27762,Dead
+27762,Alive
 27763,Dead
 27764,Dead
 27765,Dead
@@ -3867,7 +3867,7 @@ patient_id,vital_status
 27866,Dead
 27867,Dead
 27868,Dead
-27869,Alive
+27869,Dead
 27870,Dead
 27871,Dead
 27872,Dead
@@ -3878,13 +3878,13 @@ patient_id,vital_status
 27877,Dead
 27878,Dead
 27879,Alive
-27880,Dead
+27880,Alive
 27881,Dead
 27882,Alive
 27883,Dead
 27884,Dead
 27885,Dead
-27886,Dead
+27886,Alive
 27887,Dead
 27888,Dead
 27889,Dead
@@ -4054,7 +4054,7 @@ patient_id,vital_status
 28053,Dead
 28054,Dead
 28055,Dead
-28056,Dead
+28056,Alive
 28057,Dead
 28058,Dead
 28059,Dead
@@ -4142,7 +4142,7 @@ patient_id,vital_status
 28141,Dead
 28142,Dead
 28143,Dead
-28144,Alive
+28144,Dead
 28145,Dead
 28146,Alive
 28147,Dead
@@ -4193,7 +4193,7 @@ patient_id,vital_status
 28192,Dead
 28193,Dead
 28194,Alive
-28195,Dead
+28195,Alive
 28196,Dead
 28197,Dead
 28198,Alive
@@ -4219,7 +4219,7 @@ patient_id,vital_status
 28218,Alive
 28219,Dead
 28220,Dead
-28221,Dead
+28221,Alive
 28222,Dead
 28223,Dead
 28224,Dead
@@ -4259,7 +4259,7 @@ patient_id,vital_status
 28258,Dead
 28259,Dead
 28260,Dead
-28261,Alive
+28261,Dead
 28262,Alive
 28263,Dead
 28264,Dead
@@ -4364,7 +4364,7 @@ patient_id,vital_status
 28363,Dead
 28364,Dead
 28365,Dead
-28366,Dead
+28366,Alive
 28367,Dead
 28368,Alive
 28369,Alive
@@ -4382,7 +4382,7 @@ patient_id,vital_status
 28381,Dead
 28382,Dead
 28383,Dead
-28384,Dead
+28384,Alive
 28385,Dead
 28386,Alive
 28387,Dead
@@ -4420,8 +4420,8 @@ patient_id,vital_status
 28419,Dead
 28420,Dead
 28421,Dead
-28422,Dead
-28423,Dead
+28422,Alive
+28423,Alive
 28424,Dead
 28425,Alive
 28426,Dead
@@ -4444,7 +4444,7 @@ patient_id,vital_status
 28443,Dead
 28444,Dead
 28445,Dead
-28446,Alive
+28446,Dead
 28447,Dead
 28448,Dead
 28449,Dead
@@ -4471,7 +4471,7 @@ patient_id,vital_status
 28470,Alive
 28471,Dead
 28472,Dead
-28473,Alive
+28473,Dead
 28474,Dead
 28475,Dead
 28476,Dead
@@ -4495,7 +4495,7 @@ patient_id,vital_status
 28494,Dead
 28495,Dead
 28496,Dead
-28497,Dead
+28497,Alive
 28498,Alive
 28499,Dead
 28500,Dead
@@ -4515,7 +4515,7 @@ patient_id,vital_status
 28514,Alive
 28515,Dead
 28516,Dead
-28517,Alive
+28517,Dead
 28518,Dead
 28519,Dead
 28520,Dead
@@ -4536,7 +4536,7 @@ patient_id,vital_status
 28535,Dead
 28536,Dead
 28537,Dead
-28538,Dead
+28538,Alive
 28539,Dead
 28540,Alive
 28541,Dead
@@ -4567,7 +4567,7 @@ patient_id,vital_status
 28566,Dead
 28567,Dead
 28568,Dead
-28569,Alive
+28569,Dead
 28570,Dead
 28571,Dead
 28572,Dead
@@ -4577,7 +4577,7 @@ patient_id,vital_status
 28576,Alive
 28577,Dead
 28578,Dead
-28579,Alive
+28579,Dead
 28580,Dead
 28581,Alive
 28582,Dead
@@ -4622,10 +4622,10 @@ patient_id,vital_status
 28621,Dead
 28622,Dead
 28623,Dead
-28624,Alive
+28624,Dead
 28625,Dead
 28626,Dead
-28627,Dead
+28627,Alive
 28628,Dead
 28629,Dead
 28630,Dead
@@ -4654,7 +4654,7 @@ patient_id,vital_status
 28653,Dead
 28654,Dead
 28655,Alive
-28656,Dead
+28656,Alive
 28657,Dead
 28658,Alive
 28659,Dead
@@ -4737,7 +4737,7 @@ patient_id,vital_status
 28736,Dead
 28737,Dead
 28738,Alive
-28739,Alive
+28739,Dead
 28740,Dead
 28741,Dead
 28742,Dead
@@ -4794,7 +4794,7 @@ patient_id,vital_status
 28793,Dead
 28794,Dead
 28795,Alive
-28796,Alive
+28796,Dead
 28797,Alive
 28798,Dead
 28799,Alive
@@ -4849,7 +4849,7 @@ patient_id,vital_status
 28848,Dead
 28849,Dead
 28850,Dead
-28851,Dead
+28851,Alive
 28852,Dead
 28853,Dead
 28854,Dead
@@ -4867,7 +4867,7 @@ patient_id,vital_status
 28866,Alive
 28867,Dead
 28868,Dead
-28869,Dead
+28869,Alive
 28870,Alive
 28871,Dead
 28872,Dead
@@ -4905,7 +4905,7 @@ patient_id,vital_status
 28904,Dead
 28905,Dead
 28906,Dead
-28907,Alive
+28907,Dead
 28908,Dead
 28909,Dead
 28910,Alive
@@ -5006,7 +5006,7 @@ patient_id,vital_status
 29005,Dead
 29006,Dead
 29007,Dead
-29008,Alive
+29008,Dead
 29009,Dead
 29010,Alive
 29011,Dead
@@ -5113,7 +5113,7 @@ patient_id,vital_status
 29112,Dead
 29113,Dead
 29114,Dead
-29115,Dead
+29115,Alive
 29116,Dead
 29117,Dead
 29118,Dead
@@ -5165,9 +5165,9 @@ patient_id,vital_status
 29164,Alive
 29165,Dead
 29166,Dead
-29167,Dead
+29167,Alive
 29168,Dead
-29169,Alive
+29169,Dead
 29170,Dead
 29171,Dead
 29172,Dead
@@ -5275,7 +5275,7 @@ patient_id,vital_status
 29274,Dead
 29275,Dead
 29276,Dead
-29277,Alive
+29277,Dead
 29278,Dead
 29279,Dead
 29280,Dead
@@ -5293,7 +5293,7 @@ patient_id,vital_status
 29292,Dead
 29293,Dead
 29294,Dead
-29295,Alive
+29295,Dead
 29296,Dead
 29297,Alive
 29298,Dead
@@ -5368,7 +5368,7 @@ patient_id,vital_status
 29367,Alive
 29368,Dead
 29369,Dead
-29370,Dead
+29370,Alive
 29371,Dead
 29372,Dead
 29373,Dead
@@ -5471,7 +5471,7 @@ patient_id,vital_status
 29470,Dead
 29471,Dead
 29472,Alive
-29473,Dead
+29473,Alive
 29474,Dead
 29475,Dead
 29476,Alive
@@ -5487,7 +5487,7 @@ patient_id,vital_status
 29486,Dead
 29487,Dead
 29488,Dead
-29489,Dead
+29489,Alive
 29490,Dead
 29491,Dead
 29492,Dead
@@ -5683,7 +5683,7 @@ patient_id,vital_status
 29682,Dead
 29683,Dead
 29684,Alive
-29685,Dead
+29685,Alive
 29686,Dead
 29687,Dead
 29688,Dead
@@ -5725,7 +5725,7 @@ patient_id,vital_status
 29724,Dead
 29725,Dead
 29726,Dead
-29727,Alive
+29727,Dead
 29728,Dead
 29729,Dead
 29730,Dead
@@ -5771,12 +5771,12 @@ patient_id,vital_status
 29770,Dead
 29771,Dead
 29772,Dead
-29773,Dead
+29773,Alive
 29774,Dead
 29775,Dead
 29776,Dead
 29777,Dead
-29778,Alive
+29778,Dead
 29779,Dead
 29780,Dead
 29781,Dead
@@ -5810,7 +5810,7 @@ patient_id,vital_status
 29809,Dead
 29810,Dead
 29811,Dead
-29812,Alive
+29812,Dead
 29813,Dead
 29814,Dead
 29815,Dead
@@ -5875,7 +5875,7 @@ patient_id,vital_status
 29874,Dead
 29875,Dead
 29876,Dead
-29877,Alive
+29877,Dead
 29878,Dead
 29879,Dead
 29880,Dead
@@ -5906,8 +5906,8 @@ patient_id,vital_status
 29905,Dead
 29906,Alive
 29907,Dead
-29908,Alive
-29909,Alive
+29908,Dead
+29909,Dead
 29910,Dead
 29911,Dead
 29912,Dead
@@ -6012,7 +6012,7 @@ patient_id,vital_status
 30011,Dead
 30012,Dead
 30013,Alive
-30014,Dead
+30014,Alive
 30015,Dead
 30016,Dead
 30017,Dead
@@ -6029,14 +6029,14 @@ patient_id,vital_status
 30028,Alive
 30029,Dead
 30030,Dead
-30031,Alive
+30031,Dead
 30032,Alive
 30033,Dead
 30034,Alive
 30035,Dead
 30036,Alive
 30037,Dead
-30038,Dead
+30038,Alive
 30039,Dead
 30040,Dead
 30041,Alive
@@ -6070,7 +6070,7 @@ patient_id,vital_status
 30069,Alive
 30070,Dead
 30071,Dead
-30072,Dead
+30072,Alive
 30073,Dead
 30074,Dead
 30075,Dead
@@ -6119,7 +6119,7 @@ patient_id,vital_status
 30118,Dead
 30119,Dead
 30120,Dead
-30121,Alive
+30121,Dead
 30122,Alive
 30123,Dead
 30124,Dead
@@ -6177,7 +6177,7 @@ patient_id,vital_status
 30176,Alive
 30177,Dead
 30178,Dead
-30179,Alive
+30179,Dead
 30180,Dead
 30181,Dead
 30182,Dead
@@ -6279,7 +6279,7 @@ patient_id,vital_status
 30278,Alive
 30279,Dead
 30280,Dead
-30281,Dead
+30281,Alive
 30282,Dead
 30283,Alive
 30284,Dead
@@ -6333,7 +6333,7 @@ patient_id,vital_status
 30332,Alive
 30333,Dead
 30334,Dead
-30335,Alive
+30335,Dead
 30336,Alive
 30337,Dead
 30338,Dead
@@ -6355,7 +6355,7 @@ patient_id,vital_status
 30354,Dead
 30355,Dead
 30356,Dead
-30357,Dead
+30357,Alive
 30358,Dead
 30359,Dead
 30360,Dead
@@ -6367,7 +6367,7 @@ patient_id,vital_status
 30366,Dead
 30367,Dead
 30368,Dead
-30369,Alive
+30369,Dead
 30370,Alive
 30371,Dead
 30372,Dead
@@ -6429,7 +6429,7 @@ patient_id,vital_status
 30428,Dead
 30429,Dead
 30430,Alive
-30431,Dead
+30431,Alive
 30432,Dead
 30433,Dead
 30434,Dead
@@ -6447,7 +6447,7 @@ patient_id,vital_status
 30446,Dead
 30447,Dead
 30448,Dead
-30449,Dead
+30449,Alive
 30450,Dead
 30451,Dead
 30452,Dead
@@ -6483,7 +6483,7 @@ patient_id,vital_status
 30482,Dead
 30483,Dead
 30484,Dead
-30485,Dead
+30485,Alive
 30486,Dead
 30487,Dead
 30488,Dead
@@ -6745,7 +6745,7 @@ patient_id,vital_status
 30744,Dead
 30745,Dead
 30746,Dead
-30747,Alive
+30747,Dead
 30748,Dead
 30749,Dead
 30750,Dead
@@ -6861,7 +6861,7 @@ patient_id,vital_status
 30860,Alive
 30861,Alive
 30862,Alive
-30863,Dead
+30863,Alive
 30864,Dead
 30865,Dead
 30866,Dead
@@ -6889,7 +6889,7 @@ patient_id,vital_status
 30888,Dead
 30889,Dead
 30890,Dead
-30891,Alive
+30891,Dead
 30892,Dead
 30893,Dead
 30894,Dead
@@ -6902,9 +6902,9 @@ patient_id,vital_status
 30901,Dead
 30902,Dead
 30903,Dead
-30904,Dead
+30904,Alive
 30905,Dead
-30906,Dead
+30906,Alive
 30907,Dead
 30908,Dead
 30909,Dead
@@ -7041,7 +7041,7 @@ patient_id,vital_status
 31040,Dead
 31041,Dead
 31042,Alive
-31043,Alive
+31043,Dead
 31044,Dead
 31045,Dead
 31046,Dead
@@ -7191,7 +7191,7 @@ patient_id,vital_status
 31190,Dead
 31191,Dead
 31192,Dead
-31193,Alive
+31193,Dead
 31194,Dead
 31195,Dead
 31196,Dead
@@ -7309,7 +7309,7 @@ patient_id,vital_status
 31308,Dead
 31309,Alive
 31310,Dead
-31311,Dead
+31311,Alive
 31312,Dead
 31313,Dead
 31314,Dead
@@ -7609,7 +7609,7 @@ patient_id,vital_status
 31608,Alive
 31609,Dead
 31610,Dead
-31611,Dead
+31611,Alive
 31612,Dead
 31613,Dead
 31614,Dead
@@ -7652,7 +7652,7 @@ patient_id,vital_status
 31651,Dead
 31652,Dead
 31653,Dead
-31654,Dead
+31654,Alive
 31655,Dead
 31656,Dead
 31657,Dead
@@ -7723,7 +7723,7 @@ patient_id,vital_status
 31722,Dead
 31723,Dead
 31724,Dead
-31725,Dead
+31725,Alive
 31726,Dead
 31727,Dead
 31728,Dead
@@ -7797,7 +7797,7 @@ patient_id,vital_status
 31796,Dead
 31797,Dead
 31798,Dead
-31799,Dead
+31799,Alive
 31800,Dead
 31801,Dead
 31802,Dead
@@ -7822,7 +7822,7 @@ patient_id,vital_status
 31821,Dead
 31822,Alive
 31823,Dead
-31824,Dead
+31824,Alive
 31825,Dead
 31826,Alive
 31827,Alive
@@ -7836,7 +7836,7 @@ patient_id,vital_status
 31835,Dead
 31836,Dead
 31837,Dead
-31838,Dead
+31838,Alive
 31839,Dead
 31840,Dead
 31841,Dead
@@ -7865,7 +7865,7 @@ patient_id,vital_status
 31864,Dead
 31865,Dead
 31866,Dead
-31867,Alive
+31867,Dead
 31868,Dead
 31869,Dead
 31870,Dead
@@ -8002,7 +8002,7 @@ patient_id,vital_status
 32001,Alive
 32002,Alive
 32003,Dead
-32004,Dead
+32004,Alive
 32005,Dead
 32006,Dead
 32007,Dead
@@ -8132,7 +8132,7 @@ patient_id,vital_status
 32131,Dead
 32132,Alive
 32133,Dead
-32134,Alive
+32134,Dead
 32135,Dead
 32136,Dead
 32137,Alive
@@ -8147,18 +8147,18 @@ patient_id,vital_status
 32146,Dead
 32147,Dead
 32148,Dead
-32149,Alive
+32149,Dead
 32150,Dead
 32151,Dead
-32152,Dead
+32152,Alive
 32153,Dead
 32154,Dead
 32155,Dead
 32156,Dead
 32157,Dead
 32158,Dead
-32159,Dead
-32160,Alive
+32159,Alive
+32160,Dead
 32161,Dead
 32162,Alive
 32163,Dead
@@ -8248,7 +8248,7 @@ patient_id,vital_status
 32247,Dead
 32248,Dead
 32249,Dead
-32250,Dead
+32250,Alive
 32251,Dead
 32252,Dead
 32253,Dead
@@ -8276,7 +8276,7 @@ patient_id,vital_status
 32275,Dead
 32276,Alive
 32277,Dead
-32278,Alive
+32278,Dead
 32279,Dead
 32280,Dead
 32281,Dead
@@ -8304,7 +8304,7 @@ patient_id,vital_status
 32303,Alive
 32304,Dead
 32305,Dead
-32306,Dead
+32306,Alive
 32307,Dead
 32308,Dead
 32309,Dead
@@ -8324,7 +8324,7 @@ patient_id,vital_status
 32323,Dead
 32324,Dead
 32325,Dead
-32326,Dead
+32326,Alive
 32327,Dead
 32328,Dead
 32329,Dead
@@ -8364,7 +8364,7 @@ patient_id,vital_status
 32363,Dead
 32364,Dead
 32365,Dead
-32366,Alive
+32366,Dead
 32367,Dead
 32368,Dead
 32369,Dead
@@ -8456,7 +8456,7 @@ patient_id,vital_status
 32455,Dead
 32456,Dead
 32457,Dead
-32458,Dead
+32458,Alive
 32459,Dead
 32460,Alive
 32461,Dead
@@ -8536,7 +8536,7 @@ patient_id,vital_status
 32535,Dead
 32536,Alive
 32537,Dead
-32538,Dead
+32538,Alive
 32539,Alive
 32540,Dead
 32541,Dead
@@ -8607,7 +8607,7 @@ patient_id,vital_status
 32606,Dead
 32607,Dead
 32608,Alive
-32609,Dead
+32609,Alive
 32610,Dead
 32611,Alive
 32612,Dead
@@ -8709,7 +8709,7 @@ patient_id,vital_status
 32708,Dead
 32709,Alive
 32710,Dead
-32711,Alive
+32711,Dead
 32712,Alive
 32713,Dead
 32714,Dead
@@ -8731,7 +8731,7 @@ patient_id,vital_status
 32730,Dead
 32731,Dead
 32732,Dead
-32733,Alive
+32733,Dead
 32734,Dead
 32735,Dead
 32736,Dead
@@ -8820,7 +8820,7 @@ patient_id,vital_status
 32819,Dead
 32820,Alive
 32821,Dead
-32822,Dead
+32822,Alive
 32823,Alive
 32824,Dead
 32825,Dead
@@ -8855,7 +8855,7 @@ patient_id,vital_status
 32854,Dead
 32855,Dead
 32856,Dead
-32857,Dead
+32857,Alive
 32858,Dead
 32859,Dead
 32860,Dead
@@ -8934,7 +8934,7 @@ patient_id,vital_status
 32933,Alive
 32934,Dead
 32935,Dead
-32936,Dead
+32936,Alive
 32937,Dead
 32938,Dead
 32939,Dead
@@ -8949,7 +8949,7 @@ patient_id,vital_status
 32948,Alive
 32949,Dead
 32950,Dead
-32951,Alive
+32951,Dead
 32952,Dead
 32953,Dead
 32954,Dead
@@ -9034,7 +9034,7 @@ patient_id,vital_status
 33033,Dead
 33034,Dead
 33035,Dead
-33036,Alive
+33036,Dead
 33037,Dead
 33038,Dead
 33039,Dead
@@ -9056,7 +9056,7 @@ patient_id,vital_status
 33055,Dead
 33056,Dead
 33057,Dead
-33058,Alive
+33058,Dead
 33059,Dead
 33060,Alive
 33061,Dead
@@ -9083,7 +9083,7 @@ patient_id,vital_status
 33082,Dead
 33083,Dead
 33084,Dead
-33085,Alive
+33085,Dead
 33086,Dead
 33087,Dead
 33088,Dead
@@ -9114,7 +9114,7 @@ patient_id,vital_status
 33113,Dead
 33114,Dead
 33115,Dead
-33116,Alive
+33116,Dead
 33117,Dead
 33118,Dead
 33119,Dead
@@ -9145,7 +9145,7 @@ patient_id,vital_status
 33144,Dead
 33145,Dead
 33146,Dead
-33147,Dead
+33147,Alive
 33148,Dead
 33149,Dead
 33150,Dead
@@ -9232,7 +9232,7 @@ patient_id,vital_status
 33231,Dead
 33232,Dead
 33233,Dead
-33234,Dead
+33234,Alive
 33235,Dead
 33236,Dead
 33237,Alive
@@ -9307,7 +9307,7 @@ patient_id,vital_status
 33306,Dead
 33307,Dead
 33308,Alive
-33309,Dead
+33309,Alive
 33310,Dead
 33311,Alive
 33312,Dead
@@ -9372,12 +9372,12 @@ patient_id,vital_status
 33371,Dead
 33372,Alive
 33373,Dead
-33374,Dead
+33374,Alive
 33375,Dead
 33376,Dead
 33377,Dead
 33378,Alive
-33379,Alive
+33379,Dead
 33380,Dead
 33381,Alive
 33382,Alive
@@ -9437,9 +9437,9 @@ patient_id,vital_status
 33436,Dead
 33437,Dead
 33438,Dead
-33439,Dead
+33439,Alive
 33440,Dead
-33441,Alive
+33441,Dead
 33442,Dead
 33443,Dead
 33444,Dead
@@ -9474,7 +9474,7 @@ patient_id,vital_status
 33473,Dead
 33474,Dead
 33475,Dead
-33476,Alive
+33476,Dead
 33477,Dead
 33478,Dead
 33479,Dead
@@ -9515,7 +9515,7 @@ patient_id,vital_status
 33514,Dead
 33515,Alive
 33516,Dead
-33517,Dead
+33517,Alive
 33518,Dead
 33519,Dead
 33520,Dead
@@ -9593,7 +9593,7 @@ patient_id,vital_status
 33592,Dead
 33593,Dead
 33594,Alive
-33595,Alive
+33595,Dead
 33596,Dead
 33597,Alive
 33598,Dead
@@ -9643,7 +9643,7 @@ patient_id,vital_status
 33642,Dead
 33643,Dead
 33644,Dead
-33645,Dead
+33645,Alive
 33646,Dead
 33647,Dead
 33648,Dead
@@ -9660,7 +9660,7 @@ patient_id,vital_status
 33659,Dead
 33660,Dead
 33661,Dead
-33662,Dead
+33662,Alive
 33663,Alive
 33664,Dead
 33665,Dead
@@ -9694,7 +9694,7 @@ patient_id,vital_status
 33693,Dead
 33694,Dead
 33695,Dead
-33696,Alive
+33696,Dead
 33697,Dead
 33698,Alive
 33699,Dead
@@ -9706,7 +9706,7 @@ patient_id,vital_status
 33705,Dead
 33706,Alive
 33707,Dead
-33708,Alive
+33708,Dead
 33709,Dead
 33710,Dead
 33711,Alive
@@ -9733,7 +9733,7 @@ patient_id,vital_status
 33732,Dead
 33733,Dead
 33734,Dead
-33735,Alive
+33735,Dead
 33736,Dead
 33737,Dead
 33738,Dead
@@ -9784,10 +9784,10 @@ patient_id,vital_status
 33783,Alive
 33784,Dead
 33785,Dead
-33786,Dead
+33786,Alive
 33787,Dead
 33788,Dead
-33789,Dead
+33789,Alive
 33790,Dead
 33791,Alive
 33792,Dead
@@ -9864,7 +9864,7 @@ patient_id,vital_status
 33863,Dead
 33864,Dead
 33865,Dead
-33866,Dead
+33866,Alive
 33867,Dead
 33868,Dead
 33869,Dead
@@ -9974,7 +9974,7 @@ patient_id,vital_status
 33973,Dead
 33974,Alive
 33975,Dead
-33976,Dead
+33976,Alive
 33977,Dead
 33978,Dead
 33979,Dead
@@ -10062,7 +10062,7 @@ patient_id,vital_status
 34061,Alive
 34062,Dead
 34063,Dead
-34064,Alive
+34064,Dead
 34065,Dead
 34066,Dead
 34067,Dead
@@ -10099,7 +10099,7 @@ patient_id,vital_status
 34098,Dead
 34099,Dead
 34100,Alive
-34101,Dead
+34101,Alive
 34102,Dead
 34103,Dead
 34104,Dead
@@ -10172,13 +10172,13 @@ patient_id,vital_status
 34171,Dead
 34172,Dead
 34173,Dead
-34174,Alive
+34174,Dead
 34175,Dead
-34176,Dead
+34176,Alive
 34177,Dead
 34178,Dead
 34179,Dead
-34180,Alive
+34180,Dead
 34181,Dead
 34182,Dead
 34183,Dead
@@ -10240,7 +10240,7 @@ patient_id,vital_status
 34239,Dead
 34240,Alive
 34241,Alive
-34242,Dead
+34242,Alive
 34243,Dead
 34244,Dead
 34245,Dead
@@ -10291,7 +10291,7 @@ patient_id,vital_status
 34290,Alive
 34291,Dead
 34292,Alive
-34293,Alive
+34293,Dead
 34294,Alive
 34295,Dead
 34296,Dead
@@ -10332,7 +10332,7 @@ patient_id,vital_status
 34331,Dead
 34332,Alive
 34333,Dead
-34334,Dead
+34334,Alive
 34335,Dead
 34336,Dead
 34337,Dead
@@ -10443,7 +10443,7 @@ patient_id,vital_status
 34442,Dead
 34443,Alive
 34444,Dead
-34445,Alive
+34445,Dead
 34446,Dead
 34447,Alive
 34448,Dead
@@ -10609,7 +10609,7 @@ patient_id,vital_status
 34608,Alive
 34609,Dead
 34610,Dead
-34611,Alive
+34611,Dead
 34612,Dead
 34613,Dead
 34614,Dead
@@ -10672,7 +10672,7 @@ patient_id,vital_status
 34671,Dead
 34672,Dead
 34673,Dead
-34674,Alive
+34674,Dead
 34675,Dead
 34676,Dead
 34677,Alive
@@ -10706,7 +10706,7 @@ patient_id,vital_status
 34705,Alive
 34706,Dead
 34707,Dead
-34708,Alive
+34708,Dead
 34709,Dead
 34710,Dead
 34711,Dead
@@ -10772,7 +10772,7 @@ patient_id,vital_status
 34771,Dead
 34772,Dead
 34773,Dead
-34774,Alive
+34774,Dead
 34775,Dead
 34776,Dead
 34777,Dead
@@ -10803,7 +10803,7 @@ patient_id,vital_status
 34802,Dead
 34803,Dead
 34804,Dead
-34805,Dead
+34805,Alive
 34806,Dead
 34807,Dead
 34808,Dead
@@ -10926,7 +10926,7 @@ patient_id,vital_status
 34925,Dead
 34926,Dead
 34927,Dead
-34928,Dead
+34928,Alive
 34929,Dead
 34930,Dead
 34931,Dead
@@ -10944,7 +10944,7 @@ patient_id,vital_status
 34943,Dead
 34944,Dead
 34945,Dead
-34946,Alive
+34946,Dead
 34947,Dead
 34948,Dead
 34949,Dead
@@ -11048,7 +11048,7 @@ patient_id,vital_status
 35047,Dead
 35048,Dead
 35049,Dead
-35050,Dead
+35050,Alive
 35051,Dead
 35052,Alive
 35053,Dead
@@ -11075,7 +11075,7 @@ patient_id,vital_status
 35074,Dead
 35075,Dead
 35076,Dead
-35077,Dead
+35077,Alive
 35078,Dead
 35079,Dead
 35080,Dead
@@ -11153,7 +11153,7 @@ patient_id,vital_status
 35152,Dead
 35153,Dead
 35154,Dead
-35155,Alive
+35155,Dead
 35156,Dead
 35157,Dead
 35158,Dead
@@ -11225,7 +11225,7 @@ patient_id,vital_status
 35224,Dead
 35225,Dead
 35226,Dead
-35227,Alive
+35227,Dead
 35228,Dead
 35229,Dead
 35230,Dead
@@ -11241,10 +11241,10 @@ patient_id,vital_status
 35240,Dead
 35241,Dead
 35242,Dead
-35243,Dead
+35243,Alive
 35244,Dead
 35245,Dead
-35246,Dead
+35246,Alive
 35247,Dead
 35248,Dead
 35249,Alive
@@ -11300,7 +11300,7 @@ patient_id,vital_status
 35299,Dead
 35300,Dead
 35301,Dead
-35302,Alive
+35302,Dead
 35303,Dead
 35304,Dead
 35305,Dead
@@ -11385,7 +11385,7 @@ patient_id,vital_status
 35384,Dead
 35385,Dead
 35386,Dead
-35387,Dead
+35387,Alive
 35388,Dead
 35389,Dead
 35390,Dead
@@ -11407,8 +11407,8 @@ patient_id,vital_status
 35406,Dead
 35407,Dead
 35408,Dead
-35409,Alive
-35410,Dead
+35409,Dead
+35410,Alive
 35411,Dead
 35412,Dead
 35413,Alive
@@ -11669,7 +11669,7 @@ patient_id,vital_status
 35668,Dead
 35669,Alive
 35670,Dead
-35671,Alive
+35671,Dead
 35672,Dead
 35673,Dead
 35674,Dead
@@ -11689,10 +11689,10 @@ patient_id,vital_status
 35688,Dead
 35689,Dead
 35690,Alive
-35691,Alive
+35691,Dead
 35692,Dead
 35693,Dead
-35694,Alive
+35694,Dead
 35695,Dead
 35696,Dead
 35697,Dead
@@ -11704,7 +11704,7 @@ patient_id,vital_status
 35703,Alive
 35704,Dead
 35705,Alive
-35706,Alive
+35706,Dead
 35707,Dead
 35708,Dead
 35709,Dead
@@ -11718,7 +11718,7 @@ patient_id,vital_status
 35717,Dead
 35718,Dead
 35719,Dead
-35720,Dead
+35720,Alive
 35721,Dead
 35722,Dead
 35723,Dead
@@ -11851,7 +11851,7 @@ patient_id,vital_status
 35850,Dead
 35851,Dead
 35852,Alive
-35853,Dead
+35853,Alive
 35854,Dead
 35855,Alive
 35856,Dead
@@ -11914,8 +11914,8 @@ patient_id,vital_status
 35913,Dead
 35914,Dead
 35915,Dead
-35916,Alive
-35917,Dead
+35916,Dead
+35917,Alive
 35918,Dead
 35919,Dead
 35920,Dead
@@ -11956,17 +11956,17 @@ patient_id,vital_status
 35955,Dead
 35956,Dead
 35957,Dead
-35958,Alive
+35958,Dead
 35959,Alive
 35960,Dead
 35961,Alive
 35962,Dead
-35963,Dead
+35963,Alive
 35964,Dead
 35965,Dead
 35966,Dead
 35967,Dead
-35968,Alive
+35968,Dead
 35969,Dead
 35970,Dead
 35971,Dead
@@ -11986,7 +11986,7 @@ patient_id,vital_status
 35985,Alive
 35986,Dead
 35987,Dead
-35988,Alive
+35988,Dead
 35989,Alive
 35990,Dead
 35991,Dead
@@ -12012,7 +12012,7 @@ patient_id,vital_status
 36011,Dead
 36012,Dead
 36013,Dead
-36014,Dead
+36014,Alive
 36015,Alive
 36016,Alive
 36017,Alive
@@ -12047,7 +12047,7 @@ patient_id,vital_status
 36046,Dead
 36047,Dead
 36048,Alive
-36049,Alive
+36049,Dead
 36050,Dead
 36051,Alive
 36052,Dead
@@ -12163,7 +12163,7 @@ patient_id,vital_status
 36162,Dead
 36163,Dead
 36164,Alive
-36165,Dead
+36165,Alive
 36166,Dead
 36167,Dead
 36168,Dead
@@ -12175,7 +12175,7 @@ patient_id,vital_status
 36174,Dead
 36175,Dead
 36176,Dead
-36177,Alive
+36177,Dead
 36178,Dead
 36179,Dead
 36180,Dead
@@ -12214,7 +12214,7 @@ patient_id,vital_status
 36213,Dead
 36214,Dead
 36215,Dead
-36216,Dead
+36216,Alive
 36217,Dead
 36218,Dead
 36219,Dead
@@ -12293,7 +12293,7 @@ patient_id,vital_status
 36292,Dead
 36293,Dead
 36294,Dead
-36295,Dead
+36295,Alive
 36296,Alive
 36297,Dead
 36298,Dead
@@ -12392,7 +12392,7 @@ patient_id,vital_status
 36391,Dead
 36392,Alive
 36393,Dead
-36394,Alive
+36394,Dead
 36395,Dead
 36396,Alive
 36397,Dead
@@ -12473,7 +12473,7 @@ patient_id,vital_status
 36472,Dead
 36473,Dead
 36474,Dead
-36475,Dead
+36475,Alive
 36476,Dead
 36477,Dead
 36478,Dead
@@ -12594,7 +12594,7 @@ patient_id,vital_status
 36593,Alive
 36594,Dead
 36595,Dead
-36596,Dead
+36596,Alive
 36597,Dead
 36598,Alive
 36599,Alive
@@ -12619,7 +12619,7 @@ patient_id,vital_status
 36618,Dead
 36619,Dead
 36620,Dead
-36621,Alive
+36621,Dead
 36622,Dead
 36623,Dead
 36624,Dead
@@ -12741,8 +12741,8 @@ patient_id,vital_status
 36740,Dead
 36741,Dead
 36742,Dead
-36743,Dead
-36744,Dead
+36743,Alive
+36744,Alive
 36745,Dead
 36746,Dead
 36747,Dead
@@ -12758,12 +12758,12 @@ patient_id,vital_status
 36757,Dead
 36758,Dead
 36759,Dead
-36760,Alive
+36760,Dead
 36761,Dead
 36762,Dead
 36763,Dead
 36764,Dead
-36765,Alive
+36765,Dead
 36766,Dead
 36767,Dead
 36768,Dead
@@ -12826,7 +12826,7 @@ patient_id,vital_status
 36825,Dead
 36826,Dead
 36827,Dead
-36828,Dead
+36828,Alive
 36829,Dead
 36830,Dead
 36831,Dead
@@ -12879,7 +12879,7 @@ patient_id,vital_status
 36878,Dead
 36879,Dead
 36880,Dead
-36881,Dead
+36881,Alive
 36882,Dead
 36883,Dead
 36884,Dead
@@ -13017,7 +13017,7 @@ patient_id,vital_status
 37016,Alive
 37017,Dead
 37018,Dead
-37019,Dead
+37019,Alive
 37020,Alive
 37021,Dead
 37022,Dead
@@ -13053,7 +13053,7 @@ patient_id,vital_status
 37052,Dead
 37053,Dead
 37054,Dead
-37055,Dead
+37055,Alive
 37056,Dead
 37057,Dead
 37058,Dead
@@ -13069,7 +13069,7 @@ patient_id,vital_status
 37068,Dead
 37069,Dead
 37070,Alive
-37071,Dead
+37071,Alive
 37072,Dead
 37073,Alive
 37074,Dead
@@ -13094,7 +13094,7 @@ patient_id,vital_status
 37093,Alive
 37094,Alive
 37095,Dead
-37096,Dead
+37096,Alive
 37097,Dead
 37098,Dead
 37099,Dead
@@ -13130,12 +13130,12 @@ patient_id,vital_status
 37129,Dead
 37130,Dead
 37131,Dead
-37132,Dead
+37132,Alive
 37133,Dead
 37134,Dead
 37135,Alive
 37136,Dead
-37137,Dead
+37137,Alive
 37138,Alive
 37139,Dead
 37140,Dead
@@ -13150,7 +13150,7 @@ patient_id,vital_status
 37149,Alive
 37150,Dead
 37151,Dead
-37152,Alive
+37152,Dead
 37153,Dead
 37154,Dead
 37155,Dead
@@ -13190,7 +13190,7 @@ patient_id,vital_status
 37189,Dead
 37190,Dead
 37191,Dead
-37192,Dead
+37192,Alive
 37193,Dead
 37194,Dead
 37195,Dead
@@ -13201,7 +13201,7 @@ patient_id,vital_status
 37200,Alive
 37201,Dead
 37202,Alive
-37203,Alive
+37203,Dead
 37204,Alive
 37205,Dead
 37206,Dead
@@ -13325,7 +13325,7 @@ patient_id,vital_status
 37324,Dead
 37325,Dead
 37326,Dead
-37327,Dead
+37327,Alive
 37328,Dead
 37329,Dead
 37330,Dead
@@ -13361,7 +13361,7 @@ patient_id,vital_status
 37360,Dead
 37361,Dead
 37362,Dead
-37363,Dead
+37363,Alive
 37364,Dead
 37365,Alive
 37366,Dead
@@ -13381,12 +13381,12 @@ patient_id,vital_status
 37380,Dead
 37381,Dead
 37382,Dead
-37383,Alive
+37383,Dead
 37384,Dead
 37385,Dead
 37386,Alive
 37387,Dead
-37388,Dead
+37388,Alive
 37389,Dead
 37390,Dead
 37391,Dead
@@ -13408,7 +13408,7 @@ patient_id,vital_status
 37407,Dead
 37408,Dead
 37409,Alive
-37410,Alive
+37410,Dead
 37411,Dead
 37412,Dead
 37413,Dead
@@ -13506,7 +13506,7 @@ patient_id,vital_status
 37505,Alive
 37506,Dead
 37507,Alive
-37508,Dead
+37508,Alive
 37509,Dead
 37510,Dead
 37511,Dead
@@ -13600,7 +13600,7 @@ patient_id,vital_status
 37599,Alive
 37600,Dead
 37601,Dead
-37602,Dead
+37602,Alive
 37603,Dead
 37604,Dead
 37605,Alive
@@ -13612,7 +13612,7 @@ patient_id,vital_status
 37611,Dead
 37612,Dead
 37613,Dead
-37614,Alive
+37614,Dead
 37615,Dead
 37616,Dead
 37617,Dead
@@ -13635,7 +13635,7 @@ patient_id,vital_status
 37634,Alive
 37635,Dead
 37636,Dead
-37637,Alive
+37637,Dead
 37638,Dead
 37639,Dead
 37640,Dead
@@ -13645,7 +13645,7 @@ patient_id,vital_status
 37644,Dead
 37645,Dead
 37646,Dead
-37647,Alive
+37647,Dead
 37648,Dead
 37649,Dead
 37650,Dead
@@ -13694,7 +13694,7 @@ patient_id,vital_status
 37693,Dead
 37694,Dead
 37695,Dead
-37696,Dead
+37696,Alive
 37697,Dead
 37698,Dead
 37699,Dead
@@ -13718,7 +13718,7 @@ patient_id,vital_status
 37717,Dead
 37718,Dead
 37719,Dead
-37720,Alive
+37720,Dead
 37721,Dead
 37722,Dead
 37723,Dead
@@ -13779,7 +13779,7 @@ patient_id,vital_status
 37778,Dead
 37779,Dead
 37780,Dead
-37781,Alive
+37781,Dead
 37782,Dead
 37783,Dead
 37784,Dead
@@ -13816,7 +13816,7 @@ patient_id,vital_status
 37815,Alive
 37816,Alive
 37817,Dead
-37818,Dead
+37818,Alive
 37819,Dead
 37820,Dead
 37821,Dead
@@ -13880,7 +13880,7 @@ patient_id,vital_status
 37879,Dead
 37880,Alive
 37881,Dead
-37882,Alive
+37882,Dead
 37883,Alive
 37884,Dead
 37885,Dead
@@ -14145,7 +14145,7 @@ patient_id,vital_status
 38144,Dead
 38145,Alive
 38146,Dead
-38147,Dead
+38147,Alive
 38148,Dead
 38149,Alive
 38150,Alive
@@ -14222,7 +14222,7 @@ patient_id,vital_status
 38221,Alive
 38222,Dead
 38223,Dead
-38224,Dead
+38224,Alive
 38225,Dead
 38226,Alive
 38227,Dead
@@ -14294,7 +14294,7 @@ patient_id,vital_status
 38293,Dead
 38294,Dead
 38295,Dead
-38296,Alive
+38296,Dead
 38297,Dead
 38298,Dead
 38299,Dead
@@ -14341,7 +14341,7 @@ patient_id,vital_status
 38340,Dead
 38341,Dead
 38342,Dead
-38343,Alive
+38343,Dead
 38344,Dead
 38345,Dead
 38346,Alive
@@ -14391,7 +14391,7 @@ patient_id,vital_status
 38390,Dead
 38391,Dead
 38392,Alive
-38393,Alive
+38393,Dead
 38394,Dead
 38395,Dead
 38396,Dead
@@ -14526,7 +14526,7 @@ patient_id,vital_status
 38525,Dead
 38526,Dead
 38527,Dead
-38528,Dead
+38528,Alive
 38529,Alive
 38530,Dead
 38531,Dead
@@ -14602,7 +14602,7 @@ patient_id,vital_status
 38601,Dead
 38602,Dead
 38603,Dead
-38604,Dead
+38604,Alive
 38605,Dead
 38606,Dead
 38607,Dead
@@ -14673,11 +14673,11 @@ patient_id,vital_status
 38672,Dead
 38673,Dead
 38674,Dead
-38675,Dead
+38675,Alive
 38676,Dead
 38677,Dead
 38678,Alive
-38679,Dead
+38679,Alive
 38680,Dead
 38681,Dead
 38682,Dead
@@ -14709,7 +14709,7 @@ patient_id,vital_status
 38708,Dead
 38709,Alive
 38710,Dead
-38711,Alive
+38711,Dead
 38712,Dead
 38713,Dead
 38714,Dead
@@ -14727,11 +14727,11 @@ patient_id,vital_status
 38726,Dead
 38727,Dead
 38728,Dead
-38729,Alive
+38729,Dead
 38730,Alive
 38731,Dead
 38732,Dead
-38733,Dead
+38733,Alive
 38734,Dead
 38735,Alive
 38736,Dead
@@ -14828,7 +14828,7 @@ patient_id,vital_status
 38827,Alive
 38828,Dead
 38829,Dead
-38830,Dead
+38830,Alive
 38831,Dead
 38832,Dead
 38833,Dead
@@ -14840,9 +14840,9 @@ patient_id,vital_status
 38839,Dead
 38840,Dead
 38841,Dead
-38842,Dead
+38842,Alive
 38843,Dead
-38844,Dead
+38844,Alive
 38845,Dead
 38846,Dead
 38847,Dead
@@ -14900,7 +14900,7 @@ patient_id,vital_status
 38899,Dead
 38900,Dead
 38901,Dead
-38902,Alive
+38902,Dead
 38903,Dead
 38904,Alive
 38905,Dead
@@ -14939,7 +14939,7 @@ patient_id,vital_status
 38938,Dead
 38939,Dead
 38940,Dead
-38941,Alive
+38941,Dead
 38942,Dead
 38943,Dead
 38944,Dead
@@ -15030,7 +15030,7 @@ patient_id,vital_status
 39029,Dead
 39030,Dead
 39031,Dead
-39032,Alive
+39032,Dead
 39033,Alive
 39034,Dead
 39035,Dead
@@ -15057,8 +15057,8 @@ patient_id,vital_status
 39056,Dead
 39057,Dead
 39058,Dead
-39059,Dead
-39060,Alive
+39059,Alive
+39060,Dead
 39061,Dead
 39062,Dead
 39063,Dead
@@ -15195,7 +15195,7 @@ patient_id,vital_status
 39194,Dead
 39195,Alive
 39196,Dead
-39197,Dead
+39197,Alive
 39198,Alive
 39199,Dead
 39200,Dead
@@ -15242,7 +15242,7 @@ patient_id,vital_status
 39241,Dead
 39242,Dead
 39243,Dead
-39244,Alive
+39244,Dead
 39245,Dead
 39246,Dead
 39247,Dead
@@ -15345,7 +15345,7 @@ patient_id,vital_status
 39344,Alive
 39345,Dead
 39346,Dead
-39347,Alive
+39347,Dead
 39348,Dead
 39349,Dead
 39350,Dead
@@ -15358,7 +15358,7 @@ patient_id,vital_status
 39357,Alive
 39358,Alive
 39359,Dead
-39360,Alive
+39360,Dead
 39361,Dead
 39362,Dead
 39363,Dead
@@ -15446,7 +15446,7 @@ patient_id,vital_status
 39445,Dead
 39446,Dead
 39447,Dead
-39448,Alive
+39448,Dead
 39449,Dead
 39450,Dead
 39451,Dead
@@ -15493,17 +15493,17 @@ patient_id,vital_status
 39492,Dead
 39493,Dead
 39494,Dead
-39495,Dead
+39495,Alive
 39496,Dead
 39497,Alive
 39498,Dead
 39499,Dead
 39500,Dead
 39501,Dead
-39502,Dead
+39502,Alive
 39503,Alive
 39504,Dead
-39505,Dead
+39505,Alive
 39506,Dead
 39507,Dead
 39508,Dead
@@ -15623,7 +15623,7 @@ patient_id,vital_status
 39622,Alive
 39623,Dead
 39624,Dead
-39625,Alive
+39625,Dead
 39626,Dead
 39627,Dead
 39628,Dead
@@ -15726,7 +15726,7 @@ patient_id,vital_status
 39725,Dead
 39726,Dead
 39727,Dead
-39728,Alive
+39728,Dead
 39729,Dead
 39730,Dead
 39731,Alive
@@ -15736,7 +15736,7 @@ patient_id,vital_status
 39735,Dead
 39736,Dead
 39737,Dead
-39738,Dead
+39738,Alive
 39739,Dead
 39740,Dead
 39741,Dead
@@ -15765,7 +15765,7 @@ patient_id,vital_status
 39764,Dead
 39765,Alive
 39766,Dead
-39767,Alive
+39767,Dead
 39768,Dead
 39769,Dead
 39770,Dead
@@ -15840,10 +15840,10 @@ patient_id,vital_status
 39839,Dead
 39840,Dead
 39841,Dead
-39842,Alive
+39842,Dead
 39843,Dead
 39844,Dead
-39845,Alive
+39845,Dead
 39846,Dead
 39847,Dead
 39848,Dead
@@ -15906,7 +15906,7 @@ patient_id,vital_status
 39905,Dead
 39906,Dead
 39907,Dead
-39908,Dead
+39908,Alive
 39909,Dead
 39910,Alive
 39911,Alive
@@ -15974,7 +15974,7 @@ patient_id,vital_status
 39973,Dead
 39974,Dead
 39975,Alive
-39976,Alive
+39976,Dead
 39977,Alive
 39978,Dead
 39979,Dead
@@ -16044,7 +16044,7 @@ patient_id,vital_status
 40043,Dead
 40044,Dead
 40045,Alive
-40046,Dead
+40046,Alive
 40047,Alive
 40048,Dead
 40049,Dead
@@ -16067,7 +16067,7 @@ patient_id,vital_status
 40066,Dead
 40067,Dead
 40068,Alive
-40069,Dead
+40069,Alive
 40070,Dead
 40071,Alive
 40072,Dead
@@ -16081,12 +16081,12 @@ patient_id,vital_status
 40080,Dead
 40081,Dead
 40082,Dead
-40083,Dead
+40083,Alive
 40084,Dead
 40085,Dead
 40086,Dead
 40087,Dead
-40088,Alive
+40088,Dead
 40089,Dead
 40090,Alive
 40091,Dead
@@ -16112,7 +16112,7 @@ patient_id,vital_status
 40111,Dead
 40112,Dead
 40113,Dead
-40114,Dead
+40114,Alive
 40115,Dead
 40116,Dead
 40117,Dead
@@ -16533,7 +16533,7 @@ patient_id,vital_status
 40532,Dead
 40533,Dead
 40534,Dead
-40535,Dead
+40535,Alive
 40536,Dead
 40537,Dead
 40538,Dead
@@ -16555,7 +16555,7 @@ patient_id,vital_status
 40554,Dead
 40555,Dead
 40556,Dead
-40557,Alive
+40557,Dead
 40558,Dead
 40559,Alive
 40560,Alive
@@ -16570,9 +16570,9 @@ patient_id,vital_status
 40569,Dead
 40570,Dead
 40571,Dead
-40572,Alive
+40572,Dead
 40573,Dead
-40574,Alive
+40574,Dead
 40575,Alive
 40576,Alive
 40577,Dead
@@ -16588,7 +16588,7 @@ patient_id,vital_status
 40587,Dead
 40588,Dead
 40589,Dead
-40590,Dead
+40590,Alive
 40591,Dead
 40592,Dead
 40593,Dead
@@ -16603,7 +16603,7 @@ patient_id,vital_status
 40602,Dead
 40603,Dead
 40604,Dead
-40605,Alive
+40605,Dead
 40606,Dead
 40607,Dead
 40608,Dead
@@ -16645,7 +16645,7 @@ patient_id,vital_status
 40644,Dead
 40645,Dead
 40646,Dead
-40647,Alive
+40647,Dead
 40648,Alive
 40649,Dead
 40650,Dead
@@ -16786,7 +16786,7 @@ patient_id,vital_status
 40785,Dead
 40786,Dead
 40787,Dead
-40788,Alive
+40788,Dead
 40789,Dead
 40790,Dead
 40791,Dead
@@ -16797,7 +16797,7 @@ patient_id,vital_status
 40796,Dead
 40797,Alive
 40798,Dead
-40799,Alive
+40799,Dead
 40800,Dead
 40801,Dead
 40802,Dead
@@ -16899,7 +16899,7 @@ patient_id,vital_status
 40898,Alive
 40899,Dead
 40900,Dead
-40901,Alive
+40901,Dead
 40902,Dead
 40903,Dead
 40904,Dead
@@ -16929,7 +16929,7 @@ patient_id,vital_status
 40928,Dead
 40929,Dead
 40930,Dead
-40931,Alive
+40931,Dead
 40932,Alive
 40933,Dead
 40934,Dead
@@ -17044,7 +17044,7 @@ patient_id,vital_status
 41043,Dead
 41044,Dead
 41045,Dead
-41046,Alive
+41046,Dead
 41047,Dead
 41048,Dead
 41049,Dead
@@ -17052,12 +17052,12 @@ patient_id,vital_status
 41051,Alive
 41052,Dead
 41053,Dead
-41054,Dead
+41054,Alive
 41055,Dead
 41056,Dead
 41057,Dead
 41058,Dead
-41059,Alive
+41059,Dead
 41060,Dead
 41061,Alive
 41062,Dead
@@ -17206,7 +17206,7 @@ patient_id,vital_status
 41205,Dead
 41206,Dead
 41207,Dead
-41208,Dead
+41208,Alive
 41209,Dead
 41210,Alive
 41211,Dead
@@ -17265,7 +17265,7 @@ patient_id,vital_status
 41264,Dead
 41265,Dead
 41266,Dead
-41267,Dead
+41267,Alive
 41268,Alive
 41269,Dead
 41270,Dead
@@ -17278,7 +17278,7 @@ patient_id,vital_status
 41277,Dead
 41278,Dead
 41279,Dead
-41280,Alive
+41280,Dead
 41281,Dead
 41282,Dead
 41283,Dead
@@ -17322,7 +17322,7 @@ patient_id,vital_status
 41321,Dead
 41322,Dead
 41323,Alive
-41324,Dead
+41324,Alive
 41325,Dead
 41326,Alive
 41327,Alive
@@ -17348,7 +17348,7 @@ patient_id,vital_status
 41347,Dead
 41348,Dead
 41349,Dead
-41350,Alive
+41350,Dead
 41351,Alive
 41352,Dead
 41353,Dead
@@ -17437,7 +17437,7 @@ patient_id,vital_status
 41436,Dead
 41437,Dead
 41438,Dead
-41439,Alive
+41439,Dead
 41440,Dead
 41441,Dead
 41442,Alive
@@ -17447,7 +17447,7 @@ patient_id,vital_status
 41446,Alive
 41447,Alive
 41448,Dead
-41449,Alive
+41449,Dead
 41450,Dead
 41451,Alive
 41452,Alive
@@ -17461,7 +17461,7 @@ patient_id,vital_status
 41460,Alive
 41461,Dead
 41462,Dead
-41463,Alive
+41463,Dead
 41464,Dead
 41465,Dead
 41466,Dead
@@ -17546,7 +17546,7 @@ patient_id,vital_status
 41545,Dead
 41546,Dead
 41547,Dead
-41548,Dead
+41548,Alive
 41549,Alive
 41550,Dead
 41551,Alive
@@ -17601,7 +17601,7 @@ patient_id,vital_status
 41600,Dead
 41601,Dead
 41602,Dead
-41603,Dead
+41603,Alive
 41604,Dead
 41605,Dead
 41606,Dead
@@ -17644,7 +17644,7 @@ patient_id,vital_status
 41643,Dead
 41644,Dead
 41645,Dead
-41646,Alive
+41646,Dead
 41647,Dead
 41648,Dead
 41649,Alive
@@ -17706,7 +17706,7 @@ patient_id,vital_status
 41705,Dead
 41706,Dead
 41707,Alive
-41708,Dead
+41708,Alive
 41709,Dead
 41710,Alive
 41711,Alive
@@ -17770,7 +17770,7 @@ patient_id,vital_status
 41769,Dead
 41770,Dead
 41771,Dead
-41772,Alive
+41772,Dead
 41773,Dead
 41774,Dead
 41775,Dead
@@ -17784,7 +17784,7 @@ patient_id,vital_status
 41783,Dead
 41784,Dead
 41785,Dead
-41786,Alive
+41786,Dead
 41787,Dead
 41788,Dead
 41789,Dead
@@ -17907,7 +17907,7 @@ patient_id,vital_status
 41906,Dead
 41907,Alive
 41908,Alive
-41909,Alive
+41909,Dead
 41910,Dead
 41911,Dead
 41912,Dead
@@ -18034,7 +18034,7 @@ patient_id,vital_status
 42033,Dead
 42034,Dead
 42035,Dead
-42036,Alive
+42036,Dead
 42037,Dead
 42038,Dead
 42039,Dead
@@ -18046,7 +18046,7 @@ patient_id,vital_status
 42045,Dead
 42046,Dead
 42047,Dead
-42048,Alive
+42048,Dead
 42049,Dead
 42050,Alive
 42051,Dead
@@ -18061,7 +18061,7 @@ patient_id,vital_status
 42060,Alive
 42061,Dead
 42062,Alive
-42063,Dead
+42063,Alive
 42064,Dead
 42065,Alive
 42066,Alive
@@ -18072,8 +18072,8 @@ patient_id,vital_status
 42071,Dead
 42072,Dead
 42073,Dead
-42074,Alive
-42075,Alive
+42074,Dead
+42075,Dead
 42076,Dead
 42077,Dead
 42078,Alive
@@ -18090,7 +18090,7 @@ patient_id,vital_status
 42089,Alive
 42090,Dead
 42091,Alive
-42092,Alive
+42092,Dead
 42093,Dead
 42094,Alive
 42095,Dead
@@ -18110,7 +18110,7 @@ patient_id,vital_status
 42109,Alive
 42110,Dead
 42111,Dead
-42112,Dead
+42112,Alive
 42113,Dead
 42114,Dead
 42115,Dead
@@ -18146,7 +18146,7 @@ patient_id,vital_status
 42145,Dead
 42146,Dead
 42147,Dead
-42148,Dead
+42148,Alive
 42149,Dead
 42150,Dead
 42151,Dead
@@ -18204,7 +18204,7 @@ patient_id,vital_status
 42203,Dead
 42204,Dead
 42205,Dead
-42206,Alive
+42206,Dead
 42207,Dead
 42208,Dead
 42209,Dead
@@ -18263,7 +18263,7 @@ patient_id,vital_status
 42262,Dead
 42263,Dead
 42264,Dead
-42265,Dead
+42265,Alive
 42266,Dead
 42267,Dead
 42268,Dead
@@ -18273,7 +18273,7 @@ patient_id,vital_status
 42272,Dead
 42273,Dead
 42274,Dead
-42275,Dead
+42275,Alive
 42276,Dead
 42277,Alive
 42278,Dead
@@ -18360,7 +18360,7 @@ patient_id,vital_status
 42359,Dead
 42360,Dead
 42361,Dead
-42362,Alive
+42362,Dead
 42363,Alive
 42364,Dead
 42365,Dead
@@ -18402,7 +18402,7 @@ patient_id,vital_status
 42401,Dead
 42402,Alive
 42403,Alive
-42404,Alive
+42404,Dead
 42405,Alive
 42406,Dead
 42407,Dead
@@ -18413,13 +18413,13 @@ patient_id,vital_status
 42412,Dead
 42413,Dead
 42414,Dead
-42415,Dead
+42415,Alive
 42416,Dead
 42417,Dead
 42418,Dead
 42419,Dead
 42420,Alive
-42421,Alive
+42421,Dead
 42422,Alive
 42423,Dead
 42424,Dead
@@ -18485,7 +18485,7 @@ patient_id,vital_status
 42484,Alive
 42485,Dead
 42486,Dead
-42487,Dead
+42487,Alive
 42488,Dead
 42489,Dead
 42490,Dead
@@ -18532,7 +18532,7 @@ patient_id,vital_status
 42531,Dead
 42532,Dead
 42533,Dead
-42534,Alive
+42534,Dead
 42535,Dead
 42536,Dead
 42537,Dead
@@ -18612,7 +18612,7 @@ patient_id,vital_status
 42611,Dead
 42612,Dead
 42613,Dead
-42614,Dead
+42614,Alive
 42615,Dead
 42616,Dead
 42617,Dead
@@ -18737,10 +18737,10 @@ patient_id,vital_status
 42736,Dead
 42737,Dead
 42738,Dead
-42739,Alive
+42739,Dead
 42740,Alive
 42741,Dead
-42742,Dead
+42742,Alive
 42743,Dead
 42744,Dead
 42745,Dead
@@ -18792,7 +18792,7 @@ patient_id,vital_status
 42791,Alive
 42792,Alive
 42793,Dead
-42794,Alive
+42794,Dead
 42795,Dead
 42796,Dead
 42797,Dead
@@ -18860,7 +18860,7 @@ patient_id,vital_status
 42859,Dead
 42860,Dead
 42861,Dead
-42862,Alive
+42862,Dead
 42863,Dead
 42864,Dead
 42865,Dead
@@ -18883,7 +18883,7 @@ patient_id,vital_status
 42882,Dead
 42883,Alive
 42884,Dead
-42885,Dead
+42885,Alive
 42886,Dead
 42887,Dead
 42888,Dead
@@ -18897,7 +18897,7 @@ patient_id,vital_status
 42896,Dead
 42897,Dead
 42898,Dead
-42899,Alive
+42899,Dead
 42900,Dead
 42901,Alive
 42902,Dead
@@ -19026,7 +19026,7 @@ patient_id,vital_status
 43025,Dead
 43026,Dead
 43027,Dead
-43028,Dead
+43028,Alive
 43029,Dead
 43030,Dead
 43031,Dead
@@ -19065,7 +19065,7 @@ patient_id,vital_status
 43064,Dead
 43065,Dead
 43066,Alive
-43067,Dead
+43067,Alive
 43068,Dead
 43069,Dead
 43070,Dead
@@ -19137,7 +19137,7 @@ patient_id,vital_status
 43136,Alive
 43137,Dead
 43138,Dead
-43139,Alive
+43139,Dead
 43140,Dead
 43141,Dead
 43142,Dead
@@ -19172,7 +19172,7 @@ patient_id,vital_status
 43171,Alive
 43172,Dead
 43173,Dead
-43174,Dead
+43174,Alive
 43175,Dead
 43176,Dead
 43177,Dead
@@ -19280,7 +19280,7 @@ patient_id,vital_status
 43279,Dead
 43280,Dead
 43281,Dead
-43282,Alive
+43282,Dead
 43283,Dead
 43284,Alive
 43285,Dead
@@ -19369,7 +19369,7 @@ patient_id,vital_status
 43368,Dead
 43369,Dead
 43370,Dead
-43371,Dead
+43371,Alive
 43372,Alive
 43373,Alive
 43374,Dead
@@ -19396,7 +19396,7 @@ patient_id,vital_status
 43395,Dead
 43396,Dead
 43397,Dead
-43398,Alive
+43398,Dead
 43399,Dead
 43400,Dead
 43401,Dead
@@ -19485,7 +19485,7 @@ patient_id,vital_status
 43484,Dead
 43485,Dead
 43486,Dead
-43487,Alive
+43487,Dead
 43488,Dead
 43489,Dead
 43490,Dead
@@ -19529,7 +19529,7 @@ patient_id,vital_status
 43528,Dead
 43529,Dead
 43530,Dead
-43531,Dead
+43531,Alive
 43532,Dead
 43533,Dead
 43534,Alive
@@ -19585,12 +19585,12 @@ patient_id,vital_status
 43584,Alive
 43585,Dead
 43586,Dead
-43587,Dead
+43587,Alive
 43588,Dead
 43589,Dead
 43590,Dead
 43591,Dead
-43592,Alive
+43592,Dead
 43593,Dead
 43594,Dead
 43595,Dead
@@ -19666,7 +19666,7 @@ patient_id,vital_status
 43665,Dead
 43666,Dead
 43667,Dead
-43668,Alive
+43668,Dead
 43669,Dead
 43670,Dead
 43671,Dead
@@ -19675,7 +19675,7 @@ patient_id,vital_status
 43674,Dead
 43675,Dead
 43676,Dead
-43677,Dead
+43677,Alive
 43678,Dead
 43679,Dead
 43680,Dead
@@ -19684,7 +19684,7 @@ patient_id,vital_status
 43683,Alive
 43684,Dead
 43685,Dead
-43686,Dead
+43686,Alive
 43687,Dead
 43688,Alive
 43689,Dead
@@ -19716,7 +19716,7 @@ patient_id,vital_status
 43715,Alive
 43716,Alive
 43717,Dead
-43718,Dead
+43718,Alive
 43719,Dead
 43720,Dead
 43721,Dead
@@ -19762,7 +19762,7 @@ patient_id,vital_status
 43761,Dead
 43762,Dead
 43763,Dead
-43764,Dead
+43764,Alive
 43765,Dead
 43766,Dead
 43767,Dead
@@ -19789,7 +19789,7 @@ patient_id,vital_status
 43788,Alive
 43789,Alive
 43790,Dead
-43791,Dead
+43791,Alive
 43792,Dead
 43793,Dead
 43794,Dead
@@ -19887,7 +19887,7 @@ patient_id,vital_status
 43886,Dead
 43887,Dead
 43888,Dead
-43889,Dead
+43889,Alive
 43890,Alive
 43891,Dead
 43892,Dead
@@ -19986,7 +19986,7 @@ patient_id,vital_status
 43985,Dead
 43986,Dead
 43987,Dead
-43988,Alive
+43988,Dead
 43989,Dead
 43990,Dead
 43991,Dead
@@ -19995,7 +19995,7 @@ patient_id,vital_status
 43994,Dead
 43995,Dead
 43996,Dead
-43997,Dead
+43997,Alive
 43998,Dead
 43999,Dead
 44000,Dead
@@ -20007,7 +20007,7 @@ patient_id,vital_status
 44006,Dead
 44007,Dead
 44008,Dead
-44009,Dead
+44009,Alive
 44010,Alive
 44011,Dead
 44012,Dead
@@ -20019,7 +20019,7 @@ patient_id,vital_status
 44018,Dead
 44019,Dead
 44020,Alive
-44021,Dead
+44021,Alive
 44022,Dead
 44023,Dead
 44024,Alive
@@ -20097,7 +20097,7 @@ patient_id,vital_status
 44096,Dead
 44097,Dead
 44098,Dead
-44099,Dead
+44099,Alive
 44100,Dead
 44101,Alive
 44102,Alive
@@ -20114,7 +20114,7 @@ patient_id,vital_status
 44113,Dead
 44114,Dead
 44115,Dead
-44116,Dead
+44116,Alive
 44117,Dead
 44118,Dead
 44119,Dead
@@ -20144,12 +20144,12 @@ patient_id,vital_status
 44143,Alive
 44144,Dead
 44145,Alive
-44146,Alive
+44146,Dead
 44147,Dead
 44148,Dead
 44149,Dead
 44150,Dead
-44151,Alive
+44151,Dead
 44152,Dead
 44153,Dead
 44154,Dead
@@ -20166,7 +20166,7 @@ patient_id,vital_status
 44165,Dead
 44166,Dead
 44167,Dead
-44168,Dead
+44168,Alive
 44169,Dead
 44170,Dead
 44171,Dead
@@ -20252,8 +20252,8 @@ patient_id,vital_status
 44251,Dead
 44252,Dead
 44253,Dead
-44254,Alive
-44255,Alive
+44254,Dead
+44255,Dead
 44256,Dead
 44257,Dead
 44258,Dead
@@ -20268,7 +20268,7 @@ patient_id,vital_status
 44267,Dead
 44268,Dead
 44269,Dead
-44270,Alive
+44270,Dead
 44271,Dead
 44272,Dead
 44273,Dead
@@ -20342,7 +20342,7 @@ patient_id,vital_status
 44341,Dead
 44342,Dead
 44343,Dead
-44344,Alive
+44344,Dead
 44345,Dead
 44346,Dead
 44347,Dead
@@ -20371,7 +20371,7 @@ patient_id,vital_status
 44370,Dead
 44371,Dead
 44372,Alive
-44373,Dead
+44373,Alive
 44374,Dead
 44375,Alive
 44376,Dead
@@ -20380,7 +20380,7 @@ patient_id,vital_status
 44379,Dead
 44380,Dead
 44381,Dead
-44382,Dead
+44382,Alive
 44383,Dead
 44384,Dead
 44385,Alive
@@ -20420,7 +20420,7 @@ patient_id,vital_status
 44419,Alive
 44420,Dead
 44421,Dead
-44422,Dead
+44422,Alive
 44423,Dead
 44424,Dead
 44425,Dead
@@ -20467,7 +20467,7 @@ patient_id,vital_status
 44466,Dead
 44467,Dead
 44468,Dead
-44469,Dead
+44469,Alive
 44470,Dead
 44471,Dead
 44472,Dead
@@ -20536,7 +20536,7 @@ patient_id,vital_status
 44535,Dead
 44536,Dead
 44537,Dead
-44538,Dead
+44538,Alive
 44539,Dead
 44540,Alive
 44541,Dead
@@ -20611,13 +20611,13 @@ patient_id,vital_status
 44610,Dead
 44611,Dead
 44612,Dead
-44613,Dead
+44613,Alive
 44614,Dead
 44615,Dead
 44616,Dead
 44617,Alive
 44618,Dead
-44619,Alive
+44619,Dead
 44620,Dead
 44621,Dead
 44622,Dead
@@ -20643,7 +20643,7 @@ patient_id,vital_status
 44642,Dead
 44643,Dead
 44644,Dead
-44645,Alive
+44645,Dead
 44646,Dead
 44647,Dead
 44648,Dead
@@ -20838,7 +20838,7 @@ patient_id,vital_status
 44837,Dead
 44838,Dead
 44839,Dead
-44840,Alive
+44840,Dead
 44841,Dead
 44842,Dead
 44843,Alive
@@ -20853,7 +20853,7 @@ patient_id,vital_status
 44852,Dead
 44853,Dead
 44854,Dead
-44855,Alive
+44855,Dead
 44856,Dead
 44857,Alive
 44858,Alive
@@ -20877,7 +20877,7 @@ patient_id,vital_status
 44876,Alive
 44877,Dead
 44878,Dead
-44879,Alive
+44879,Dead
 44880,Dead
 44881,Dead
 44882,Dead
@@ -20999,7 +20999,7 @@ patient_id,vital_status
 44998,Dead
 44999,Dead
 45000,Dead
-45001,Dead
+45001,Alive
 45002,Dead
 45003,Dead
 45004,Dead
@@ -21066,7 +21066,7 @@ patient_id,vital_status
 45065,Dead
 45066,Dead
 45067,Dead
-45068,Alive
+45068,Dead
 45069,Alive
 45070,Alive
 45071,Dead
@@ -21130,7 +21130,7 @@ patient_id,vital_status
 45129,Alive
 45130,Dead
 45131,Dead
-45132,Alive
+45132,Dead
 45133,Dead
 45134,Dead
 45135,Dead
@@ -21157,7 +21157,7 @@ patient_id,vital_status
 45156,Dead
 45157,Dead
 45158,Alive
-45159,Alive
+45159,Dead
 45160,Dead
 45161,Dead
 45162,Alive
@@ -21182,7 +21182,7 @@ patient_id,vital_status
 45181,Dead
 45182,Dead
 45183,Alive
-45184,Alive
+45184,Dead
 45185,Dead
 45186,Dead
 45187,Dead
@@ -21243,7 +21243,7 @@ patient_id,vital_status
 45242,Dead
 45243,Dead
 45244,Dead
-45245,Alive
+45245,Dead
 45246,Dead
 45247,Alive
 45248,Dead
@@ -21297,7 +21297,7 @@ patient_id,vital_status
 45296,Dead
 45297,Dead
 45298,Dead
-45299,Dead
+45299,Alive
 45300,Dead
 45301,Dead
 45302,Dead
@@ -21323,7 +21323,7 @@ patient_id,vital_status
 45322,Dead
 45323,Dead
 45324,Dead
-45325,Dead
+45325,Alive
 45326,Dead
 45327,Dead
 45328,Dead
@@ -21334,7 +21334,7 @@ patient_id,vital_status
 45333,Dead
 45334,Dead
 45335,Alive
-45336,Alive
+45336,Dead
 45337,Dead
 45338,Dead
 45339,Dead
@@ -21353,7 +21353,7 @@ patient_id,vital_status
 45352,Dead
 45353,Dead
 45354,Dead
-45355,Alive
+45355,Dead
 45356,Alive
 45357,Dead
 45358,Dead
@@ -21363,7 +21363,7 @@ patient_id,vital_status
 45362,Dead
 45363,Dead
 45364,Dead
-45365,Dead
+45365,Alive
 45366,Dead
 45367,Dead
 45368,Dead
@@ -21406,7 +21406,7 @@ patient_id,vital_status
 45405,Dead
 45406,Dead
 45407,Dead
-45408,Alive
+45408,Dead
 45409,Alive
 45410,Alive
 45411,Alive
@@ -21422,7 +21422,7 @@ patient_id,vital_status
 45421,Dead
 45422,Dead
 45423,Dead
-45424,Dead
+45424,Alive
 45425,Alive
 45426,Dead
 45427,Dead
@@ -21586,7 +21586,7 @@ patient_id,vital_status
 45585,Dead
 45586,Dead
 45587,Dead
-45588,Dead
+45588,Alive
 45589,Dead
 45590,Dead
 45591,Dead
@@ -21650,11 +21650,11 @@ patient_id,vital_status
 45649,Dead
 45650,Dead
 45651,Dead
-45652,Dead
+45652,Alive
 45653,Alive
 45654,Dead
 45655,Dead
-45656,Dead
+45656,Alive
 45657,Dead
 45658,Dead
 45659,Dead
@@ -21670,7 +21670,7 @@ patient_id,vital_status
 45669,Dead
 45670,Dead
 45671,Dead
-45672,Alive
+45672,Dead
 45673,Dead
 45674,Dead
 45675,Dead
@@ -21680,7 +21680,7 @@ patient_id,vital_status
 45679,Dead
 45680,Dead
 45681,Alive
-45682,Dead
+45682,Alive
 45683,Dead
 45684,Dead
 45685,Dead
@@ -21857,7 +21857,7 @@ patient_id,vital_status
 45856,Alive
 45857,Dead
 45858,Dead
-45859,Alive
+45859,Dead
 45860,Dead
 45861,Alive
 45862,Dead
@@ -21925,14 +21925,14 @@ patient_id,vital_status
 45924,Dead
 45925,Dead
 45926,Dead
-45927,Dead
+45927,Alive
 45928,Dead
 45929,Dead
 45930,Dead
 45931,Dead
 45932,Dead
 45933,Dead
-45934,Dead
+45934,Alive
 45935,Dead
 45936,Dead
 45937,Alive
@@ -21946,7 +21946,7 @@ patient_id,vital_status
 45945,Dead
 45946,Dead
 45947,Dead
-45948,Alive
+45948,Dead
 45949,Dead
 45950,Dead
 45951,Dead
@@ -21975,7 +21975,7 @@ patient_id,vital_status
 45974,Dead
 45975,Alive
 45976,Alive
-45977,Dead
+45977,Alive
 45978,Dead
 45979,Alive
 45980,Dead
@@ -22000,7 +22000,7 @@ patient_id,vital_status
 45999,Dead
 46000,Dead
 46001,Dead
-46002,Dead
+46002,Alive
 46003,Dead
 46004,Dead
 46005,Dead
@@ -22110,7 +22110,7 @@ patient_id,vital_status
 46109,Dead
 46110,Dead
 46111,Dead
-46112,Alive
+46112,Dead
 46113,Dead
 46114,Dead
 46115,Dead
@@ -22179,7 +22179,7 @@ patient_id,vital_status
 46178,Dead
 46179,Dead
 46180,Dead
-46181,Alive
+46181,Dead
 46182,Dead
 46183,Dead
 46184,Dead
@@ -22250,7 +22250,7 @@ patient_id,vital_status
 46249,Dead
 46250,Dead
 46251,Dead
-46252,Dead
+46252,Alive
 46253,Dead
 46254,Alive
 46255,Dead
@@ -22313,7 +22313,7 @@ patient_id,vital_status
 46312,Dead
 46313,Dead
 46314,Dead
-46315,Alive
+46315,Dead
 46316,Dead
 46317,Dead
 46318,Dead
@@ -22346,7 +22346,7 @@ patient_id,vital_status
 46345,Alive
 46346,Dead
 46347,Dead
-46348,Dead
+46348,Alive
 46349,Dead
 46350,Dead
 46351,Dead
@@ -22358,7 +22358,7 @@ patient_id,vital_status
 46357,Alive
 46358,Dead
 46359,Dead
-46360,Alive
+46360,Dead
 46361,Dead
 46362,Alive
 46363,Dead
@@ -22457,10 +22457,10 @@ patient_id,vital_status
 46456,Alive
 46457,Dead
 46458,Dead
-46459,Alive
+46459,Dead
 46460,Dead
 46461,Alive
-46462,Dead
+46462,Alive
 46463,Alive
 46464,Alive
 46465,Dead
@@ -22478,7 +22478,7 @@ patient_id,vital_status
 46477,Dead
 46478,Dead
 46479,Dead
-46480,Alive
+46480,Dead
 46481,Dead
 46482,Dead
 46483,Dead
@@ -22617,7 +22617,7 @@ patient_id,vital_status
 46616,Dead
 46617,Dead
 46618,Dead
-46619,Dead
+46619,Alive
 46620,Dead
 46621,Dead
 46622,Dead
@@ -22707,7 +22707,7 @@ patient_id,vital_status
 46706,Dead
 46707,Dead
 46708,Dead
-46709,Dead
+46709,Alive
 46710,Dead
 46711,Dead
 46712,Dead
@@ -22795,7 +22795,7 @@ patient_id,vital_status
 46794,Alive
 46795,Dead
 46796,Dead
-46797,Alive
+46797,Dead
 46798,Dead
 46799,Dead
 46800,Dead
@@ -22805,7 +22805,7 @@ patient_id,vital_status
 46804,Dead
 46805,Alive
 46806,Dead
-46807,Alive
+46807,Dead
 46808,Dead
 46809,Dead
 46810,Dead
@@ -22840,7 +22840,7 @@ patient_id,vital_status
 46839,Dead
 46840,Dead
 46841,Dead
-46842,Dead
+46842,Alive
 46843,Dead
 46844,Alive
 46845,Dead
@@ -22887,7 +22887,7 @@ patient_id,vital_status
 46886,Dead
 46887,Dead
 46888,Dead
-46889,Dead
+46889,Alive
 46890,Dead
 46891,Dead
 46892,Alive
@@ -22906,7 +22906,7 @@ patient_id,vital_status
 46905,Dead
 46906,Dead
 46907,Alive
-46908,Alive
+46908,Dead
 46909,Dead
 46910,Alive
 46911,Dead
@@ -23022,7 +23022,7 @@ patient_id,vital_status
 47021,Dead
 47022,Dead
 47023,Dead
-47024,Dead
+47024,Alive
 47025,Dead
 47026,Dead
 47027,Dead
@@ -23030,7 +23030,7 @@ patient_id,vital_status
 47029,Dead
 47030,Alive
 47031,Dead
-47032,Dead
+47032,Alive
 47033,Dead
 47034,Dead
 47035,Dead
@@ -23075,7 +23075,7 @@ patient_id,vital_status
 47074,Alive
 47075,Dead
 47076,Dead
-47077,Alive
+47077,Dead
 47078,Dead
 47079,Dead
 47080,Dead
@@ -23242,13 +23242,13 @@ patient_id,vital_status
 47241,Dead
 47242,Dead
 47243,Dead
-47244,Alive
+47244,Dead
 47245,Alive
 47246,Alive
 47247,Dead
 47248,Dead
 47249,Dead
-47250,Dead
+47250,Alive
 47251,Dead
 47252,Dead
 47253,Dead
@@ -23324,7 +23324,7 @@ patient_id,vital_status
 47323,Dead
 47324,Dead
 47325,Dead
-47326,Alive
+47326,Dead
 47327,Dead
 47328,Dead
 47329,Dead
@@ -23378,7 +23378,7 @@ patient_id,vital_status
 47377,Dead
 47378,Dead
 47379,Dead
-47380,Alive
+47380,Dead
 47381,Dead
 47382,Dead
 47383,Dead
@@ -23396,7 +23396,7 @@ patient_id,vital_status
 47395,Dead
 47396,Dead
 47397,Alive
-47398,Dead
+47398,Alive
 47399,Dead
 47400,Dead
 47401,Dead
@@ -23472,7 +23472,7 @@ patient_id,vital_status
 47471,Alive
 47472,Dead
 47473,Dead
-47474,Alive
+47474,Dead
 47475,Dead
 47476,Dead
 47477,Dead
@@ -23570,7 +23570,7 @@ patient_id,vital_status
 47569,Dead
 47570,Dead
 47571,Dead
-47572,Dead
+47572,Alive
 47573,Dead
 47574,Dead
 47575,Dead
@@ -23703,7 +23703,7 @@ patient_id,vital_status
 47702,Alive
 47703,Dead
 47704,Dead
-47705,Alive
+47705,Dead
 47706,Alive
 47707,Dead
 47708,Alive
@@ -23790,7 +23790,7 @@ patient_id,vital_status
 47789,Dead
 47790,Alive
 47791,Dead
-47792,Dead
+47792,Alive
 47793,Alive
 47794,Dead
 47795,Dead
@@ -23818,7 +23818,7 @@ patient_id,vital_status
 47817,Dead
 47818,Alive
 47819,Dead
-47820,Dead
+47820,Alive
 47821,Alive
 47822,Dead
 47823,Dead
@@ -23834,7 +23834,7 @@ patient_id,vital_status
 47833,Dead
 47834,Dead
 47835,Dead
-47836,Dead
+47836,Alive
 47837,Dead
 47838,Dead
 47839,Dead
@@ -23938,7 +23938,7 @@ patient_id,vital_status
 47937,Dead
 47938,Dead
 47939,Dead
-47940,Alive
+47940,Dead
 47941,Dead
 47942,Dead
 47943,Dead
@@ -24027,7 +24027,7 @@ patient_id,vital_status
 48026,Alive
 48027,Alive
 48028,Dead
-48029,Alive
+48029,Dead
 48030,Dead
 48031,Dead
 48032,Dead
@@ -24053,7 +24053,7 @@ patient_id,vital_status
 48052,Dead
 48053,Dead
 48054,Dead
-48055,Alive
+48055,Dead
 48056,Dead
 48057,Dead
 48058,Dead
@@ -24125,7 +24125,7 @@ patient_id,vital_status
 48124,Dead
 48125,Dead
 48126,Dead
-48127,Dead
+48127,Alive
 48128,Dead
 48129,Dead
 48130,Dead
@@ -24158,7 +24158,7 @@ patient_id,vital_status
 48157,Dead
 48158,Dead
 48159,Dead
-48160,Dead
+48160,Alive
 48161,Dead
 48162,Dead
 48163,Dead
@@ -24178,7 +24178,7 @@ patient_id,vital_status
 48177,Dead
 48178,Alive
 48179,Dead
-48180,Dead
+48180,Alive
 48181,Alive
 48182,Dead
 48183,Dead
@@ -24203,7 +24203,7 @@ patient_id,vital_status
 48202,Dead
 48203,Dead
 48204,Dead
-48205,Alive
+48205,Dead
 48206,Dead
 48207,Dead
 48208,Dead
@@ -24269,7 +24269,7 @@ patient_id,vital_status
 48268,Alive
 48269,Alive
 48270,Dead
-48271,Dead
+48271,Alive
 48272,Dead
 48273,Dead
 48274,Dead
@@ -24299,7 +24299,7 @@ patient_id,vital_status
 48298,Alive
 48299,Dead
 48300,Dead
-48301,Dead
+48301,Alive
 48302,Dead
 48303,Dead
 48304,Dead
@@ -24330,7 +24330,7 @@ patient_id,vital_status
 48329,Dead
 48330,Dead
 48331,Dead
-48332,Alive
+48332,Dead
 48333,Dead
 48334,Alive
 48335,Dead
@@ -24441,7 +24441,7 @@ patient_id,vital_status
 48440,Alive
 48441,Dead
 48442,Dead
-48443,Dead
+48443,Alive
 48444,Dead
 48445,Dead
 48446,Dead
@@ -24544,7 +24544,7 @@ patient_id,vital_status
 48543,Dead
 48544,Dead
 48545,Dead
-48546,Alive
+48546,Dead
 48547,Dead
 48548,Dead
 48549,Dead
@@ -24579,7 +24579,7 @@ patient_id,vital_status
 48578,Dead
 48579,Dead
 48580,Dead
-48581,Dead
+48581,Alive
 48582,Dead
 48583,Dead
 48584,Dead
@@ -24591,13 +24591,13 @@ patient_id,vital_status
 48590,Dead
 48591,Dead
 48592,Alive
-48593,Alive
+48593,Dead
 48594,Dead
 48595,Dead
 48596,Dead
 48597,Dead
 48598,Dead
-48599,Dead
+48599,Alive
 48600,Dead
 48601,Dead
 48602,Dead
@@ -24686,7 +24686,7 @@ patient_id,vital_status
 48685,Dead
 48686,Dead
 48687,Dead
-48688,Alive
+48688,Dead
 48689,Dead
 48690,Alive
 48691,Dead
@@ -24777,7 +24777,7 @@ patient_id,vital_status
 48776,Alive
 48777,Dead
 48778,Dead
-48779,Alive
+48779,Dead
 48780,Dead
 48781,Dead
 48782,Alive
@@ -24905,7 +24905,7 @@ patient_id,vital_status
 48904,Dead
 48905,Dead
 48906,Alive
-48907,Alive
+48907,Dead
 48908,Dead
 48909,Dead
 48910,Dead
@@ -24928,7 +24928,7 @@ patient_id,vital_status
 48927,Dead
 48928,Dead
 48929,Alive
-48930,Dead
+48930,Alive
 48931,Dead
 48932,Dead
 48933,Dead
@@ -24936,7 +24936,7 @@ patient_id,vital_status
 48935,Dead
 48936,Dead
 48937,Dead
-48938,Dead
+48938,Alive
 48939,Dead
 48940,Dead
 48941,Dead
@@ -25069,13 +25069,13 @@ patient_id,vital_status
 49068,Dead
 49069,Dead
 49070,Dead
-49071,Alive
+49071,Dead
 49072,Dead
 49073,Dead
 49074,Dead
 49075,Alive
 49076,Dead
-49077,Alive
+49077,Dead
 49078,Dead
 49079,Dead
 49080,Dead
@@ -25084,8 +25084,8 @@ patient_id,vital_status
 49083,Dead
 49084,Dead
 49085,Dead
-49086,Alive
-49087,Dead
+49086,Dead
+49087,Alive
 49088,Alive
 49089,Dead
 49090,Dead
@@ -25100,7 +25100,7 @@ patient_id,vital_status
 49099,Dead
 49100,Dead
 49101,Dead
-49102,Alive
+49102,Dead
 49103,Dead
 49104,Dead
 49105,Dead
@@ -25113,7 +25113,7 @@ patient_id,vital_status
 49112,Dead
 49113,Dead
 49114,Dead
-49115,Alive
+49115,Dead
 49116,Dead
 49117,Alive
 49118,Dead
@@ -25151,7 +25151,7 @@ patient_id,vital_status
 49150,Dead
 49151,Dead
 49152,Dead
-49153,Dead
+49153,Alive
 49154,Dead
 49155,Alive
 49156,Dead
@@ -25170,7 +25170,7 @@ patient_id,vital_status
 49169,Dead
 49170,Dead
 49171,Dead
-49172,Alive
+49172,Dead
 49173,Dead
 49174,Dead
 49175,Dead
@@ -25193,7 +25193,7 @@ patient_id,vital_status
 49192,Alive
 49193,Alive
 49194,Dead
-49195,Dead
+49195,Alive
 49196,Dead
 49197,Dead
 49198,Dead
@@ -25211,7 +25211,7 @@ patient_id,vital_status
 49210,Dead
 49211,Dead
 49212,Dead
-49213,Alive
+49213,Dead
 49214,Dead
 49215,Dead
 49216,Dead
@@ -25339,7 +25339,7 @@ patient_id,vital_status
 49338,Dead
 49339,Dead
 49340,Dead
-49341,Alive
+49341,Dead
 49342,Alive
 49343,Alive
 49344,Alive
@@ -25387,7 +25387,7 @@ patient_id,vital_status
 49386,Alive
 49387,Dead
 49388,Dead
-49389,Alive
+49389,Dead
 49390,Dead
 49391,Dead
 49392,Alive
@@ -25429,7 +25429,7 @@ patient_id,vital_status
 49428,Dead
 49429,Dead
 49430,Dead
-49431,Alive
+49431,Dead
 49432,Dead
 49433,Dead
 49434,Dead
@@ -25645,13 +25645,13 @@ patient_id,vital_status
 49644,Dead
 49645,Dead
 49646,Alive
-49647,Alive
+49647,Dead
 49648,Dead
 49649,Dead
 49650,Dead
 49651,Dead
 49652,Dead
-49653,Alive
+49653,Dead
 49654,Dead
 49655,Dead
 49656,Dead
@@ -25664,7 +25664,7 @@ patient_id,vital_status
 49663,Dead
 49664,Dead
 49665,Dead
-49666,Dead
+49666,Alive
 49667,Dead
 49668,Dead
 49669,Dead
@@ -25693,7 +25693,7 @@ patient_id,vital_status
 49692,Dead
 49693,Dead
 49694,Dead
-49695,Dead
+49695,Alive
 49696,Alive
 49697,Dead
 49698,Dead
@@ -25732,14 +25732,14 @@ patient_id,vital_status
 49731,Alive
 49732,Alive
 49733,Dead
-49734,Dead
+49734,Alive
 49735,Alive
 49736,Dead
 49737,Dead
 49738,Dead
 49739,Dead
 49740,Alive
-49741,Dead
+49741,Alive
 49742,Dead
 49743,Dead
 49744,Dead
@@ -25768,7 +25768,7 @@ patient_id,vital_status
 49767,Dead
 49768,Alive
 49769,Dead
-49770,Alive
+49770,Dead
 49771,Dead
 49772,Dead
 49773,Dead
@@ -25781,7 +25781,7 @@ patient_id,vital_status
 49780,Dead
 49781,Dead
 49782,Dead
-49783,Dead
+49783,Alive
 49784,Dead
 49785,Dead
 49786,Dead
@@ -25796,7 +25796,7 @@ patient_id,vital_status
 49795,Alive
 49796,Dead
 49797,Alive
-49798,Alive
+49798,Dead
 49799,Dead
 49800,Dead
 49801,Dead
@@ -25887,8 +25887,8 @@ patient_id,vital_status
 49886,Dead
 49887,Alive
 49888,Dead
-49889,Dead
-49890,Dead
+49889,Alive
+49890,Alive
 49891,Dead
 49892,Dead
 49893,Dead
@@ -25993,7 +25993,7 @@ patient_id,vital_status
 49992,Dead
 49993,Dead
 49994,Dead
-49995,Dead
+49995,Alive
 49996,Dead
 49997,Alive
 49998,Dead
@@ -26001,7 +26001,7 @@ patient_id,vital_status
 50000,Dead
 50001,Dead
 50002,Dead
-50003,Alive
+50003,Dead
 50004,Dead
 50005,Dead
 50006,Dead
@@ -26013,7 +26013,7 @@ patient_id,vital_status
 50012,Dead
 50013,Dead
 50014,Dead
-50015,Alive
+50015,Dead
 50016,Dead
 50017,Dead
 50018,Dead
@@ -26068,7 +26068,7 @@ patient_id,vital_status
 50067,Dead
 50068,Alive
 50069,Dead
-50070,Dead
+50070,Alive
 50071,Dead
 50072,Dead
 50073,Dead
@@ -26132,7 +26132,7 @@ patient_id,vital_status
 50131,Dead
 50132,Dead
 50133,Dead
-50134,Dead
+50134,Alive
 50135,Dead
 50136,Alive
 50137,Dead
@@ -26224,7 +26224,7 @@ patient_id,vital_status
 50223,Dead
 50224,Dead
 50225,Dead
-50226,Dead
+50226,Alive
 50227,Dead
 50228,Dead
 50229,Alive
@@ -26283,7 +26283,7 @@ patient_id,vital_status
 50282,Dead
 50283,Dead
 50284,Dead
-50285,Dead
+50285,Alive
 50286,Dead
 50287,Dead
 50288,Dead
@@ -26314,7 +26314,7 @@ patient_id,vital_status
 50313,Dead
 50314,Dead
 50315,Dead
-50316,Dead
+50316,Alive
 50317,Dead
 50318,Dead
 50319,Alive
@@ -26457,7 +26457,7 @@ patient_id,vital_status
 50456,Dead
 50457,Dead
 50458,Dead
-50459,Dead
+50459,Alive
 50460,Dead
 50461,Dead
 50462,Dead
@@ -26547,7 +26547,7 @@ patient_id,vital_status
 50546,Dead
 50547,Dead
 50548,Dead
-50549,Alive
+50549,Dead
 50550,Dead
 50551,Dead
 50552,Dead
@@ -26698,7 +26698,7 @@ patient_id,vital_status
 50697,Alive
 50698,Alive
 50699,Dead
-50700,Dead
+50700,Alive
 50701,Alive
 50702,Dead
 50703,Dead
@@ -26714,12 +26714,12 @@ patient_id,vital_status
 50713,Alive
 50714,Dead
 50715,Dead
-50716,Dead
+50716,Alive
 50717,Alive
 50718,Dead
 50719,Alive
 50720,Dead
-50721,Dead
+50721,Alive
 50722,Dead
 50723,Dead
 50724,Dead
@@ -26841,7 +26841,7 @@ patient_id,vital_status
 50840,Dead
 50841,Dead
 50842,Alive
-50843,Alive
+50843,Dead
 50844,Dead
 50845,Dead
 50846,Dead
@@ -26867,7 +26867,7 @@ patient_id,vital_status
 50866,Dead
 50867,Dead
 50868,Dead
-50869,Dead
+50869,Alive
 50870,Dead
 50871,Dead
 50872,Dead
@@ -26891,7 +26891,7 @@ patient_id,vital_status
 50890,Dead
 50891,Dead
 50892,Dead
-50893,Dead
+50893,Alive
 50894,Dead
 50895,Alive
 50896,Dead
@@ -26974,7 +26974,7 @@ patient_id,vital_status
 50973,Alive
 50974,Dead
 50975,Dead
-50976,Dead
+50976,Alive
 50977,Dead
 50978,Alive
 50979,Dead
@@ -27075,7 +27075,7 @@ patient_id,vital_status
 51074,Dead
 51075,Dead
 51076,Dead
-51077,Dead
+51077,Alive
 51078,Dead
 51079,Dead
 51080,Dead
@@ -27092,7 +27092,7 @@ patient_id,vital_status
 51091,Alive
 51092,Dead
 51093,Alive
-51094,Dead
+51094,Alive
 51095,Dead
 51096,Dead
 51097,Alive
@@ -27103,7 +27103,7 @@ patient_id,vital_status
 51102,Dead
 51103,Dead
 51104,Dead
-51105,Alive
+51105,Dead
 51106,Dead
 51107,Dead
 51108,Dead
@@ -27152,7 +27152,7 @@ patient_id,vital_status
 51151,Dead
 51152,Alive
 51153,Alive
-51154,Alive
+51154,Dead
 51155,Dead
 51156,Dead
 51157,Dead
@@ -27253,7 +27253,7 @@ patient_id,vital_status
 51252,Alive
 51253,Dead
 51254,Dead
-51255,Dead
+51255,Alive
 51256,Dead
 51257,Dead
 51258,Dead
@@ -27271,7 +27271,7 @@ patient_id,vital_status
 51270,Dead
 51271,Dead
 51272,Dead
-51273,Alive
+51273,Dead
 51274,Dead
 51275,Alive
 51276,Dead
@@ -27358,9 +27358,9 @@ patient_id,vital_status
 51357,Dead
 51358,Dead
 51359,Dead
-51360,Alive
+51360,Dead
 51361,Dead
-51362,Dead
+51362,Alive
 51363,Dead
 51364,Dead
 51365,Dead
@@ -27377,7 +27377,7 @@ patient_id,vital_status
 51376,Alive
 51377,Dead
 51378,Dead
-51379,Dead
+51379,Alive
 51380,Dead
 51381,Dead
 51382,Dead
@@ -27404,15 +27404,15 @@ patient_id,vital_status
 51403,Dead
 51404,Dead
 51405,Dead
-51406,Alive
+51406,Dead
 51407,Dead
 51408,Dead
 51409,Alive
-51410,Alive
+51410,Dead
 51411,Alive
 51412,Dead
 51413,Dead
-51414,Alive
+51414,Dead
 51415,Dead
 51416,Alive
 51417,Dead
@@ -27439,7 +27439,7 @@ patient_id,vital_status
 51438,Dead
 51439,Dead
 51440,Alive
-51441,Alive
+51441,Dead
 51442,Dead
 51443,Alive
 51444,Alive
@@ -27450,7 +27450,7 @@ patient_id,vital_status
 51449,Alive
 51450,Dead
 51451,Dead
-51452,Dead
+51452,Alive
 51453,Dead
 51454,Dead
 51455,Dead
@@ -27506,7 +27506,7 @@ patient_id,vital_status
 51505,Dead
 51506,Dead
 51507,Dead
-51508,Dead
+51508,Alive
 51509,Dead
 51510,Dead
 51511,Dead
@@ -27554,7 +27554,7 @@ patient_id,vital_status
 51553,Dead
 51554,Alive
 51555,Dead
-51556,Dead
+51556,Alive
 51557,Dead
 51558,Dead
 51559,Dead
@@ -27724,7 +27724,7 @@ patient_id,vital_status
 51723,Dead
 51724,Dead
 51725,Alive
-51726,Alive
+51726,Dead
 51727,Dead
 51728,Alive
 51729,Dead
@@ -27785,7 +27785,7 @@ patient_id,vital_status
 51784,Dead
 51785,Dead
 51786,Dead
-51787,Dead
+51787,Alive
 51788,Dead
 51789,Dead
 51790,Dead
@@ -27822,7 +27822,7 @@ patient_id,vital_status
 51821,Alive
 51822,Alive
 51823,Dead
-51824,Dead
+51824,Alive
 51825,Dead
 51826,Dead
 51827,Dead
@@ -27880,19 +27880,19 @@ patient_id,vital_status
 51879,Dead
 51880,Dead
 51881,Alive
-51882,Alive
+51882,Dead
 51883,Dead
 51884,Dead
 51885,Dead
 51886,Alive
 51887,Dead
-51888,Dead
+51888,Alive
 51889,Dead
 51890,Dead
 51891,Dead
 51892,Dead
 51893,Dead
-51894,Alive
+51894,Dead
 51895,Dead
 51896,Dead
 51897,Dead
@@ -27989,7 +27989,7 @@ patient_id,vital_status
 51988,Dead
 51989,Dead
 51990,Alive
-51991,Alive
+51991,Dead
 51992,Dead
 51993,Dead
 51994,Dead
@@ -28016,7 +28016,7 @@ patient_id,vital_status
 52015,Dead
 52016,Dead
 52017,Dead
-52018,Dead
+52018,Alive
 52019,Dead
 52020,Dead
 52021,Dead
@@ -28041,7 +28041,7 @@ patient_id,vital_status
 52040,Dead
 52041,Dead
 52042,Dead
-52043,Alive
+52043,Dead
 52044,Dead
 52045,Dead
 52046,Dead
@@ -28139,7 +28139,7 @@ patient_id,vital_status
 52138,Dead
 52139,Dead
 52140,Dead
-52141,Alive
+52141,Dead
 52142,Dead
 52143,Dead
 52144,Dead
@@ -28149,7 +28149,7 @@ patient_id,vital_status
 52148,Dead
 52149,Dead
 52150,Dead
-52151,Dead
+52151,Alive
 52152,Dead
 52153,Dead
 52154,Dead
@@ -28199,7 +28199,7 @@ patient_id,vital_status
 52198,Dead
 52199,Dead
 52200,Dead
-52201,Dead
+52201,Alive
 52202,Alive
 52203,Alive
 52204,Alive
@@ -28357,7 +28357,7 @@ patient_id,vital_status
 52356,Dead
 52357,Dead
 52358,Dead
-52359,Alive
+52359,Dead
 52360,Dead
 52361,Dead
 52362,Dead
@@ -28373,7 +28373,7 @@ patient_id,vital_status
 52372,Alive
 52373,Dead
 52374,Dead
-52375,Alive
+52375,Dead
 52376,Dead
 52377,Alive
 52378,Dead
@@ -28488,7 +28488,7 @@ patient_id,vital_status
 52487,Dead
 52488,Dead
 52489,Dead
-52490,Dead
+52490,Alive
 52491,Dead
 52492,Dead
 52493,Dead
@@ -28567,7 +28567,7 @@ patient_id,vital_status
 52566,Dead
 52567,Dead
 52568,Dead
-52569,Alive
+52569,Dead
 52570,Dead
 52571,Alive
 52572,Dead
@@ -28588,7 +28588,7 @@ patient_id,vital_status
 52587,Alive
 52588,Dead
 52589,Dead
-52590,Dead
+52590,Alive
 52591,Dead
 52592,Dead
 52593,Dead
@@ -28601,7 +28601,7 @@ patient_id,vital_status
 52600,Dead
 52601,Alive
 52602,Dead
-52603,Dead
+52603,Alive
 52604,Dead
 52605,Dead
 52606,Alive
@@ -28638,7 +28638,7 @@ patient_id,vital_status
 52637,Dead
 52638,Dead
 52639,Dead
-52640,Alive
+52640,Dead
 52641,Dead
 52642,Dead
 52643,Dead
@@ -28667,7 +28667,7 @@ patient_id,vital_status
 52666,Dead
 52667,Dead
 52668,Dead
-52669,Alive
+52669,Dead
 52670,Dead
 52671,Dead
 52672,Dead
@@ -28735,7 +28735,7 @@ patient_id,vital_status
 52734,Dead
 52735,Dead
 52736,Dead
-52737,Alive
+52737,Dead
 52738,Dead
 52739,Dead
 52740,Dead
@@ -28789,7 +28789,7 @@ patient_id,vital_status
 52788,Alive
 52789,Dead
 52790,Dead
-52791,Alive
+52791,Dead
 52792,Dead
 52793,Dead
 52794,Dead
@@ -28816,7 +28816,7 @@ patient_id,vital_status
 52815,Dead
 52816,Dead
 52817,Dead
-52818,Alive
+52818,Dead
 52819,Dead
 52820,Dead
 52821,Dead
@@ -28848,7 +28848,7 @@ patient_id,vital_status
 52847,Alive
 52848,Dead
 52849,Dead
-52850,Dead
+52850,Alive
 52851,Dead
 52852,Dead
 52853,Alive
@@ -28874,7 +28874,7 @@ patient_id,vital_status
 52873,Dead
 52874,Dead
 52875,Dead
-52876,Alive
+52876,Dead
 52877,Dead
 52878,Dead
 52879,Alive
@@ -28883,7 +28883,7 @@ patient_id,vital_status
 52882,Dead
 52883,Dead
 52884,Dead
-52885,Dead
+52885,Alive
 52886,Dead
 52887,Dead
 52888,Dead
@@ -28914,7 +28914,7 @@ patient_id,vital_status
 52913,Alive
 52914,Dead
 52915,Dead
-52916,Dead
+52916,Alive
 52917,Alive
 52918,Dead
 52919,Dead
@@ -29044,7 +29044,7 @@ patient_id,vital_status
 53043,Dead
 53044,Dead
 53045,Dead
-53046,Alive
+53046,Dead
 53047,Dead
 53048,Dead
 53049,Dead
@@ -29104,7 +29104,7 @@ patient_id,vital_status
 53103,Dead
 53104,Alive
 53105,Dead
-53106,Dead
+53106,Alive
 53107,Dead
 53108,Dead
 53109,Dead
@@ -29146,7 +29146,7 @@ patient_id,vital_status
 53145,Dead
 53146,Dead
 53147,Dead
-53148,Dead
+53148,Alive
 53149,Dead
 53150,Dead
 53151,Dead
@@ -29172,7 +29172,7 @@ patient_id,vital_status
 53171,Dead
 53172,Dead
 53173,Dead
-53174,Alive
+53174,Dead
 53175,Dead
 53176,Dead
 53177,Alive
@@ -29265,7 +29265,7 @@ patient_id,vital_status
 53264,Dead
 53265,Dead
 53266,Dead
-53267,Alive
+53267,Dead
 53268,Alive
 53269,Dead
 53270,Alive
@@ -29332,7 +29332,7 @@ patient_id,vital_status
 53331,Dead
 53332,Dead
 53333,Dead
-53334,Dead
+53334,Alive
 53335,Dead
 53336,Dead
 53337,Dead
@@ -29398,7 +29398,7 @@ patient_id,vital_status
 53397,Dead
 53398,Dead
 53399,Dead
-53400,Alive
+53400,Dead
 53401,Dead
 53402,Dead
 53403,Dead
@@ -29408,7 +29408,7 @@ patient_id,vital_status
 53407,Dead
 53408,Alive
 53409,Dead
-53410,Dead
+53410,Alive
 53411,Dead
 53412,Dead
 53413,Dead
@@ -29499,7 +29499,7 @@ patient_id,vital_status
 53498,Alive
 53499,Dead
 53500,Dead
-53501,Dead
+53501,Alive
 53502,Dead
 53503,Alive
 53504,Dead
@@ -29515,7 +29515,7 @@ patient_id,vital_status
 53514,Dead
 53515,Dead
 53516,Dead
-53517,Alive
+53517,Dead
 53518,Dead
 53519,Dead
 53520,Dead
@@ -29525,7 +29525,7 @@ patient_id,vital_status
 53524,Dead
 53525,Dead
 53526,Dead
-53527,Dead
+53527,Alive
 53528,Dead
 53529,Dead
 53530,Dead
@@ -29671,7 +29671,7 @@ patient_id,vital_status
 53670,Dead
 53671,Dead
 53672,Dead
-53673,Dead
+53673,Alive
 53674,Alive
 53675,Dead
 53676,Dead
@@ -29769,7 +29769,7 @@ patient_id,vital_status
 53768,Dead
 53769,Dead
 53770,Dead
-53771,Dead
+53771,Alive
 53772,Dead
 53773,Alive
 53774,Dead
@@ -29814,13 +29814,13 @@ patient_id,vital_status
 53813,Alive
 53814,Alive
 53815,Dead
-53816,Alive
+53816,Dead
 53817,Alive
 53818,Dead
 53819,Dead
 53820,Dead
 53821,Dead
-53822,Alive
+53822,Dead
 53823,Alive
 53824,Dead
 53825,Dead
@@ -29849,10 +29849,10 @@ patient_id,vital_status
 53848,Dead
 53849,Alive
 53850,Dead
-53851,Alive
+53851,Dead
 53852,Alive
 53853,Dead
-53854,Dead
+53854,Alive
 53855,Dead
 53856,Dead
 53857,Dead
@@ -29865,7 +29865,7 @@ patient_id,vital_status
 53864,Dead
 53865,Dead
 53866,Dead
-53867,Dead
+53867,Alive
 53868,Dead
 53869,Alive
 53870,Dead
@@ -29907,7 +29907,7 @@ patient_id,vital_status
 53906,Dead
 53907,Dead
 53908,Dead
-53909,Dead
+53909,Alive
 53910,Dead
 53911,Alive
 53912,Dead
@@ -29928,7 +29928,7 @@ patient_id,vital_status
 53927,Dead
 53928,Dead
 53929,Dead
-53930,Dead
+53930,Alive
 53931,Dead
 53932,Dead
 53933,Dead
@@ -29972,7 +29972,7 @@ patient_id,vital_status
 53971,Dead
 53972,Dead
 53973,Dead
-53974,Alive
+53974,Dead
 53975,Alive
 53976,Dead
 53977,Dead
@@ -30055,7 +30055,7 @@ patient_id,vital_status
 54054,Dead
 54055,Dead
 54056,Dead
-54057,Alive
+54057,Dead
 54058,Dead
 54059,Dead
 54060,Dead
@@ -30177,7 +30177,7 @@ patient_id,vital_status
 54176,Dead
 54177,Dead
 54178,Dead
-54179,Dead
+54179,Alive
 54180,Dead
 54181,Dead
 54182,Alive
@@ -30258,7 +30258,7 @@ patient_id,vital_status
 54257,Dead
 54258,Dead
 54259,Dead
-54260,Alive
+54260,Dead
 54261,Dead
 54262,Alive
 54263,Dead
@@ -30355,7 +30355,7 @@ patient_id,vital_status
 54354,Dead
 54355,Dead
 54356,Dead
-54357,Alive
+54357,Dead
 54358,Dead
 54359,Dead
 54360,Dead
@@ -30405,7 +30405,7 @@ patient_id,vital_status
 54404,Alive
 54405,Dead
 54406,Dead
-54407,Alive
+54407,Dead
 54408,Dead
 54409,Dead
 54410,Dead
@@ -30440,7 +30440,7 @@ patient_id,vital_status
 54439,Dead
 54440,Dead
 54441,Dead
-54442,Dead
+54442,Alive
 54443,Dead
 54444,Alive
 54445,Dead
@@ -30543,14 +30543,14 @@ patient_id,vital_status
 54542,Dead
 54543,Dead
 54544,Alive
-54545,Dead
+54545,Alive
 54546,Dead
 54547,Alive
 54548,Dead
 54549,Alive
 54550,Alive
 54551,Dead
-54552,Dead
+54552,Alive
 54553,Alive
 54554,Dead
 54555,Dead
@@ -30596,7 +30596,7 @@ patient_id,vital_status
 54595,Dead
 54596,Dead
 54597,Dead
-54598,Alive
+54598,Dead
 54599,Dead
 54600,Dead
 54601,Dead
@@ -30677,7 +30677,7 @@ patient_id,vital_status
 54676,Dead
 54677,Dead
 54678,Dead
-54679,Alive
+54679,Dead
 54680,Dead
 54681,Dead
 54682,Alive
@@ -30715,7 +30715,7 @@ patient_id,vital_status
 54714,Dead
 54715,Dead
 54716,Dead
-54717,Alive
+54717,Dead
 54718,Dead
 54719,Dead
 54720,Dead
@@ -30733,7 +30733,7 @@ patient_id,vital_status
 54732,Dead
 54733,Dead
 54734,Dead
-54735,Alive
+54735,Dead
 54736,Dead
 54737,Dead
 54738,Dead
@@ -30750,8 +30750,8 @@ patient_id,vital_status
 54749,Dead
 54750,Dead
 54751,Dead
-54752,Alive
-54753,Dead
+54752,Dead
+54753,Alive
 54754,Dead
 54755,Dead
 54756,Dead
@@ -31067,11 +31067,11 @@ patient_id,vital_status
 55066,Dead
 55067,Dead
 55068,Alive
-55069,Alive
+55069,Dead
 55070,Alive
 55071,Dead
 55072,Dead
-55073,Alive
+55073,Dead
 55074,Dead
 55075,Alive
 55076,Dead
@@ -31130,7 +31130,7 @@ patient_id,vital_status
 55129,Dead
 55130,Dead
 55131,Alive
-55132,Dead
+55132,Alive
 55133,Dead
 55134,Dead
 55135,Dead
@@ -31148,7 +31148,7 @@ patient_id,vital_status
 55147,Dead
 55148,Dead
 55149,Dead
-55150,Dead
+55150,Alive
 55151,Dead
 55152,Dead
 55153,Dead
@@ -31156,7 +31156,7 @@ patient_id,vital_status
 55155,Dead
 55156,Alive
 55157,Dead
-55158,Alive
+55158,Dead
 55159,Dead
 55160,Dead
 55161,Dead
@@ -31204,7 +31204,7 @@ patient_id,vital_status
 55203,Dead
 55204,Dead
 55205,Dead
-55206,Dead
+55206,Alive
 55207,Dead
 55208,Dead
 55209,Alive
@@ -31228,7 +31228,7 @@ patient_id,vital_status
 55227,Dead
 55228,Dead
 55229,Dead
-55230,Dead
+55230,Alive
 55231,Alive
 55232,Alive
 55233,Dead
@@ -31260,7 +31260,7 @@ patient_id,vital_status
 55259,Dead
 55260,Alive
 55261,Dead
-55262,Alive
+55262,Dead
 55263,Alive
 55264,Dead
 55265,Dead
@@ -31270,7 +31270,7 @@ patient_id,vital_status
 55269,Dead
 55270,Dead
 55271,Dead
-55272,Alive
+55272,Dead
 55273,Dead
 55274,Dead
 55275,Dead
@@ -31362,13 +31362,13 @@ patient_id,vital_status
 55361,Dead
 55362,Dead
 55363,Dead
-55364,Alive
+55364,Dead
 55365,Dead
 55366,Dead
 55367,Dead
 55368,Dead
 55369,Dead
-55370,Alive
+55370,Dead
 55371,Dead
 55372,Alive
 55373,Dead
@@ -31528,7 +31528,7 @@ patient_id,vital_status
 55527,Dead
 55528,Dead
 55529,Dead
-55530,Dead
+55530,Alive
 55531,Dead
 55532,Dead
 55533,Dead
@@ -31549,7 +31549,7 @@ patient_id,vital_status
 55548,Dead
 55549,Dead
 55550,Dead
-55551,Alive
+55551,Dead
 55552,Dead
 55553,Dead
 55554,Dead
@@ -31573,7 +31573,7 @@ patient_id,vital_status
 55572,Dead
 55573,Dead
 55574,Dead
-55575,Dead
+55575,Alive
 55576,Dead
 55577,Alive
 55578,Dead
@@ -31599,7 +31599,7 @@ patient_id,vital_status
 55598,Dead
 55599,Dead
 55600,Dead
-55601,Dead
+55601,Alive
 55602,Dead
 55603,Dead
 55604,Alive
@@ -31657,12 +31657,12 @@ patient_id,vital_status
 55656,Dead
 55657,Alive
 55658,Alive
-55659,Alive
+55659,Dead
 55660,Dead
 55661,Dead
 55662,Dead
 55663,Dead
-55664,Dead
+55664,Alive
 55665,Alive
 55666,Dead
 55667,Dead
@@ -31673,7 +31673,7 @@ patient_id,vital_status
 55672,Alive
 55673,Dead
 55674,Dead
-55675,Dead
+55675,Alive
 55676,Dead
 55677,Dead
 55678,Alive
@@ -31684,7 +31684,7 @@ patient_id,vital_status
 55683,Dead
 55684,Dead
 55685,Dead
-55686,Alive
+55686,Dead
 55687,Dead
 55688,Alive
 55689,Dead
@@ -31725,7 +31725,7 @@ patient_id,vital_status
 55724,Dead
 55725,Alive
 55726,Alive
-55727,Dead
+55727,Alive
 55728,Dead
 55729,Dead
 55730,Dead
@@ -31797,7 +31797,7 @@ patient_id,vital_status
 55796,Dead
 55797,Dead
 55798,Dead
-55799,Alive
+55799,Dead
 55800,Dead
 55801,Alive
 55802,Alive
@@ -31963,7 +31963,7 @@ patient_id,vital_status
 55962,Dead
 55963,Dead
 55964,Dead
-55965,Alive
+55965,Dead
 55966,Dead
 55967,Alive
 55968,Dead
@@ -32048,7 +32048,7 @@ patient_id,vital_status
 56047,Dead
 56048,Dead
 56049,Dead
-56050,Alive
+56050,Dead
 56051,Dead
 56052,Dead
 56053,Dead
@@ -32057,7 +32057,7 @@ patient_id,vital_status
 56056,Alive
 56057,Dead
 56058,Dead
-56059,Dead
+56059,Alive
 56060,Dead
 56061,Dead
 56062,Dead
@@ -32075,7 +32075,7 @@ patient_id,vital_status
 56074,Dead
 56075,Dead
 56076,Alive
-56077,Dead
+56077,Alive
 56078,Dead
 56079,Alive
 56080,Dead
@@ -32141,7 +32141,7 @@ patient_id,vital_status
 56140,Dead
 56141,Dead
 56142,Dead
-56143,Dead
+56143,Alive
 56144,Dead
 56145,Dead
 56146,Dead
@@ -32224,7 +32224,7 @@ patient_id,vital_status
 56223,Dead
 56224,Dead
 56225,Dead
-56226,Alive
+56226,Dead
 56227,Dead
 56228,Dead
 56229,Dead
@@ -32248,7 +32248,7 @@ patient_id,vital_status
 56247,Alive
 56248,Alive
 56249,Alive
-56250,Alive
+56250,Dead
 56251,Dead
 56252,Dead
 56253,Dead
@@ -32362,7 +32362,7 @@ patient_id,vital_status
 56361,Dead
 56362,Dead
 56363,Dead
-56364,Alive
+56364,Dead
 56365,Dead
 56366,Dead
 56367,Dead
@@ -32374,7 +32374,7 @@ patient_id,vital_status
 56373,Alive
 56374,Alive
 56375,Dead
-56376,Dead
+56376,Alive
 56377,Dead
 56378,Dead
 56379,Dead
@@ -32388,7 +32388,7 @@ patient_id,vital_status
 56387,Dead
 56388,Dead
 56389,Dead
-56390,Dead
+56390,Alive
 56391,Dead
 56392,Dead
 56393,Dead
@@ -32449,7 +32449,7 @@ patient_id,vital_status
 56448,Dead
 56449,Alive
 56450,Dead
-56451,Dead
+56451,Alive
 56452,Dead
 56453,Dead
 56454,Dead
@@ -32512,7 +32512,7 @@ patient_id,vital_status
 56511,Alive
 56512,Dead
 56513,Dead
-56514,Dead
+56514,Alive
 56515,Dead
 56516,Dead
 56517,Dead
@@ -32655,7 +32655,7 @@ patient_id,vital_status
 56654,Dead
 56655,Dead
 56656,Dead
-56657,Alive
+56657,Dead
 56658,Dead
 56659,Dead
 56660,Dead
@@ -32670,7 +32670,7 @@ patient_id,vital_status
 56669,Dead
 56670,Dead
 56671,Dead
-56672,Alive
+56672,Dead
 56673,Dead
 56674,Dead
 56675,Dead
@@ -32752,7 +32752,7 @@ patient_id,vital_status
 56751,Dead
 56752,Alive
 56753,Dead
-56754,Dead
+56754,Alive
 56755,Alive
 56756,Dead
 56757,Dead
@@ -32999,7 +32999,7 @@ patient_id,vital_status
 56998,Dead
 56999,Dead
 57000,Dead
-57001,Alive
+57001,Dead
 57002,Dead
 57003,Alive
 57004,Dead
@@ -33065,7 +33065,7 @@ patient_id,vital_status
 57064,Dead
 57065,Dead
 57066,Dead
-57067,Alive
+57067,Dead
 57068,Dead
 57069,Dead
 57070,Dead
@@ -33128,7 +33128,7 @@ patient_id,vital_status
 57127,Dead
 57128,Dead
 57129,Dead
-57130,Alive
+57130,Dead
 57131,Dead
 57132,Dead
 57133,Dead
@@ -33175,7 +33175,7 @@ patient_id,vital_status
 57174,Dead
 57175,Dead
 57176,Dead
-57177,Alive
+57177,Dead
 57178,Dead
 57179,Dead
 57180,Dead
@@ -33187,7 +33187,7 @@ patient_id,vital_status
 57186,Dead
 57187,Dead
 57188,Alive
-57189,Alive
+57189,Dead
 57190,Dead
 57191,Alive
 57192,Alive
@@ -33210,7 +33210,7 @@ patient_id,vital_status
 57209,Dead
 57210,Dead
 57211,Alive
-57212,Dead
+57212,Alive
 57213,Dead
 57214,Dead
 57215,Alive
@@ -33222,7 +33222,7 @@ patient_id,vital_status
 57221,Dead
 57222,Dead
 57223,Dead
-57224,Alive
+57224,Dead
 57225,Dead
 57226,Alive
 57227,Alive
@@ -33254,7 +33254,7 @@ patient_id,vital_status
 57253,Dead
 57254,Dead
 57255,Dead
-57256,Alive
+57256,Dead
 57257,Dead
 57258,Dead
 57259,Dead
@@ -33279,7 +33279,7 @@ patient_id,vital_status
 57278,Dead
 57279,Dead
 57280,Dead
-57281,Alive
+57281,Dead
 57282,Alive
 57283,Dead
 57284,Dead
@@ -33300,7 +33300,7 @@ patient_id,vital_status
 57299,Dead
 57300,Dead
 57301,Dead
-57302,Dead
+57302,Alive
 57303,Alive
 57304,Dead
 57305,Dead
@@ -33317,7 +33317,7 @@ patient_id,vital_status
 57316,Dead
 57317,Dead
 57318,Dead
-57319,Dead
+57319,Alive
 57320,Dead
 57321,Dead
 57322,Dead
@@ -33467,7 +33467,7 @@ patient_id,vital_status
 57466,Dead
 57467,Dead
 57468,Dead
-57469,Dead
+57469,Alive
 57470,Dead
 57471,Dead
 57472,Dead
@@ -33573,7 +33573,7 @@ patient_id,vital_status
 57572,Alive
 57573,Dead
 57574,Alive
-57575,Dead
+57575,Alive
 57576,Dead
 57577,Dead
 57578,Dead
@@ -33608,7 +33608,7 @@ patient_id,vital_status
 57607,Dead
 57608,Dead
 57609,Dead
-57610,Dead
+57610,Alive
 57611,Dead
 57612,Dead
 57613,Dead
@@ -33653,7 +33653,7 @@ patient_id,vital_status
 57652,Dead
 57653,Dead
 57654,Dead
-57655,Alive
+57655,Dead
 57656,Dead
 57657,Dead
 57658,Dead
@@ -33668,10 +33668,10 @@ patient_id,vital_status
 57667,Alive
 57668,Alive
 57669,Dead
-57670,Alive
+57670,Dead
 57671,Alive
 57672,Dead
-57673,Alive
+57673,Dead
 57674,Dead
 57675,Dead
 57676,Dead
@@ -33694,7 +33694,7 @@ patient_id,vital_status
 57693,Dead
 57694,Alive
 57695,Dead
-57696,Dead
+57696,Alive
 57697,Dead
 57698,Dead
 57699,Alive
@@ -33736,12 +33736,12 @@ patient_id,vital_status
 57735,Dead
 57736,Dead
 57737,Dead
-57738,Alive
+57738,Dead
 57739,Dead
 57740,Dead
 57741,Dead
 57742,Dead
-57743,Alive
+57743,Dead
 57744,Dead
 57745,Dead
 57746,Alive
@@ -33822,7 +33822,7 @@ patient_id,vital_status
 57821,Dead
 57822,Dead
 57823,Dead
-57824,Alive
+57824,Dead
 57825,Alive
 57826,Dead
 57827,Dead
@@ -33929,7 +33929,7 @@ patient_id,vital_status
 57928,Dead
 57929,Dead
 57930,Dead
-57931,Dead
+57931,Alive
 57932,Alive
 57933,Alive
 57934,Alive
@@ -33942,7 +33942,7 @@ patient_id,vital_status
 57941,Dead
 57942,Dead
 57943,Dead
-57944,Alive
+57944,Dead
 57945,Dead
 57946,Dead
 57947,Alive
@@ -33956,7 +33956,7 @@ patient_id,vital_status
 57955,Dead
 57956,Dead
 57957,Alive
-57958,Dead
+57958,Alive
 57959,Dead
 57960,Dead
 57961,Dead
@@ -34012,7 +34012,7 @@ patient_id,vital_status
 58011,Dead
 58012,Dead
 58013,Dead
-58014,Dead
+58014,Alive
 58015,Dead
 58016,Dead
 58017,Dead
@@ -34176,7 +34176,7 @@ patient_id,vital_status
 58175,Dead
 58176,Alive
 58177,Dead
-58178,Dead
+58178,Alive
 58179,Dead
 58180,Alive
 58181,Dead
@@ -34224,7 +34224,7 @@ patient_id,vital_status
 58223,Dead
 58224,Dead
 58225,Dead
-58226,Alive
+58226,Dead
 58227,Dead
 58228,Alive
 58229,Dead
@@ -34286,7 +34286,7 @@ patient_id,vital_status
 58285,Dead
 58286,Dead
 58287,Dead
-58288,Alive
+58288,Dead
 58289,Dead
 58290,Dead
 58291,Dead
@@ -34420,7 +34420,7 @@ patient_id,vital_status
 58419,Dead
 58420,Dead
 58421,Dead
-58422,Dead
+58422,Alive
 58423,Dead
 58424,Dead
 58425,Dead
@@ -34472,7 +34472,7 @@ patient_id,vital_status
 58471,Dead
 58472,Dead
 58473,Dead
-58474,Dead
+58474,Alive
 58475,Dead
 58476,Dead
 58477,Alive
@@ -34613,7 +34613,7 @@ patient_id,vital_status
 58612,Dead
 58613,Dead
 58614,Dead
-58615,Dead
+58615,Alive
 58616,Dead
 58617,Dead
 58618,Dead
@@ -34723,14 +34723,14 @@ patient_id,vital_status
 58722,Dead
 58723,Dead
 58724,Dead
-58725,Alive
+58725,Dead
 58726,Dead
 58727,Dead
 58728,Alive
 58729,Dead
 58730,Alive
 58731,Dead
-58732,Alive
+58732,Dead
 58733,Dead
 58734,Dead
 58735,Dead
@@ -34795,10 +34795,10 @@ patient_id,vital_status
 58794,Dead
 58795,Alive
 58796,Dead
-58797,Alive
+58797,Dead
 58798,Dead
 58799,Dead
-58800,Dead
+58800,Alive
 58801,Dead
 58802,Dead
 58803,Dead
@@ -34847,7 +34847,7 @@ patient_id,vital_status
 58846,Dead
 58847,Dead
 58848,Dead
-58849,Alive
+58849,Dead
 58850,Dead
 58851,Dead
 58852,Dead
@@ -34859,7 +34859,7 @@ patient_id,vital_status
 58858,Dead
 58859,Dead
 58860,Dead
-58861,Dead
+58861,Alive
 58862,Dead
 58863,Alive
 58864,Dead
@@ -34873,7 +34873,7 @@ patient_id,vital_status
 58872,Dead
 58873,Dead
 58874,Dead
-58875,Alive
+58875,Dead
 58876,Dead
 58877,Alive
 58878,Dead
@@ -35157,7 +35157,7 @@ patient_id,vital_status
 59156,Dead
 59157,Dead
 59158,Dead
-59159,Dead
+59159,Alive
 59160,Dead
 59161,Dead
 59162,Dead
@@ -35195,7 +35195,7 @@ patient_id,vital_status
 59194,Alive
 59195,Dead
 59196,Dead
-59197,Dead
+59197,Alive
 59198,Dead
 59199,Alive
 59200,Alive
@@ -35267,7 +35267,7 @@ patient_id,vital_status
 59266,Dead
 59267,Alive
 59268,Dead
-59269,Dead
+59269,Alive
 59270,Dead
 59271,Alive
 59272,Dead
@@ -35306,7 +35306,7 @@ patient_id,vital_status
 59305,Dead
 59306,Dead
 59307,Alive
-59308,Dead
+59308,Alive
 59309,Alive
 59310,Dead
 59311,Dead
@@ -35449,7 +35449,7 @@ patient_id,vital_status
 59448,Dead
 59449,Dead
 59450,Dead
-59451,Alive
+59451,Dead
 59452,Dead
 59453,Dead
 59454,Dead
@@ -35509,7 +35509,7 @@ patient_id,vital_status
 59508,Dead
 59509,Dead
 59510,Alive
-59511,Dead
+59511,Alive
 59512,Dead
 59513,Alive
 59514,Dead
@@ -35546,12 +35546,12 @@ patient_id,vital_status
 59545,Dead
 59546,Dead
 59547,Alive
-59548,Dead
+59548,Alive
 59549,Alive
 59550,Dead
 59551,Dead
 59552,Dead
-59553,Dead
+59553,Alive
 59554,Dead
 59555,Dead
 59556,Dead
@@ -35571,7 +35571,7 @@ patient_id,vital_status
 59570,Dead
 59571,Dead
 59572,Dead
-59573,Dead
+59573,Alive
 59574,Dead
 59575,Dead
 59576,Dead
@@ -35661,7 +35661,7 @@ patient_id,vital_status
 59660,Dead
 59661,Dead
 59662,Dead
-59663,Alive
+59663,Dead
 59664,Dead
 59665,Dead
 59666,Dead
@@ -35709,7 +35709,7 @@ patient_id,vital_status
 59708,Dead
 59709,Dead
 59710,Dead
-59711,Dead
+59711,Alive
 59712,Dead
 59713,Dead
 59714,Dead
@@ -35751,7 +35751,7 @@ patient_id,vital_status
 59750,Dead
 59751,Dead
 59752,Dead
-59753,Alive
+59753,Dead
 59754,Dead
 59755,Dead
 59756,Alive
@@ -35759,7 +35759,7 @@ patient_id,vital_status
 59758,Dead
 59759,Alive
 59760,Dead
-59761,Alive
+59761,Dead
 59762,Alive
 59763,Dead
 59764,Dead
@@ -35817,7 +35817,7 @@ patient_id,vital_status
 59816,Dead
 59817,Alive
 59818,Dead
-59819,Alive
+59819,Dead
 59820,Dead
 59821,Dead
 59822,Dead
@@ -35845,7 +35845,7 @@ patient_id,vital_status
 59844,Dead
 59845,Alive
 59846,Dead
-59847,Dead
+59847,Alive
 59848,Dead
 59849,Dead
 59850,Dead
@@ -35890,7 +35890,7 @@ patient_id,vital_status
 59889,Alive
 59890,Dead
 59891,Dead
-59892,Dead
+59892,Alive
 59893,Dead
 59894,Alive
 59895,Dead
@@ -35924,8 +35924,8 @@ patient_id,vital_status
 59923,Dead
 59924,Dead
 59925,Dead
-59926,Alive
-59927,Alive
+59926,Dead
+59927,Dead
 59928,Dead
 59929,Alive
 59930,Dead

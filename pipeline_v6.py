@@ -336,7 +336,7 @@ for rep in range(N_REPS):
 
         f5 = f1_score(y[val_idx], (v5_val >= 0.5).astype(int), pos_label=1)
         f4 = f1_score(y[val_idx], (v4_val >= 0.5).astype(int), pos_label=1)
-        print(f"    F{fold+1}: v5={f5:.5f}  v4={f4:.5f}")
+        print(f"    F{fold+1} Dead-class F1: v5={f5:.5f}  v4={f4:.5f}")
 
 # Average OOF across repeats
 oof_v5 /= oof_counts
@@ -359,14 +359,14 @@ for alpha in np.arange(0.0, 1.01, 0.05):
         best_blend_f1 = f
         best_alpha = round(alpha, 2)
 
-print(f"  Best blend: {best_alpha:.0%} v5 + {1-best_alpha:.0%} v4 → OOF F1={best_blend_f1:.5f}")
+print(f"  Best blend: {best_alpha:.0%} v5 + {1-best_alpha:.0%} v4 → OOF Dead-class F1={best_blend_f1:.5f}")
 
 # Also check individual OOF scores
 f5_oof = f1_score(y, (oof_v5 >= 0.5).astype(int), pos_label=1)
 f4_oof = f1_score(y, (oof_v4 >= 0.5).astype(int), pos_label=1)
-print(f"  v5 alone OOF F1: {f5_oof:.5f}")
-print(f"  v4 alone OOF F1: {f4_oof:.5f}")
-print(f"  Blend   OOF F1:  {best_blend_f1:.5f}")
+print(f"  v5 alone OOF Dead-class F1: {f5_oof:.5f}")
+print(f"  v4 alone OOF Dead-class F1: {f4_oof:.5f}")
+print(f"  Blend   OOF Dead-class F1:  {best_blend_f1:.5f}")
 
 # Blend test predictions
 test_blend = best_alpha * v5_ens + (1 - best_alpha) * v4_ens
@@ -498,7 +498,7 @@ sub2.to_csv(OUTPUT_DIR / "submission_blend.csv", index=False)
 print(f"  {OUTPUT_DIR / 'submission_blend.csv'}: th={th2:.3f} → Dead={preds2.sum():,} ({preds2.mean():.1%})")
 
 # Comparison with previous best
-print(f"\n  Reference: Best LB score 0.876730 at Dead%=84.5%")
+print(f"\n  Historical pre-v6 LB benchmark: 0.876730 at Dead%=84.5%")
 print(f"  Historical v5 probabilities are retained in archive/probs_foldavg.npy")
 
 print(f"\n{'='*80}")
