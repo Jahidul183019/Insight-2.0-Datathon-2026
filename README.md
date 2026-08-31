@@ -38,10 +38,29 @@ saved-OOF screening evidence but is not claimed as a clean-runtime retrain.
 Written organizer acceptance of this notebook/selection asymmetry remains an
 open compliance item until a response is retained.
 
+## Separate Submission 10 recipe audit
+
+`insight_2_0_submission10.ipynb` is a separate, executed notebook that retrains
+the Submission 6 tree system and the historical entity-embedding NN before
+forming the 80%/20% blend. Its clean-kernel run completed in `516.84` seconds,
+saved five new NN fold checkpoints, and passed all structural checks.
+
+The fresh tree vector matched the historical tree bytes, but the fresh NN did
+not reproduce the missing historical NN checkpoints: the fresh blend changed
+108 labels relative to archived Submission 10 and has SHA-256
+`d624009d5e12e58c157bee34b664ebaf23eba05f9613f2c5e7ccd0c65a98cf34`.
+An explicitly separate historical-artifact replay reproduces Submission 10
+exactly with SHA-256
+`333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1`.
+The replay proves provenance, not an exact historical NN retrain, so it does
+not replace the rulebook-safe Submission 6 notebook without organizer approval.
+
 ## Reproducibility
 
 - `insight_2_0_consolidated.ipynb` embeds and executes the complete Submission 6
   workflow without loading cached model probabilities.
+- `insight_2_0_submission10.ipynb` executes the full Submission 10 recipe and
+  keeps its fresh retrain separate from the optional historical replay.
 - `pseudo_label_nested_validation.py` performs the five-fold outer-holdout gate
   comparing 90% pseudo-labeling with a rebuilt 95% control.
 - `pipeline_v6.py` contains the original tree/pseudo-label training workflow.
@@ -109,6 +128,9 @@ a byte mismatch.
 - `archive/probs_v6_final.npy`: exact probability source for Submission 6
 - `archive/probs_v6_blend.npy`: pre-pseudo v6 teacher probabilities
 - `archive/probs_nn.npy`: NN test probabilities used by Submission 10
+- `artifacts/submission10_notebook/`: fresh Submission 10 recipe retrain,
+  five newly preserved NN fold checkpoints, exact historical replay, and the
+  machine-readable reproduction report
 - `archive/oof_nn.npy` and the versioned diagnostic outputs: historical local
   validation inputs; they are not required by the final notebook
 - `diagnostic_outputs/submission6_nested/nested_oof_predictions.npz`: completed

@@ -1,0 +1,36 @@
+{
+  "fresh_oof_screening_metrics": {
+    "blend_pre_pseudo_proxy_weighted_f1": 0.8780227324913893,
+    "nn_weighted_f1": 0.8711471871412171,
+    "tree_pre_pseudo_weighted_f1": 0.877513432835821
+  },
+  "fresh_output": {
+    "alive": 5589,
+    "dead": 30411,
+    "nn_probability_sha256": "499740c22ed4bab0704e9b14f385ec33e61a995049075c50111087f251dd8454",
+    "rows": 36000,
+    "submission_path": "artifacts/submission10_notebook/submission.csv",
+    "submission_sha256": "d624009d5e12e58c157bee34b664ebaf23eba05f9613f2c5e7ccd0c65a98cf34",
+    "tree_probability_sha256": "aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6"
+  },
+  "historical_audit": {
+    "available": true,
+    "fresh_nn_matches_historical_bytes": false,
+    "fresh_submission_matches_historical_bytes": false,
+    "fresh_vs_historical_label_disagreements": 108,
+    "fresh_vs_historical_nn_mae": 0.017510407778140183,
+    "fresh_vs_historical_nn_max_error": 0.20145893096923828,
+    "fresh_vs_historical_nn_pearson": 0.9934927511494037,
+    "fresh_vs_historical_nn_spearman": 0.9916363690296921,
+    "historical_replay_exact": true,
+    "historical_replay_path": "artifacts/submission10_notebook/historical_replay_submission10.csv",
+    "historical_replay_sha256": "333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1",
+    "trusted_expected_hashes": true
+  },
+  "historical_expected_hashes": {
+    "nn_probability_sha256": "7ec4721ae7d4eccb35ebc5821014e581ad2da4e872775d8a4845f37423b1ce46",
+    "submission10_sha256": "333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1",
+    "tree_probability_sha256": "aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6"
+  },
+  "status": "fresh_recipe_retrain"
+}

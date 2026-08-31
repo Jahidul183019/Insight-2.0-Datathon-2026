@@ -19,6 +19,12 @@
   notebook model because its original per-fold NN checkpoints were not
   preserved. Written organizer acceptance of this split remains an open risk
   until a response is retained.
+- **Submission 10 Recipe Notebook:** `insight_2_0_submission10.ipynb` now
+  performs a full fresh tree-plus-NN retrain and saves five new NN fold
+  checkpoints. Its fresh blend differs from historical Submission 10 on 108
+  rows; a separately labelled frozen-artifact replay matches the historical
+  CSV exactly. This documents provenance but does not close the missing
+  historical-checkpoint gap.
 - **Pending Model Candidates:** None. Every locally evaluated candidate has
   either been submitted and scored or explicitly rejected.
 
@@ -47,6 +53,24 @@
   It remains a valid scored historical artifact, but its original per-fold NN
   model checkpoints were not saved, so it is not claimed as the exact
   retrainable final notebook model.
+
+### Separate Submission 10 Recipe Audit
+
+- `insight_2_0_submission10.ipynb` completed from a fresh kernel in `516.84`
+  seconds with execution counts 1–6 and no error outputs.
+- The fresh Submission 6 tree probability matched the archived vector exactly.
+- The deterministic fresh NN probability had SHA-256
+  `499740c22ed4bab0704e9b14f385ec33e61a995049075c50111087f251dd8454`.
+- The resulting fresh 80%/20% CSV has SHA-256
+  `d624009d5e12e58c157bee34b664ebaf23eba05f9613f2c5e7ccd0c65a98cf34`
+  and differs from historical Submission 10 on 108 rows while retaining exactly
+  30,411 `Dead` predictions.
+- The optional post-training historical replay matched archived Submission 10
+  exactly at SHA-256
+  `333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1`.
+- Five new fold checkpoints were retained for this fresh deterministic rerun.
+  They are not the missing historical checkpoints and therefore do not prove
+  byte-identical historical model retraining.
 
 ## Metric Correction
 
@@ -234,7 +258,7 @@ gate is approved.
   `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
 - **LB Score:** `0.877460` (verified via user screenshot on 2026-08-29).
 - **Comparison with Submission 6:** `+0.000202`. This is a new **Personal Best**. The conservative 10% injection of the Neural Network probabilities provided enough structural diversity to correct tree errors without diluting the strong GBDT signal.
-- **Status:** Submitted and corroborated via Kaggle submissions page screenshot on 2026-08-29. It is the highest verified Public-LB artifact, but its Private-LB performance is unknown and the saved-OOF screen did not favor it over Submission 10.
+- **Status:** Submitted and corroborated via Kaggle submissions page screenshot on 2026-08-29. Subsequently superseded as the primary Kaggle selection by Submission 10, which dominated the 40/60 validation harness (see Final Strategy Selection).
 
 ---
 
