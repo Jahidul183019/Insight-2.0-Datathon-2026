@@ -1,8 +1,7 @@
 """Build the self-contained, reproducible final competition notebook.
 
 The generated notebook embeds the exact Submission 6 training implementation
-instead of loading frozen prediction vectors.  Historical artifacts are used
-only for an optional post-training equality check.
+instead of loading frozen predictions, checkpoints, or project-local modules.
 """
 
 from __future__ import annotations
@@ -15,22 +14,45 @@ import nbformat as nbf
 ROOT = Path(__file__).resolve().parent
 NOTEBOOK_PATH = ROOT / "insight_2_0_consolidated.ipynb"
 
+ASCII_TRANSLATION = str.maketrans(
+    {
+        "\u00d7": "x",
+        "\u2013": "-",
+        "\u2014": "-",
+        "\u2192": "->",
+        "\u2264": "<=",
+        "\u2265": ">=",
+        "\u2500": "-",
+    }
+)
+
 
 def markdown(text: str):
-    return nbf.v4.new_markdown_cell(text.strip() + "\n")
+    return nbf.v4.new_markdown_cell(text.translate(ASCII_TRANSLATION).strip() + "\n")
 
 
 def code(text: str):
-    return nbf.v4.new_code_cell(text.strip() + "\n")
+    return nbf.v4.new_code_cell(text.translate(ASCII_TRANSLATION).strip() + "\n")
 
 
 def embedded_tree_pipeline() -> str:
     source = (ROOT / "pipeline_v6.py").read_text(encoding="utf-8")
     old = 'OUTPUT_DIR = Path("artifacts/v6_rerun")'
-    new = 'OUTPUT_DIR = Path("artifacts/final_notebook")'
+    new = 'OUTPUT_DIR = ROOT / "artifacts" / "final_notebook"'
     if source.count(old) != 1:
         raise RuntimeError("Could not locate the canonical v6 output declaration")
     source = source.replace(old, new)
+    for old_path, new_path in (
+        ('train_df = pd.read_csv("train.csv")', "train_df = pd.read_csv(TRAIN_PATH)"),
+        ('test_df = pd.read_csv("test.csv")', "test_df = pd.read_csv(TEST_PATH)"),
+    ):
+        if source.count(old_path) != 1:
+            raise RuntimeError(f"Could not locate pipeline input: {old_path}")
+        source = source.replace(old_path, new_path)
+    source = source.replace(
+        'print(f"  Historical v5 probabilities are retained in archive/probs_foldavg.npy")',
+        'print(f"  Fresh V6 probabilities were generated in this run")',
+    )
     return (
         "# Exact final-model training implementation, embedded for portability.\n"
         "# It reads only train.csv/test.csv and writes under artifacts/final_notebook/.\n"
@@ -51,7 +73,7 @@ nb.metadata = {
 nb.cells = [
     markdown(
         """
-# Insight 2.0 — Reproducible Final Model
+# Insight 2.0 - Reproducible Final Model
 
 This notebook trains the final Submission 6 workflow for cancer-patient vital
 status prediction. The competition describes the metric as weighted F1 and
@@ -92,17 +114,54 @@ import xgboost
 import catboost
 from sklearn.metrics import f1_score
 
-ROOT = Path.cwd().resolve()
-TRAIN_PATH = ROOT / "train.csv"
-TEST_PATH = ROOT / "test.csv"
-for required in (TRAIN_PATH, TEST_PATH):
-    if not required.is_file():
-        raise FileNotFoundError(f"Missing required competition file: {required}")
+RUN_DIR = Path.cwd().resolve()
+ROOT = Path("/kaggle/working") if Path("/kaggle/working").is_dir() else RUN_DIR
+
+def locate_data_files():
+    candidate_dirs = [RUN_DIR, ROOT]
+    kaggle_input = Path("/kaggle/input")
+    if kaggle_input.is_dir():
+        candidate_dirs.extend(
+            sorted({path.parent for path in kaggle_input.rglob("train.csv")})
+        )
+
+    seen = set()
+    for directory in candidate_dirs:
+        directory = directory.resolve()
+        if directory in seen:
+            continue
+        seen.add(directory)
+        train_path = directory / "train.csv"
+        test_path = directory / "test.csv"
+        if not (train_path.is_file() and test_path.is_file()):
+            continue
+        try:
+            train_columns = set(pd.read_csv(train_path, nrows=2).columns)
+            test_columns = set(pd.read_csv(test_path, nrows=2).columns)
+        except Exception:
+            continue
+        if (
+            "vital_status" in train_columns
+            and "vital_status" not in test_columns
+            and "patient_id" in train_columns
+            and "patient_id" in test_columns
+            and test_columns == train_columns - {"vital_status"}
+        ):
+            return train_path, test_path
+
+    raise FileNotFoundError(
+        "Could not locate the organizer train.csv and test.csv together. "
+        "Attach the competition data to the notebook or place both files "
+        "beside the notebook."
+    )
+
+TRAIN_PATH, TEST_PATH = locate_data_files()
 
 train = pd.read_csv(TRAIN_PATH)
 test = pd.read_csv(TEST_PATH)
 assert train.columns.tolist() == ["patient_id", "vital_status", *test.columns.drop("patient_id").tolist()] or set(test.columns) == set(train.columns) - {"vital_status"}
 assert "vital_status" not in test.columns
+assert len(train) == 24_000 and len(test) == 36_000
 assert train["patient_id"].is_unique and test["patient_id"].is_unique
 assert not train["patient_id"].isna().any() and not test["patient_id"].isna().any()
 assert set(train["vital_status"].unique()) == {"Dead", "Alive"}
@@ -129,6 +188,8 @@ VERSION_MATCHES = {
     for name, expected in AUDITED_VERSIONS.items()
 }
 print("Python:", platform.python_version())
+print("Training data:", TRAIN_PATH)
+print("Test data:", TEST_PATH)
 display(pd.DataFrame({
     "audited": AUDITED_VERSIONS,
     "runtime": RUNTIME_VERSIONS,
@@ -248,10 +309,8 @@ The full pseudo-labelled system has no ordinary OOF vector because test-derived
 pseudo labels are part of its student training population. To avoid presenting
 an optimistic estimate, the local score below is explicitly the pre-pseudo
 teacher OOF score at the locked class-count policy. The final cell then verifies
-the fresh probability vector and submission structure. If the historical
-reference files are present, they are used only after training to measure exact
-byte and label-level reproduction; they never contribute to prediction
-generation.
+the fresh probability vector and submission structure without loading any
+historical predictions or model artifacts.
 """
     ),
     code(
@@ -320,37 +379,8 @@ if not all(VERSION_MATCHES.values()):
         "floating-point reproduction is therefore not expected."
     )
 
-historical_path = ROOT / "archive" / "submission6.csv"
-historical_label_disagreements = None
-historical_bytes_equal = None
-if historical_path.is_file():
-    historical = pd.read_csv(historical_path)
-    if (
-        historical.columns.tolist() == ["patient_id", "vital_status"]
-        and len(historical) == len(test)
-        and historical["patient_id"].equals(test["patient_id"])
-        and historical["vital_status"].isin(["Dead", "Alive"]).all()
-    ):
-        historical_label_disagreements = int(
-            (generated["vital_status"] != historical["vital_status"]).sum()
-        )
-        historical_bytes_equal = (
-            generated_submission_path.read_bytes() == historical_path.read_bytes()
-        )
-        if historical_label_disagreements:
-            warnings.warn(
-                f"Fresh predictions differ from the audited Submission 6 on "
-                f"{historical_label_disagreements:,} rows."
-            )
-    else:
-        warnings.warn(
-            "The optional historical reference is malformed or misaligned; "
-            "it was ignored and did not affect prediction generation."
-        )
-
 # Promote only after all machine-independent structural checks pass. Exact
 # reference hashes remain diagnostics, not cross-platform execution gates.
-# Submission 12 remains safely preserved at archive/submission12.csv.
 canonical_submission_path = ROOT / "submission.csv"
 canonical_submission_path.write_bytes(generated_submission_path.read_bytes())
 assert sha256(canonical_submission_path) == actual_submission_sha256
@@ -359,8 +389,6 @@ print("Structural validation: PASS")
 print("Audited environment exact match:", all(VERSION_MATCHES.values()))
 print("Exact probability-byte match:", exact_probability_bytes)
 print("Exact CSV-byte match:", exact_submission_bytes)
-print("Historical label disagreements:", historical_label_disagreements)
-print("Historical CSV bytes equal:", historical_bytes_equal)
 print("Final submission:", canonical_submission_path)
 print("Rows / Dead / Alive:", len(generated), int(generated.vital_status.eq("Dead").sum()), int(generated.vital_status.eq("Alive").sum()))
 print("Actual SHA-256:", actual_submission_sha256)
@@ -423,27 +451,37 @@ else:
         "The final retained component does not expose CatBoost feature "
         "importance; the optional interpretation plot was skipped."
     )
+
+teacher_oof_age_rows = []
+age_values = train["age_recode"].fillna("Missing").astype(str)
+for age_band, indices in age_values.groupby(age_values).groups.items():
+    indices = np.asarray(list(indices))
+    if len(indices) < 200:
+        continue
+    teacher_oof_age_rows.append({
+        "age_band": age_band,
+        "patients": len(indices),
+        "support_weighted_F1": f1_score(
+            np.asarray(y)[indices],
+            teacher_oof_labels[indices],
+            average="weighted",
+            zero_division=0,
+        ),
+    })
+
+teacher_oof_age_table = pd.DataFrame(teacher_oof_age_rows).sort_values(
+    "support_weighted_F1"
+)
+display(teacher_oof_age_table)
 """
     ),
     markdown(
         """
-### Leakage-safe age-band audit
+### Age-band audit
 
-The table below is an extract from
-`diagnostic_outputs/age55_investigation/age_band_metrics.csv` using the
-`submission6_nested_equivalent` predictions. Each patient was predicted by an
-outer fold that excluded that patient during fitting.
-
-| Age band | Patients | Weighted F1 | ROC AUC |
-| --- | ---: | ---: | ---: |
-| 50–54 | 789 | 0.8514 | 0.8904 |
-| 55–59 | 1,821 | 0.8381 | 0.8625 |
-| 60–64 | 2,925 | 0.8584 | 0.8860 |
-| 65–69 | 3,851 | 0.8484 | 0.8801 |
-| 70–74 | 4,233 | 0.8723 | 0.8988 |
-
-Age 55–59 had the lowest weighted F1 among these bands. A dedicated follow-up
-found no stable error cluster that justified a subgroup-specific rule.
+The preceding table is computed in this notebook from the pre-pseudo teacher
+OOF predictions. Only age bands with at least 200 patients are shown. It is a
+model diagnostic, not a clinical performance claim.
 
 ### Decision rate
 
@@ -478,11 +516,10 @@ hashes are therefore reported as diagnostic references rather than
 cross-platform execution requirements; schema, patient IDs, labels, missing
 values, row count, and class count remain strict checks.
 
-The nested-equivalent local reconstruction achieved support-weighted F1
-`0.877004`. The age-band audit found lower performance for ages 55–59, while
-the displayed importance chart represents one CatBoost component rather than
-the complete ensemble. These associations should not be interpreted as causal
-or clinical conclusions.
+The displayed importance chart represents one CatBoost component rather than
+the complete ensemble. The age-band table is calculated from the teacher OOF
+predictions. These associations should not be interpreted as causal or
+clinical conclusions.
 
 Pseudo-label training can reinforce confident teacher errors, and a fixed
 class-count policy may transfer poorly if the hidden class prevalence differs.
