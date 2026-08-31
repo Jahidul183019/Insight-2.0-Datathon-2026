@@ -40,6 +40,7 @@ older binary F1 values are retained only when explicitly labelled
 | 12 | `archive/submission12.csv` | 30,411 | **`0.877460`** | 90% Submission 6 probabilities plus 10% NN probabilities; highest verified Public score. |
 | 13 | `archive/submission13_harmonized.csv` | 30,419 | `0.875597` | Harmonized tumour-size features; rejected after Public regression. |
 | 14 | `artifacts/submission10_notebook/submission.csv` | 30,411 | `0.876333` | Fresh reconstruction of the Submission 10 recipe; 108 labels differ from historical Submission 10. |
+| 15 | `submission_candidate_3way.csv` | 30,411 | `0.876257` | 75% tree / 25% NN blend; OOF-optimal but lowest Public score among NN blends. |
 
 ## Submission 6 reproducibility
 
@@ -125,20 +126,43 @@ strong evidence of a consistent generalization improvement.
 
 ## Final-selection evidence
 
-A 50-repeat saved-OOF 40%/60% stability screen compared Submissions 6, 10, and
-12 at the fixed class count:
+A 50-repeat saved-OOF 40%/60% stability screen compared Submissions 6, 10,
+12, and the new 75/25 blend at the fixed class count:
 
-| Candidate | Split wins | Notes |
-| --- | ---: | --- |
-| Submission 10 | 40/50 | Highest win frequency in this screening exercise |
-| Submission 12 | 3/50 | Highest verified Public score |
-| Submission 6 | 2/50 | Fully reproducible tree anchor |
-| Ties | 5/50 | — |
+| Candidate | Split wins | Mean Private F1 | Notes |
+| --- | ---: | ---: | --- |
+| 75/25 blend (Sub 15) | 32/50 | `0.877929` | OOF-dominant but Public LB `0.876257` |
+| Submission 10 (80/20) | 9/50 | `0.877709` | Planned primary selection |
+| Submission 12 (90/10) | 2/50 | `0.877256` | Highest verified Public score |
+| Submission 6 (100% tree) | 0/50 | `0.876871` | Fully reproducible tree anchor |
+| Ties | 7/50 | — | — |
 
-These partitions overlap and reuse saved OOF predictions. They are useful for
-stability screening but are not independent confidence intervals or replicas
-of Kaggle's Public/Private split. The planned pair of Submission 10 and
-Submission 6 balances the saved-OOF result with a fully reproducible tree model.
+Head-to-head at fixed 84.5% rate:
+
+| Matchup | Wins | Losses | Ties |
+| --- | ---: | ---: | ---: |
+| 75/25 vs Sub 10 | 32 | 12 | 6 |
+| 75/25 vs Sub 12 | 44 | 4 | 2 |
+| 75/25 vs Sub 6 | 48 | 2 | 0 |
+
+### Public/Private divergence
+
+The Public LB and OOF harness disagree about the optimal NN weight:
+
+| NN weight | Public LB | OOF harness direction |
+| ---: | ---: | --- |
+| 0% (Sub 6) | `0.877258` | Worst |
+| 10% (Sub 12) | **`0.877460`** | Second worst |
+| 20% (Sub 10) | `0.876616` | Second best |
+| 25% (Sub 15) | `0.876257` | **Best** |
+
+More NN weight consistently improves simulated Private holdouts but
+consistently hurts the single Public split. This pattern means the final
+Private ranking is genuinely uncertain.
+
+The planned pair of Submission 10 and Submission 6 balances the OOF result
+with a fully reproducible tree model without betting entirely on either
+signal.
 
 Only one notebook is submitted: the Submission 6 workflow. If organizers
 require the notebook model to match a different selected Kaggle entry exactly,
