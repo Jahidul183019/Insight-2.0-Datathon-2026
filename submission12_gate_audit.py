@@ -1,4 +1,4 @@
-"""Reproducible diagnostics-only gate audit for the proposed Submission 12.
+"""Diagnostics-only gate audit for the pre-numbering pseudo90+NN20 stress candidate.
 
 The proposed candidate is an 80% nested-pseudo90 / 20% neural-network OOF
 blend.  This script evaluates it against the available saved OOF controls at
@@ -826,11 +826,11 @@ def write_report(
         )
     ]
     lines = [
-        "# Submission 12 gate audit",
+        "# Pre-numbering pseudo90+NN20 stress-candidate gate audit",
         "",
         "## Decision",
         "",
-        "**NO-GO: do not generate or submit Submission 12.** The candidate fails "
+        "**NO-GO: do not generate or submit this stress candidate.** It fails "
         "multiple predeclared gates under the official weighted-F1 metric. The legacy "
         "Dead-class binary-F1 view reaches the same decision.",
         "",
@@ -1068,7 +1068,7 @@ def main() -> None:
     if not integrity["unchanged"].all():
         raise RuntimeError("A protected submission/history artifact changed during audit")
 
-    print("Submission 12 diagnostics-only gate audit complete.")
+    print("Pre-numbering pseudo90+NN20 stress-candidate gate audit complete.")
     print(f"Outputs: {OUTPUT_DIR}")
     print("Decision: NO-GO; no submission or test-probability artifact was generated.")
 

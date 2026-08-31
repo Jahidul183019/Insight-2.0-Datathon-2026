@@ -11,10 +11,16 @@
 - **Rulebook-Safe Final Model:** Submission 6 (`0.877258`). It is regenerated
   end-to-end by the executed final notebook and matches its archived CSV and
   probability vector byte-for-byte.
-- **Historical Private-LB Pair Analysis:** Submission 10 plus Submission 6 had
-  the strongest saved-OOF harness evidence. Submission 10 is not the declared
-  final notebook model because its original NN weights were not preserved.
-- **Pending/Unverified Candidates:** None. All local candidates (like Submission 12) have either been skipped or explicitly resolved.
+- **Planned Kaggle Final Pair:** Submission 10 (primary) plus Submission 6
+  (secondary), based on saved-OOF screening stability and model diversity.
+  Actual selection in Kaggle's final-submission picker still requires external
+  screenshot/API confirmation.
+- **Notebook/Picker Asymmetry:** Submission 10 is not the declared final
+  notebook model because its original per-fold NN checkpoints were not
+  preserved. Written organizer acceptance of this split remains an open risk
+  until a response is retained.
+- **Pending Model Candidates:** None. Every locally evaluated candidate has
+  either been submitted and scored or explicitly rejected.
 
 ## Final Notebook Reproducibility Audit
 
@@ -26,6 +32,8 @@
 - A clean full run completed successfully and regenerated
   `submission.csv` with SHA-256
   `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`.
+- Two clean-kernel audits completed without intervention in `237.02` and
+  `231.05` seconds (about 3 minutes 51–57 seconds) on the development machine.
 - The generated probability vector has SHA-256
   `aca54c31462449df432e1edda5da81a6d04e242c8985cfde0e5983c6d0d92ab6`.
 - Both files are byte-identical to the archived Submission 6 references.
@@ -36,9 +44,9 @@
   failure.
 - Submission 12 remains archived with SHA-256
   `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
-  It remains a valid scored historical artifact, but its original NN fold
-  weights were not saved, so it is not claimed as the exact retrainable final
-  notebook model.
+  It remains a valid scored historical artifact, but its original per-fold NN
+  model checkpoints were not saved, so it is not claimed as the exact
+  retrainable final notebook model.
 
 ## Metric Correction
 
@@ -163,7 +171,7 @@ gate is approved.
 - **Difference from Submission 6:** 292 rows change labels while the total Dead count remains fixed.
 - **LB Score:** `0.876616` (verified via Kaggle submissions page screenshot on 2026-08-29)
 - **Comparison with Submission 6:** `-0.000642`; the neural-network diversity blend did not surpass Submission 6 on the Public Leaderboard.
-- **Insight:** Submission 10 outperformed the stacking Super-Blend in Submission 8 (`0.876305`) by `0.000311`, but remained below Submission 6 (`0.877258`). It is therefore useful as a verified diversity candidate, not as the primary submission.
+- **Insight:** Submission 10 outperformed the stacking Super-Blend in Submission 8 (`0.876305`) by `0.000311`, but remained below Submission 6 (`0.877258`) on the Public split. The planned final pair nevertheless uses Submission 10 as the primary picker entry because the saved-OOF stability screen favored its 80/20 diversity blend; this is screening evidence, not proof about the hidden Private split.
 - **Status:** Submitted and verified from the Kaggle submissions page on 2026-08-29.
 
 ### Submission 11
@@ -200,10 +208,10 @@ gate is approved.
   2026-08-29.
 
 ### Submission 12 (New Best Score!)
-- **File:** `submission.csv` (current upload file);
-  `archive/submission12.csv` (byte-identical archived snapshot);
+- **File:** `archive/submission12.csv` (byte-identical archived snapshot);
   `artifacts/submission12_nn10/submission12_nn10.csv` (byte-identical generated
-  artifact).
+  artifact). Root `submission.csv` now contains the reproducible Submission 6
+  output, not Submission 12.
 - **Strategy:** Conservative neural-network interpolation using 90% archived
   Submission 6 probabilities (`archive/probs_v6_final.npy`) and 10% neural-
   network probabilities (`archive/probs_nn.npy`). Labels use a deterministic
@@ -226,13 +234,13 @@ gate is approved.
   `4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11`.
 - **LB Score:** `0.877460` (verified via user screenshot on 2026-08-29).
 - **Comparison with Submission 6:** `+0.000202`. This is a new **Personal Best**. The conservative 10% injection of the Neural Network probabilities provided enough structural diversity to correct tree errors without diluting the strong GBDT signal.
-- **Status:** Submitted and corroborated via Kaggle submissions page screenshot on 2026-08-29. This is now the undisputed primary candidate for the Private Leaderboard.
+- **Status:** Submitted and corroborated via Kaggle submissions page screenshot on 2026-08-29. It is the highest verified Public-LB artifact, but its Private-LB performance is unknown and the saved-OOF screen did not favor it over Submission 10.
 
 ---
 
 ## Final Strategy Selection
 
-For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Following the principle of prioritizing robust local validation over single-split Public Leaderboard feedback, the final pair is determined by a 50-repeat stratified 40/60 split validation harness evaluating the three canonical candidates (Submission 6, Submission 10, and Submission 12).
+For the final Kaggle Private Leaderboard evaluation, you are allowed to select two submissions. Following the principle of prioritizing robust local validation over single-split Public Leaderboard feedback, the planned pair was informed by a 50-repeat stratified 40/60 saved-OOF screening harness evaluating the three canonical candidates (Submission 6, Submission 10, and Submission 12).
 
 As documented in `diagnostic_outputs/validation_harness/three_way_summary.md` and `oof_40_60_three_way_results.csv`, at the locked production positive rate of 84.5% (the exact policy used to generate the submissions), the harness results on the simulated private holdouts are:
 - **Submission 10 (80% Tree / 20% NN):** Won 40 out of 50 holds (Mean F1 gap to 2nd place: `+0.000506` ± `0.000397`).
@@ -240,20 +248,25 @@ As documented in `diagnostic_outputs/validation_harness/three_way_summary.md` an
 - **Submission 6 (100% Tree):** Won 2 out of 50 holds.
 - **Ties:** 5 out of 50 holds.
 
-Based on saved-OOF performance evidence, the historical ranking recommendation
-was **Submission 10 plus Submission 6**:
+Based on saved-OOF performance evidence, the planned final picker pair is
+**Submission 10 plus Submission 6**. Current selection in Kaggle must still be
+confirmed externally:
 
-1. **Submission 10 (Primary):** Despite having a lower Public LB score (`0.876616`) than Submission 12 (`0.877460`), the local harness proves the 80/20 neural-network blend is significantly more robust. It dominated the simulated private splits (winning 40/50 holds, beating Sub 12 head-to-head 43 times), making it the strongest generalizer.
+1. **Submission 10 (Primary):** Despite having a lower Public LB score (`0.876616`) than Submission 12 (`0.877460`), the saved-OOF screen favored the 80/20 neural-network blend: it won 40/50 three-way holdouts and beat Submission 12 head-to-head 43 times. These overlapping simulated splits support the choice but do not prove superiority on Kaggle's hidden Private split.
 2. **Submission 6 (Secondary):** The canonical pure-tree ensemble (`0.877258`). It provides maximum structural diversity as a fallback against any neural-network overfitting, ensuring a safe, purely tree-based anchor.
 
-*(Note: While Submission 12 achieved the highest Public LB score, it is explicitly not selected because its local holdout win-rate and mean F1 were strictly inferior to Submission 10. We choose local simulation stability over noisy public-split feedback.)*
+*(Note: Submission 12 achieved the highest Public LB score, while the overlapping saved-OOF holdouts favored Submission 10 by win rate and mean F1. The planned pair prioritizes that screening stability over one Public split; neither result proves the hidden Private ordering.)*
 
 For the notebook deliverable, reproducibility is a separate hard gate. The
-original NN fold weights used by Submissions 10 and 12 were not preserved, and
+original per-fold NN model checkpoints used by Submissions 10 and 12 were not preserved, and
 fresh NN retraining is hardware-sensitive. Therefore, the rulebook-safe final
-notebook model is **Submission 6**. Select Submission 6 as a final Kaggle entry
-unless the organizers explicitly confirm that loading the frozen NN probability
-artifact is sufficient for their reproducibility review.
+notebook model is **Submission 6**. This does not change the planned Kaggle
+picker pair of Submission 10 plus Submission 6, but it leaves a disclosed
+compliance risk until the organizers confirm that the notebook may reproduce
+the secondary anchor while the primary entry is supported by saved-OOF evidence
+rather than an exact clean-runtime NN retrain. If the organizers reject that
+asymmetry, revise the final picker before the deadline rather than treating the
+current plan as approved.
 
 ---
 
@@ -310,6 +323,8 @@ A candidate blending 95% of the pre-pseudo "teacher" probabilities with 5% of th
 - **Paired Bootstrap:** 95% CI [-0.001542, 0.000747] (not significant, includes zero).
 - **Harness Stability:** Won 14 out of 50 simulated private holdouts vs Submission 10 (14 wins, 31 losses, 5 ties).
 - **Subgroup Safety:** Passed on Age 55-59 (+0.0028) but regressed on Localized stage (-0.0028).
+The machine-readable decision is retained at
+`diagnostic_outputs/validation_harness/teacher_nn5_gate_decision.json`.
 **Decision:** NO GO. Submission skipped.
 
 ### 85% Dead-Rate Threshold (Failed Gate)

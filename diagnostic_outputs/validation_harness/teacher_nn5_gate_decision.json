@@ -1,0 +1,49 @@
+{
+  "schema_version": "teacher_nn5_gate_v1",
+  "candidate": "95% pre-pseudo teacher OOF plus 5% NN OOF",
+  "comparator": "Submission 10 saved-OOF screening analogue",
+  "official_metric": "support-weighted F1",
+  "fixed_dead_rate": 0.845,
+  "full_oof": {
+    "candidate_weighted_f1": 0.877428549559893,
+    "comparator_weighted_f1": 0.8778529659395331
+  },
+  "five_fold_check": {
+    "candidate_fold_weighted_f1": [
+      0.8770321803542951,
+      0.8815878300803675,
+      0.8762218419083782,
+      0.8769045362952016,
+      0.8753651039472016
+    ],
+    "comparator_fold_weighted_f1": [
+      0.8788273020906822,
+      0.8823191539513627,
+      0.8772958482358532,
+      0.8758965027765608,
+      0.8748976253282833
+    ],
+    "candidate_wins": 2,
+    "folds": 5
+  },
+  "paired_bootstrap": {
+    "seed": 9042,
+    "repeats": 1000,
+    "mean_delta_candidate_minus_comparator": -0.0003985255905056858,
+    "ci_95_lower": -0.00154182130801698,
+    "ci_95_upper": 0.00074723964851576,
+    "excludes_zero": false
+  },
+  "repeated_40_60_screen": {
+    "candidate_wins_vs_comparator": 14,
+    "candidate_losses_vs_comparator": 31,
+    "ties": 5,
+    "splits": 50
+  },
+  "subgroup_deltas_candidate_minus_comparator": {
+    "age_55_59_weighted_f1": 0.0028248800049786,
+    "localized_stage_weighted_f1": -0.0028113656340931
+  },
+  "decision": "NO_GO",
+  "reason": "Only 2/5 fold wins; paired-bootstrap interval includes zero; 14/50 wins against Submission 10; localized-stage regression."
+}

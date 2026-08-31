@@ -28,9 +28,15 @@ promotes the fully validated result to `submission.csv`.
 
 Submission 12 remains the highest Public-LB artifact (`0.877460`) and is safely
 preserved at `archive/submission12.csv`. It is not presented as the final
-reproducible model because the original neural-network weights were not saved;
-fresh NN retraining is hardware-sensitive and does not reproduce that CSV
-exactly.
+reproducible model because the original per-fold neural-network checkpoints
+were not saved; fresh NN retraining is hardware-sensitive and does not
+reproduce that CSV exactly.
+
+The planned Kaggle final pair is Submission 10 plus Submission 6, while the
+notebook demonstrates Submission 6 only. Submission 10 is supported by
+saved-OOF screening evidence but is not claimed as a clean-runtime retrain.
+Written organizer acceptance of this notebook/selection asymmetry remains an
+open compliance item until a response is retained.
 
 ## Reproducibility
 

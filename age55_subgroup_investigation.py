@@ -594,7 +594,7 @@ def load_candidates(
         )
         candidates["pseudo90_nn20_stress_screen"] = 0.80 * pseudo90 + 0.20 * nn
         notes["pseudo90_nn20_stress_screen"] = (
-            "Saved-OOF screening blend used for the rejected Submission 12 experiment; not jointly nested."
+            "Saved-OOF screening blend used for the rejected pre-numbering pseudo90+NN20 stress experiment; not jointly nested."
         )
         hashes[str(nn_path.relative_to(ROOT))] = file_sha256(nn_path)
 

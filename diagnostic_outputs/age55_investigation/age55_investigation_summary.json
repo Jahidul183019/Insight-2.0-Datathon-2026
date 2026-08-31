@@ -18,7 +18,7 @@
     "nested_pseudo90": "Saved nested pseudo90 OOF diagnostic from Submission 11.",
     "nested_pseudo95_proxy": "Leak-safe outer-fold pseudo95 proxy, but not an exact replay of Submission 6.",
     "practical_recipe_replay_accepted": "true",
-    "pseudo90_nn20_stress_screen": "Saved-OOF screening blend used for the rejected Submission 12 experiment; not jointly nested.",
+    "pseudo90_nn20_stress_screen": "Saved-OOF screening blend used for the rejected pre-numbering pseudo90+NN20 stress experiment; not jointly nested.",
     "strict_probability_equivalence_verified": "false",
     "strict_recipe_artifact_equivalence_verified": "false",
     "submission6_nested_equivalent": "Approved practical nested recipe reference: five folds, full finite coverage, current provenance/signature, scale gate, and practical production replay accepted."

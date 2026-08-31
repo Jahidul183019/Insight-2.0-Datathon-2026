@@ -357,7 +357,7 @@ def main() -> None:
     prior_root_state = (
         "ARCHIVED_SUBMISSION_11"
         if prior_root_hash == archived_sub11_hash
-        else "IDENTICAL_SUBMISSION_13_RERUN"
+        else "IDENTICAL_SUBMISSION_12_RERUN"
     )
 
     # All validation and payload construction completes before the first write.
@@ -391,7 +391,7 @@ def main() -> None:
     selected_floor = float(blend_probabilities[descending_order[POSITIVE_COUNT - 1]])
     unselected_ceiling = float(blend_probabilities[descending_order[POSITIVE_COUNT]])
     summary = {
-        "submission_number": 13,
+        "submission_number": 12,
         "status": "SUBMITTED_AND_SCORED",
         "leaderboard_score": 0.877460,
         "leaderboard_score_recorded": True,

@@ -1,8 +1,8 @@
-# Submission 12 gate audit
+# Pre-numbering pseudo90+NN20 stress-candidate gate audit
 
 ## Decision
 
-**NO-GO: do not generate or submit Submission 12.** The candidate fails multiple predeclared gates under the official weighted-F1 metric. The legacy Dead-class binary-F1 view reaches the same decision.
+**NO-GO: do not generate or submit this stress candidate.** It fails multiple predeclared gates under the official weighted-F1 metric. This was a pre-numbering experiment and is not the later scored Submission 12 (the 90% Submission-6 / 10% NN blend). The legacy Dead-class binary-F1 view reaches the same decision.
 
 This audit created diagnostics only. It did not create a submission CSV or test-probability artifact and did not alter `submission.csv`, `SUBMISSION_HISTORY.md`, or the consolidated notebook.
 

@@ -64,10 +64,19 @@ regenerates its probability vectors and submission byte-for-byte in the pinned
 environment. Its verified Public Leaderboard score is `0.877258`.
 
 The later 90% tree/10% neural-network submission scored `0.877460`, but its
-original NN weights were not preserved and fresh NN retraining is
+original per-fold NN model checkpoints were not preserved and fresh NN retraining is
 hardware-sensitive. It is retained in the project history and is **not**
 presented here as the reproducible final model. This notebook never uses saved
 test probabilities to generate its final output.
+
+**Competition-selection context:** the planned Kaggle final pair is Submission
+10 (80% Submission-6 tree probabilities + 20% NN probabilities) and Submission
+6. This notebook regenerates Submission 6 only. Submission 10's original
+per-fold NN checkpoints were not preserved, so it is supported by saved-OOF
+screening evidence rather than claimed as a clean-runtime retrain. Whether the
+organizers accept this notebook/selection asymmetry requires written organizer
+confirmation; until that response is retained, it remains an open compliance
+risk rather than a hidden assumption.
 """
     ),
     markdown(
@@ -468,6 +477,46 @@ it did not justify changing the locked rate. That stress test is secondary
 evidence, not a direct retuning of Submission 6. The rate is a historical,
 pre-specified ranking policy—not a probability-calibration claim—and was not
 refined through row-level leaderboard probing.
+
+### Validation and model-selection record
+
+The canonical Submission 6 validation is a five-fold **nested-equivalent**
+reconstruction: every outer validation patient is excluded from target
+encoding, teacher fitting, pseudo-label selection, and student fitting. It
+predicts all 24,000 labelled rows once and achieves support-weighted F1
+`0.877004`. This is recipe-equivalent validation, not the Kaggle split and not
+a claim of byte-identical fold probabilities.
+
+For model-selection screening, saved OOF scores were repeatedly divided into
+stratified 40% pseudo-public and 60% pseudo-private partitions. At the locked
+84.5% rank rate, the three-way screen recorded Submission 10 as the winner in
+40/50 splits, Submission 12 in 3/50, Submission 6 in 2/50, with 5 ties. Mean
+60% holdout weighted F1 was `0.877587`, `0.877160`, and `0.876815`,
+respectively. Adding Teacher+5%NN produced a four-way screen in which
+Submission 10 won 29/50, Teacher+5%NN 14/50, Submission 12 2/50, with 5 ties.
+These overlapping saved-OOF screens test ranking stability; they are not
+independent confidence intervals, full nested retrains, or reconstructions of
+Kaggle's hidden Public/Private membership.
+
+This is why the planned picker pair favors Submission 10 over Submission 12
+despite Public scores `0.876616` and `0.877460`: the saved-OOF screen favored
+the 80/20 blend, while Submission 6 supplies a reproducible all-tree anchor.
+That is a risk-management choice, not proof that Submission 10 will win the
+Private leaderboard.
+
+Compact negative-results record:
+
+| Check | Evidence | Decision |
+| --- | --- | --- |
+| Submission 7 stacking | Public F1 `0.876170` | Below Submission 6 |
+| Submission 8 stack/pseudo blend | Public F1 `0.876305` | Diversity did not add lift |
+| Submission 9 iterative pseudo-labeling | Public F1 `0.875022` | Rejected |
+| Submission 10 `tree80_nn20` | Full saved-OOF F1 `0.877853`; three-way winner 40/50 | Planned primary picker entry, but NN checkpoints missing |
+| Rejected pseudo90+NN20 stress candidate | Bootstrap interval crossed zero; age 55–59 regressed `0.0023` | Not submitted |
+| Teacher+5%NN | Won 2/5 folds vs Submission 10; bootstrap 95% CI `[-0.001542, 0.000747]`; age 55–59 `+0.002825`, localized stage `-0.002811` | Not submitted |
+| 85.0% Dead-rate stress test | Won 2/5 folds; bootstrap 95% CI `[-0.001132, 0.000718]`; 19/50 split wins | Retain 84.5% |
+| Age 55–59 follow-up | Nested-equivalent F1 `0.838062`; no class-conditional cluster passed the action gate | No targeted rewrite |
+| Localized-stage harmonization | Base OOF F1 remained about `0.7410`; submitted experiment scored `0.875597` Public | Rejected |
 """
     ),
     markdown(
@@ -480,6 +529,11 @@ predictions. In the audited environment it reproduces SHA-256
 `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
 and the verified Public Leaderboard score is `0.877258`; the Private
 Leaderboard remains unknown until the competition closes.
+
+Two clean-kernel audits completed all cells without intervention in `237.02`
+and `231.05` seconds (about 3 minutes 51–57 seconds) on the development
+machine. Runtime will vary with CPU, threading, and library builds, so judges
+should allow several minutes for the 120 boosted-tree fits.
 
 Exact probability and CSV hashes are diagnostic evidence rather than execution
 gates. Different supported hardware or library builds may produce tiny numeric

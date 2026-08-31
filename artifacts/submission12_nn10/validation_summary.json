@@ -1,7 +1,7 @@
 {
   "generator": {
     "path": "pipeline_submission12_nn10.py",
-    "sha256": "2a40eb3990be4c3f3b8a8175f180a25f86a587433ccafdc6817e1820e755a301"
+    "sha256": "9e4bc9588dcf838419ed4a83cec40257f93ab64b62d797bbcec404dad265047c"
   },
   "inputs": {
     "archive/probs_nn.npy": {
@@ -78,7 +78,7 @@
     "tree_weight": 0.9
   },
   "status": "SUBMITTED_AND_SCORED",
-  "submission_number": 13,
+  "submission_number": 12,
   "validation": {
     "alive_count": 5589,
     "all_checks_passed": true,
@@ -128,7 +128,7 @@
     "probabilities_finite": true,
     "probabilities_in_unit_interval": true,
     "root_submission_prior_sha256": "4e4011c6a70a7a907685fa6a88b33023846529aa0b9beaeeb302c2bad64c3d11",
-    "root_submission_prior_state": "IDENTICAL_SUBMISSION_13_RERUN",
+    "root_submission_prior_state": "IDENTICAL_SUBMISSION_12_RERUN",
     "rows": 36000,
     "selected_floor_probability": 0.6744279597816482,
     "unselected_ceiling_probability": 0.6743117606631346
