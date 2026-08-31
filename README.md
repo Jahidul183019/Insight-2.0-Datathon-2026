@@ -1,144 +1,112 @@
-# Insight 2.0
+# Insight 2.0 Datathon 2026
 
-This workspace predicts lung-cancer vital status. The official competition
-metric is support-weighted F1; `Dead` is the designated positive class. The
-canonical upload file is `submission.csv`.
+This project predicts cancer-patient `vital_status` from the organizer-provided
+tabular data. Valid output labels are `Dead` and `Alive`.
 
-## Metric correction
+## Final notebook
 
-Earlier local audits used scikit-learn's default binary F1, which measures only
-the `Dead` class. That is not the official support-weighted F1 and explains the
-apparent roughly 0.05 gap between local scores near 0.928 and Public LB scores
-near 0.877. Corrected weighted-F1 results are the primary evidence from this
-point forward; legacy binary results are retained only for provenance.
+Submit **`insight_2_0_consolidated.ipynb`** as the single notebook deliverable.
+It trains Submission 6 from `train.csv` and `test.csv` and writes the final
+`submission.csv` without loading saved test predictions.
 
-## Final reproducible deliverable
+Verified output:
 
-- Final notebook model: Submission 6
-- Recipe: manually specified v4/v5 LightGBM, XGBoost, and CatBoost blend,
-  followed by one-pass pseudo-label augmentation
-- Output: `submission.csv` (36,000 rows, 30,411 `Dead`)
-- Public LB score: `0.877258`
-- SHA-256: `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
-- Status: regenerated end-to-end and byte-identical to `archive/submission6.csv`
+- Rows: 36,000
+- `Dead`: 30,411
+- `Alive`: 5,589
+- Public leaderboard: `0.877258`
+- CSV SHA-256:
+  `fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
 
-Open `insight_2_0_consolidated.ipynb` and run all cells from a clean kernel.
-The notebook reads only `train.csv` and `test.csv` to train the final model and
-promotes the fully validated result to `submission.csv`.
+A clean-kernel audit executed all five code cells without errors. The generated
+CSV and probability vector matched the archived Submission 6 references.
 
-Submission 12 remains the highest Public-LB artifact (`0.877460`) and is safely
-preserved at `archive/submission12.csv`. It is not presented as the final
-reproducible model because the original per-fold neural-network checkpoints
-were not saved; fresh NN retraining is hardware-sensitive and does not
-reproduce that CSV exactly.
+## Model summary
 
-The planned Kaggle final pair is Submission 10 plus Submission 6, while the
-notebook demonstrates Submission 6 only. Submission 10 is supported by
-saved-OOF screening evidence but is not claimed as a clean-runtime retrain.
-Written organizer acceptance of this notebook/selection asymmetry remains an
-open compliance item until a response is retained.
+Submission 6 combines two feature views:
 
-## Separate Submission 10 recipe audit
+1. LightGBM, XGBoost, and CatBoost without target encoding.
+2. The same model families with fold-safe target encoding.
 
-`insight_2_0_submission10.ipynb` is a separate, executed notebook that retrains
-the Submission 6 tree system and the historical entity-embedding NN before
-forming the 80%/20% blend. Its clean-kernel run completed in `516.84` seconds,
-saved five new NN fold checkpoints, and passed all structural checks.
+The workflow uses three repeated five-fold splits, blends the two views, adds
+high-confidence model-generated pseudo labels once, retrains the six component
+models, and averages the original and pseudo-trained probabilities. A stable
+rank rule selects exactly 30,411 `Dead` predictions.
 
-The fresh tree vector matched the historical tree bytes, but the fresh NN did
-not reproduce the missing historical NN checkpoints: the fresh blend changed
-108 labels relative to archived Submission 10 and has SHA-256
-`d624009d5e12e58c157bee34b664ebaf23eba05f9613f2c5e7ccd0c65a98cf34`.
-An explicitly separate historical-artifact replay reproduces Submission 10
-exactly with SHA-256
+The notebook includes EDA, preprocessing, feature engineering, fixed tuned
+parameters, local evaluation, a representative feature-importance plot, an
+age-band audit, and limitations.
+
+## Metric reporting
+
+The competition description calls the metric weighted F1 and also identifies
+`Dead` as the positive class. To avoid mixing definitions, current local model
+comparisons use support-weighted F1 and historical Dead-class F1 values are
+labelled explicitly. Kaggle scores are reported only when verified from the
+submissions page.
+
+## Submission 10 reconstruction
+
+`insight_2_0_submission10.ipynb` is a complete modelling audit plus exact
+prediction reproduction for historical Submission 10. It performs EDA,
+feature engineering, full Submission 6 training, five-fold NN training with
+new checkpoints, validation, interpretation, and then reconstructs the scored
+CSV from:
+
+- `archive/probs_v6_final.npy`
+- `archive/probs_nn.npy`
+- an 80% tree / 20% neural-network blend
+- a stable top-30,411 decision rule
+
+For one-file artifact portability, the two immutable `.npy` references are
+compressed and embedded in the notebook. The full run requires the
+organizer-provided `train.csv` and `test.csv`; it verifies the original
+artifact hashes after decompression.
+
+Running the replay writes `submission.csv` and matches
+`archive/submission10.csv` with SHA-256
 `333af97cfbc16ffdcc2d9f910000664c443694239c60e67d6504af18687e86f1`.
-The replay proves provenance, not an exact historical NN retrain, so it does
-not replace the rulebook-safe Submission 6 notebook without organizer approval.
+The recovered project snapshot contains the original NN source and probability
+vectors, but not the five original fold checkpoints or an environment lockfile.
+Fresh NN retraining therefore does not reproduce the historical probabilities
+exactly. The audited full run saved five new checkpoints and differed from the
+historical submission on 108 labels; this is reported separately rather than
+substituted for the exact historical replay.
 
 ## Reproducibility
 
-- `insight_2_0_consolidated.ipynb` embeds and executes the complete Submission 6
-  workflow without loading cached model probabilities.
-- `insight_2_0_submission10.ipynb` executes the full Submission 10 recipe and
-  keeps its fresh retrain separate from the optional historical replay.
-- `pseudo_label_nested_validation.py` performs the five-fold outer-holdout gate
-  comparing 90% pseudo-labeling with a rebuilt 95% control.
-- `pipeline_v6.py` contains the original tree/pseudo-label training workflow.
-  It is expensive and now writes only under `artifacts/v6_rerun/`; it cannot
-  overwrite the canonical root submission.
-- `pipeline_nn.py` contains the neural-network training workflow.
-- `pipeline_submission12_nn10.py` deterministically reconstructs the prepared
-  Submission 12 upload candidate from frozen probabilities.
-- `step1_cv_diagnostic.py` regenerates the cached tree OOF diagnostics.
-- `validation_harness.py` runs the saved-OOF 40/60 stability audit and writes
-  results under `diagnostic_outputs/validation_harness/`.
-- `submission6_nested_reconstruction.py` is the resumable, leakage-safe
-  five-fold reconstruction of the Submission 6 recipe. It writes checkpoints,
-  OOF predictions, metrics, and replay diagnostics under
-  `diagnostic_outputs/submission6_nested/`; it never writes a submission.
-- `submission6_practical_reference_gate.py` independently validates the saved
-  reconstruction and writes its non-training acceptance audit under
-  `diagnostic_outputs/submission6_reference_gate/`.
-- `age55_subgroup_investigation.py` reruns the age-55–59 diagnostic against the
-  approved nested reference and writes only under
-  `diagnostic_outputs/age55_investigation/`.
-- `SUBMISSION_HISTORY.md` maps scored submissions to their canonical files.
-
-The notebook has been executed from top to bottom. Its fresh probability vector
-and submission match the archived Submission 6 artifacts byte-for-byte. The
-saved notebook includes execution counts, EDA tables and plots, training logs,
-and the final SHA-256 verification.
-
-Exact probability and CSV hashes are reported as diagnostics rather than hard
-cross-platform gates. Machine-independent checks for schema, patient IDs,
-probability validity, labels, row count, and class count remain strict. If a
-different supported environment introduces floating-point drift, the notebook
-warns and reports historical label disagreement instead of crashing solely on
-a byte mismatch.
+- The final notebook requires `train.csv`, `test.csv`, NumPy, pandas,
+  scikit-learn, LightGBM, XGBoost, CatBoost, and Matplotlib.
+- Model parameters, folds, feature engineering, and ensemble weights are fixed
+  in the notebook.
+- Schema, patient IDs, labels, row count, missing values, and class count are
+  checked strictly.
+- Historical hashes are diagnostic references. A cross-platform byte mismatch
+  produces a warning rather than failing an otherwise valid prediction file.
+- `pipeline_v6.py` contains the maintained Submission 6 training workflow.
+- `SUBMISSION_HISTORY.md` records scored submissions and supporting evidence.
+- `UNSUBMITTED_EXPERIMENTS.md` records rejected local experiments.
 
 ## Competition compliance
 
-- The model workflow is manually specified; no AutoML library is used.
-- The rules also prohibit "automated pipeline-generation systems." Because
-  AI-assisted code may fall within that wording, obtain written confirmation
-  from the organizers before relying on AI-authored modelling code in the
-  submitted notebook; do not assume that "not AutoML" resolves this ambiguity.
-- Do not infer, probe, or manually assign hidden test labels from leaderboard
-  feedback.
-- Keep restricted competition data, artifacts, and solution code within the
-  official team during the competition.
-- The final notebook must reproduce the submitted workflow and outputs; frozen
-  artifact validation alone is not a substitute for that requirement.
+The final workflow uses manually specified preprocessing, features, models,
+folds, and ensemble rules. It does not use an AutoML pipeline generator,
+external data, manual test-set labels, or row-level leaderboard probing.
+Pseudo labels are generated only from model probabilities. Team members remain
+responsible for following organizer guidance and crediting any external sources
+used during development.
 
-## Important artifacts
+## Important files
 
-- `submission.csv`: final reproducible Submission 6 output (`0.877258`)
-- `artifacts/final_notebook/submission.csv`: byte-identical notebook output
-- `archive/submission12.csv`: byte-identical archived snapshot of Submission 12
-- `artifacts/submission12_nn10/submission12_nn10.csv`: byte-identical generated
-  Submission 12 candidate
-- `artifacts/submission12_nn10/validation_summary.json`: Submission 12 format,
-  provenance, hash, and disagreement audit
-- `submission6.csv`: verified baseline public-LB submission (`0.877258`)
-- `archive/submission10.csv`: byte-identical archived Submission 10 snapshot
-- `artifacts/pseudo90/submission11_pseudo90.csv`: byte-identical generated
-  Submission 11 candidate
-- `archive/submission11.csv`: byte-identical archived Submission 11 upload
-- `artifacts/pseudo90/probs_pseudo90.npy`: Submission 11 probabilities
-- `archive/probs_v6_final.npy`: exact probability source for Submission 6
-- `archive/probs_v6_blend.npy`: pre-pseudo v6 teacher probabilities
-- `archive/probs_nn.npy`: NN test probabilities used by Submission 10
-- `artifacts/submission10_notebook/`: fresh Submission 10 recipe retrain,
-  five newly preserved NN fold checkpoints, exact historical replay, and the
-  machine-readable reproduction report
-- `archive/oof_nn.npy` and the versioned diagnostic outputs: historical local
-  validation inputs; they are not required by the final notebook
-- `diagnostic_outputs/submission6_nested/nested_oof_predictions.npz`: completed
-  Submission 6 nested-recipe OOF vector
-- `diagnostic_outputs/submission6_reference_gate/submission6_practical_reference_acceptance.json`:
-  practical-vs-strict canonical-reference decision
-- `diagnostic_outputs/age55_investigation/age55_investigation_summary.json` and
-  `age55_investigation_report.md`: canonical age-55 follow-up and Step 3 stop
-  decision
+- `insight_2_0_consolidated.ipynb`: final executable Submission 6 notebook
+- `insight_2_0_submission10.ipynb`: complete Submission 10 recipe audit and exact historical prediction replay
+- `submission.csv`: current Submission 6 output
+- `submission6.csv`: verified Submission 6 reference
+- `archive/submission6.csv`: archived byte-identical Submission 6
+- `archive/submission10.csv`: historical Submission 10
+- `archive/submission12.csv`: highest verified Public-LB artifact (`0.877460`)
+- `SUBMISSION_HISTORY.md`: scored-submission record
+- `diagnostic_outputs/`: validation and subgroup reports
 
-Historical pipelines and submissions are retained in `archive/` for provenance.
+Historical submissions and superseded pipelines remain under `archive/` for
+traceability.

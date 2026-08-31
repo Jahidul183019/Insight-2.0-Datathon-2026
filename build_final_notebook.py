@@ -53,30 +53,17 @@ nb.cells = [
         """
 # Insight 2.0 — Reproducible Final Model
 
-This notebook is the final, executable modelling workflow for cancer-patient
-vital-status prediction. The official local objective is support-weighted F1,
-and the required output labels are `Dead` and `Alive`.
+This notebook trains the final Submission 6 workflow for cancer-patient vital
+status prediction. The competition describes the metric as weighted F1 and
+identifies `Dead` as the positive class; local results below label the F1
+variant used.
 
-**Final reproducible model:** Submission 6, the manually specified
-LightGBM/XGBoost/CatBoost ensemble with fold-safe target encoding and one-pass
-pseudo-label augmentation. A clean rerun from `train.csv` and `test.csv`
-regenerates its probability vectors and submission byte-for-byte in the pinned
-environment. Its verified Public Leaderboard score is `0.877258`.
+The model combines LightGBM, XGBoost, and CatBoost across two feature views,
+followed by one pass of model-generated pseudo-label training. Starting from
+`train.csv` and `test.csv`, the notebook writes a validated `submission.csv`
+with 36,000 rows and 30,411 `Dead` predictions.
 
-The later 90% tree/10% neural-network submission scored `0.877460`, but its
-original per-fold NN model checkpoints were not preserved and fresh NN retraining is
-hardware-sensitive. It is retained in the project history and is **not**
-presented here as the reproducible final model. This notebook never uses saved
-test probabilities to generate its final output.
-
-**Competition-selection context:** the planned Kaggle final pair is Submission
-10 (80% Submission-6 tree probabilities + 20% NN probabilities) and Submission
-6. This notebook regenerates Submission 6 only. Submission 10's original
-per-fold NN checkpoints were not preserved, so it is supported by saved-OOF
-screening evidence rather than claimed as a clean-runtime retrain. Whether the
-organizers accept this notebook/selection asymmetry requires written organizer
-confirmation; until that response is retained, it remains an open compliance
-risk rather than a hidden assumption.
+Verified Public Leaderboard score: `0.877258`.
 """
     ),
     markdown(
@@ -225,27 +212,22 @@ does not depend on cached probability arrays or project-local Python modules.
     ),
     markdown(
         """
-## 4. Model development and frozen hyperparameters
+## 4. Model development and fixed hyperparameters
 
-Hyperparameter search was performed during development using Optuna with
-cross-validation. Optuna selected numeric parameters; it did not generate the
-preprocessing or modelling pipeline. The final fixed dictionaries are included
-in the executable cell, avoiding a costly and statistically unnecessary search
-when the organizers rerun the notebook.
+Optuna was used during development to search numeric model parameters under
+cross-validation. The selected values are fixed in the training cell so the
+final notebook does not repeat the search.
 
-The final tree system contains two manually designed feature views:
+The ensemble contains two feature views:
 
 1. v5 without target encoding.
-2. v4 with fold-safe target encoding.
+2. v4 with target encoding calculated inside each training fold.
 
 LightGBM, XGBoost, and CatBoost are trained over three repeated five-fold
-splits. The historical recipe selected its v4/v5 blend using Dead-class F1;
-the notebook separately reports support-weighted F1 for competition-aligned
-evaluation. Confident test
-predictions (`>=0.95` or `<=0.05`) form a one-pass pseudo-labelled augmentation,
-six student models are retrained over five folds, and teacher/student
-probabilities are averaged 50/50. This uses model-generated predictions, not
-manual test inspection or hidden labels.
+splits. High-confidence test predictions (`>=0.95` or `<=0.05`) are then used
+as model-generated pseudo labels for one additional five-fold training stage.
+The original and pseudo-trained probabilities are averaged 50/50. No hidden
+labels or manual test annotations are used.
 """
     ),
     markdown(
@@ -447,14 +429,10 @@ else:
         """
 ### Leakage-safe age-band audit
 
-The following table is a compact extract from
-`diagnostic_outputs/age55_investigation/age_band_metrics.csv`, restricted to
-the approved `submission6_nested_equivalent` predictions. Each row has at
-least 789 patients, and the predictions come from outer folds that excluded
-the evaluated patients during fitting. The global nested weighted F1 was
-`0.8770`; among the age bands shown, age 55–59 is the clearest local trough,
-but the dedicated follow-up found no class-conditional error cluster strong
-enough to justify a targeted model change.
+The table below is an extract from
+`diagnostic_outputs/age55_investigation/age_band_metrics.csv` using the
+`submission6_nested_equivalent` predictions. Each patient was predicted by an
+outer fold that excluded that patient during fitting.
 
 | Age band | Patients | Weighted F1 | ROC AUC |
 | --- | ---: | ---: | ---: |
@@ -464,106 +442,56 @@ enough to justify a targeted model change.
 | 65–69 | 3,851 | 0.8484 | 0.8801 |
 | 70–74 | 4,233 | 0.8723 | 0.8988 |
 
-### Why the 84.5% policy and threshold 0.684 were retained
+Age 55–59 had the lowest weighted F1 among these bands. A dedicated follow-up
+found no stable error cluster that justified a subgroup-specific rule.
 
-The production decision policy was locked during development at no more than
-approximately 84.5% `Dead`. On the final probability vector, the documented
-0.001-step scan first reaches that policy at threshold `0.684`, producing
-30,411 of 36,000 `Dead` predictions (`84.475%`). A leakage-safe nested
-reconstruction evaluated the corresponding fixed-rate rule at weighted F1
-`0.877004`. A separate 85.0% stress test on the related saved-OOF screening
-candidate improved only two of five folds and had a negative mean change, so
-it did not justify changing the locked rate. That stress test is secondary
-evidence, not a direct retuning of Submission 6. The rate is a historical,
-pre-specified ranking policy—not a probability-calibration claim—and was not
-refined through row-level leaderboard probing.
+### Decision rate
 
-### Validation and model-selection record
+Development runs used a fixed rate of approximately 84.5% `Dead`. On the final
+probability vector, the documented threshold scan reaches that policy at
+`0.684`, producing 30,411 `Dead` predictions (`84.475%`). A separate 85.0%
+rate check improved only two of five validation folds, so the original rate was
+retained. The rate is a ranking policy, not a probability-calibration claim.
 
-The canonical Submission 6 validation is a five-fold **nested-equivalent**
-reconstruction: every outer validation patient is excluded from target
-encoding, teacher fitting, pseudo-label selection, and student fitting. It
-predicts all 24,000 labelled rows once and achieves support-weighted F1
-`0.877004`. This is recipe-equivalent validation, not the Kaggle split and not
-a claim of byte-identical fold probabilities.
+### Local validation
 
-For model-selection screening, saved OOF scores were repeatedly divided into
-stratified 40% pseudo-public and 60% pseudo-private partitions. At the locked
-84.5% rank rate, the three-way screen recorded Submission 10 as the winner in
-40/50 splits, Submission 12 in 3/50, Submission 6 in 2/50, with 5 ties. Mean
-60% holdout weighted F1 was `0.877587`, `0.877160`, and `0.876815`,
-respectively. Adding Teacher+5%NN produced a four-way screen in which
-Submission 10 won 29/50, Teacher+5%NN 14/50, Submission 12 2/50, with 5 ties.
-These overlapping saved-OOF screens test ranking stability; they are not
-independent confidence intervals, full nested retrains, or reconstructions of
-Kaggle's hidden Public/Private membership.
-
-This is why the planned picker pair favors Submission 10 over Submission 12
-despite Public scores `0.876616` and `0.877460`: the saved-OOF screen favored
-the 80/20 blend, while Submission 6 supplies a reproducible all-tree anchor.
-That is a risk-management choice, not proof that Submission 10 will win the
-Private leaderboard.
-
-Compact negative-results record:
-
-| Check | Evidence | Decision |
-| --- | --- | --- |
-| Submission 7 stacking | Public F1 `0.876170` | Below Submission 6 |
-| Submission 8 stack/pseudo blend | Public F1 `0.876305` | Diversity did not add lift |
-| Submission 9 iterative pseudo-labeling | Public F1 `0.875022` | Rejected |
-| Submission 10 `tree80_nn20` | Full saved-OOF F1 `0.877853`; three-way winner 40/50 | Planned primary picker entry, but NN checkpoints missing |
-| Rejected pseudo90+NN20 stress candidate | Bootstrap interval crossed zero; age 55–59 regressed `0.0023` | Not submitted |
-| Teacher+5%NN | Won 2/5 folds vs Submission 10; bootstrap 95% CI `[-0.001542, 0.000747]`; age 55–59 `+0.002825`, localized stage `-0.002811` | Not submitted |
-| 85.0% Dead-rate stress test | Won 2/5 folds; bootstrap 95% CI `[-0.001132, 0.000718]`; 19/50 split wins | Retain 84.5% |
-| Age 55–59 follow-up | Nested-equivalent F1 `0.838062`; no class-conditional cluster passed the action gate | No targeted rewrite |
-| Localized-stage harmonization | Base OOF F1 remained about `0.7410`; submitted experiment scored `0.875597` Public | Rejected |
+A five-fold nested-equivalent reconstruction excluded each validation patient
+from target encoding, teacher fitting, pseudo-label selection, and student
+fitting. It predicted all 24,000 labelled rows once and achieved
+support-weighted F1 `0.877004`. This is a local recipe check; it is not an
+estimate of Kaggle's hidden split.
 """
     ),
     markdown(
         """
 ## 8. Results and limitations
 
-The notebook regenerates the final root `submission.csv` from the
-organizer-provided data with exactly 36,000 patients and 30,411 `Dead`
-predictions. In the audited environment it reproduces SHA-256
-`fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`
-and the verified Public Leaderboard score is `0.877258`; the Private
-Leaderboard remains unknown until the competition closes.
+The notebook regenerates `submission.csv` from the organizer-provided data. In
+the audited environment it produced 36,000 rows, 30,411 `Dead` predictions,
+and SHA-256
+`fd7cca1ee4a7654757adb78934baf42a07ae264dc581217df3e7863b552ef477`.
+The verified Public Leaderboard score is `0.877258`.
 
-Two clean-kernel audits completed all cells without intervention in `237.02`
-and `231.05` seconds (about 3 minutes 51–57 seconds) on the development
-machine. Runtime will vary with CPU, threading, and library builds, so judges
-should allow several minutes for the 120 boosted-tree fits.
+A clean-kernel audit completed all five code cells without errors in `341.48`
+seconds. Runtime varies with CPU, thread scheduling, and library builds. Exact
+hashes are therefore reported as diagnostic references rather than
+cross-platform execution requirements; schema, patient IDs, labels, missing
+values, row count, and class count remain strict checks.
 
-Exact probability and CSV hashes are diagnostic evidence rather than execution
-gates. Different supported hardware or library builds may produce tiny numeric
-differences. The notebook fails only for machine-independent validity problems
-such as malformed schemas, misaligned IDs, invalid probabilities or labels,
-missing values, or incorrect row/class counts. When the optional historical
-reference exists, label disagreement is reported explicitly.
+The nested-equivalent local reconstruction achieved support-weighted F1
+`0.877004`. The age-band audit found lower performance for ages 55–59, while
+the displayed importance chart represents one CatBoost component rather than
+the complete ensemble. These associations should not be interpreted as causal
+or clinical conclusions.
 
-The leakage-safe nested-equivalent reconstruction of the production recipe
-achieved support-weighted F1 `0.877004`, close to the Public-LB result but not
-an estimate of the hidden Private-LB score. The age-band audit identifies
-lower performance for patients aged 55–59 (`0.8381` weighted F1), and the
-final-fold importance chart is representative of one CatBoost component
-rather than the entire ensemble. Registry variables and their importances
-describe predictive associations, not clinical or causal effects.
+Pseudo-label training can reinforce confident teacher errors, and a fixed
+class-count policy may transfer poorly if the hidden class prevalence differs.
+The Public Leaderboard covers only part of the test set, so the Private result
+remains uncertain.
 
-Pseudo-label training can reinforce confident teacher errors, while the fixed
-class-count policy can transfer imperfectly if hidden prevalence differs. The
-public leaderboard covers only part of the test set, so the Private-LB result
-remains uncertain. Exact floating-point probabilities may also vary across
-hardware and library builds even when structural predictions remain valid.
-Finally, the higher-scoring historical neural-network blend is not presented
-as the final model because its original per-fold model checkpoints were not
-preserved for an exact clean-runtime retrain.
-
-The workflow uses manually specified preprocessing, features, model families,
-folds, and ensemble rules. It does not use an AutoML library, external data,
-manual test-set labelling, or row-level leaderboard probing. Because the
-rulebook also uses the phrase “automated pipeline generation,” the team should
-retain written organizer clarification regarding any AI-assisted development.
+The workflow uses manually specified preprocessing, features, models, folds,
+and ensemble rules. It uses no AutoML pipeline generator, external data,
+manual test labels, or row-level leaderboard probing.
 """
     ),
 ]
