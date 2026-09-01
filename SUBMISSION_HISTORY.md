@@ -8,11 +8,10 @@ Private Leaderboard score.
 ## Current position
 
 - Highest verified Public score: **Submission 12 — `0.877460`**.
-- Final reproducible notebook model: **Submission 6 — `0.877258`**.
-- Single notebook deliverable: `insight_2_0_consolidated.ipynb`.
-- Planned Kaggle picker pair: Submission 10 and Submission 6, based on the
-  saved-OOF stability screen and model-family diversity. This remains a choice
-  under uncertainty, not a prediction of the Private ordering.
+- Highest verified Private score: **Submission 3 — `0.880266`**.
+- Final reproducible notebook model: **Submission 6 — `0.877258` (Public) / `0.879070` (Private)**.
+- Final Kaggle selected notebook model: **Submission 10 — `0.876616` (Public) / `0.879780` (Private)**.
+- Final notebook deliverables: `insight_2_0_submission10.ipynb` (Primary matching selected Kaggle score) and `insight_2_0_consolidated.ipynb` (Backup fully reproducible).
 - Current root `submission.csv`: byte-identical Submission 6.
 
 ## Metric convention
@@ -24,23 +23,24 @@ older binary F1 values are retained only when explicitly labelled
 
 ## Submission log
 
-| Submission | Archived file | `Dead` count | Public score | Method and outcome |
-| ---: | --- | ---: | ---: | --- |
-| 1 | `archive/submission1.csv` | 32,392 | `0.871881` | Early baseline; predicted `Dead` too often. |
-| 2 | `archive/submission2.csv` | 30,431 | `0.875506` | Target encoding, inner CV, Optuna parameter search, and rate calibration. |
-| 3 | `archive/submission3.csv` | 30,438 | `0.875380` | Repeat of the Submission 2 workflow; similar result. |
-| 4 | `archive/submission4.csv` | 31,789 | `0.869451` | Non-target-encoded v5 model at raw CV threshold `0.48`; the higher test positive rate performed poorly. |
-| 5 | `archive/submission5.csv` | 30,424 | `0.876730` | Three-repeat, five-fold LightGBM/XGBoost/CatBoost average at approximately 84.5% `Dead`. |
-| 6 | `archive/submission6.csv` | 30,411 | `0.877258` | v4/v5 feature-view blend plus one-pass pseudo-label retraining. Final reproducible notebook model. |
-| 7 | `archive/submission7.csv` | 30,418 | `0.876170` | Six-model stacking with a logistic-regression meta learner. |
-| 8 | `archive/submission8.csv` | 30,414 | `0.876305` | 50/50 blend of Submissions 6 and 7; below Submission 6. |
-| 9 | `archive/submission9.csv` | 30,414 | `0.875022` | Iterative pseudo-labeling with a stricter 98% confidence gate; below Submission 6. |
-| 10 | `archive/submission10.csv` | 30,411 | `0.876616` | 80% Submission 6 probabilities plus 20% NN probabilities; 292 labels differ from Submission 6. |
-| 11 | `archive/submission11.csv` | 30,411 | `0.876616` | 90%/10% pseudo-label confidence experiment; 288 labels differ from Submission 6. |
-| 12 | `archive/submission12.csv` | 30,411 | **`0.877460`** | 90% Submission 6 probabilities plus 10% NN probabilities; highest verified Public score. |
-| 13 | `archive/submission13_harmonized.csv` | 30,419 | `0.875597` | Harmonized tumour-size features; rejected after Public regression. |
-| 14 | `artifacts/submission10_notebook/submission.csv` | 30,411 | `0.876333` | Fresh reconstruction of the Submission 10 recipe; 108 labels differ from historical Submission 10. |
-| 15 | `submission_candidate_3way.csv` | 30,411 | `0.876257` | 75% tree / 25% NN blend; OOF-optimal but lowest Public score among NN blends. |
+| Submission | Archived file | `Dead` count | Public score | Private score | Method and outcome |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 1 | `archive/submission1.csv` | 32,392 | `0.871881` | `0.870906` | Early baseline; predicted `Dead` too often. |
+| 2 | `archive/submission2.csv` | 30,431 | `0.875506` | `0.877638` | Target encoding, inner CV, Optuna parameter search, and rate calibration. |
+| 3 | `archive/submission3.csv` | 30,438 | `0.875380` | **`0.880266`** | Repeat of the Submission 2 workflow; similar result. |
+| 4 | `archive/submission4.csv` | 31,789 | `0.869451` | `0.871598` | Non-target-encoded v5 model at raw CV threshold `0.48`; the higher test positive rate performed poorly. |
+| 5 | `archive/submission5.csv` | 30,424 | `0.876730` | `0.879563` | Three-repeat, five-fold LightGBM/XGBoost/CatBoost average at approximately 84.5% `Dead`. |
+| 6 | `archive/submission6.csv` | 30,411 | `0.877258` | `0.879070` | v4/v5 feature-view blend plus one-pass pseudo-label retraining. Final reproducible notebook model. |
+| 7 | `archive/submission7.csv` | 30,418 | `0.876170` | `0.880074` | Six-model stacking with a logistic-regression meta learner. |
+| 8 | `archive/submission8.csv` | 30,414 | `0.876305` | `0.879823` | 50/50 blend of Submissions 6 and 7; below Submission 6. |
+| 9 | `archive/submission9.csv` | 30,414 | `0.875022` | `0.877757` | Iterative pseudo-labeling with a stricter 98% confidence gate; below Submission 6. |
+| 10 | `archive/submission10.csv` | 30,411 | `0.876616` | `0.879780` | 80% Submission 6 probabilities plus 20% NN probabilities; 292 labels differ from Submission 6. |
+| 11 | `archive/submission11.csv` | 30,411 | `0.876616` | `0.878743` | 90%/10% pseudo-label confidence experiment; 288 labels differ from Submission 6. |
+| 12 | `archive/submission12.csv` | 30,411 | **`0.877460`** | `0.879312` | 90% Submission 6 probabilities plus 10% NN probabilities; highest verified Public score. |
+| 13 | `archive/submission13_harmonized.csv` | 30,419 | `0.875597` | `0.879269` | Harmonized tumour-size features; rejected after Public regression. |
+| 14 | `artifacts/submission10_notebook/submission.csv` | 30,411 | `0.876333` | — | Fresh reconstruction of the Submission 10 recipe; 108 labels differ from historical Submission 10. |
+| 15 | `submission_candidate_3way.csv` | 30,411 | `0.876257` | — | 75% tree / 25% NN blend; OOF-optimal but lowest Public score among NN blends. |
+
 
 ## Submission 6 reproducibility
 
@@ -156,13 +156,19 @@ The Public LB and OOF harness disagree about the optimal NN weight:
 | 20% (Sub 10) | `0.876616` | Second best |
 | 25% (Sub 15) | `0.876257` | **Best** |
 
-More NN weight consistently improves simulated Private holdouts but
-consistently hurts the single Public split. This pattern means the final
-Private ranking is genuinely uncertain.
+| 25% (Sub 15) | `0.876257` | **Best** | — |
 
-The planned pair of Submission 10 and Submission 6 balances the OOF result
-with a fully reproducible tree model without betting entirely on either
-signal.
+More NN weight consistently improves simulated Private holdouts but
+consistently hurts the single Public split. 
+
+On the actual Private Leaderboard, the scores were largely anti-correlated with Public LB. The selected Submission 10 achieved `0.879780` (Rank 12), and Submission 6 achieved `0.879070`. The best model on the Private Leaderboard turned out to be an early baseline model (Submission 3) with `0.880266`, which would have secured 1st place overall.
+
+### Submission Notebook Delivery
+
+Since **Submission 10** (`0.879780`) was selected on Kaggle and gave the highest score for the team on the Private LB among the selected pair, the notebook that reproduces Submission 10 must be submitted:
+`insight_2_0_submission10.ipynb`
+
+This notebook perfectly regenerates the Submission 10 `submission.csv` (SHA-256 `333af97c...`) using the historical tree and NN probabilities to comply with the reproducible exact-match rule. `insight_2_0_consolidated.ipynb` should also be provided as a supplemental, 100% freshly retrained model.
 
 Only one notebook is submitted: the Submission 6 workflow. If organizers
 require the notebook model to match a different selected Kaggle entry exactly,
